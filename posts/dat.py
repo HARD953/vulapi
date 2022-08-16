@@ -43,7 +43,7 @@ def Information2(request):
     if request.method=="GET":
         data1={}
         data2={}
-        chef=Chef_menage.objects.filter(vulnerablePhy=True, vulnerableCondi=True,vulnerableEtude=True,vulnerableOccup=True)
+        chef=Chef_menage.objects.filter(vulnerablePhy=False, vulnerableCondi=False,vulnerableEtude=False,vulnerableOccup=False)
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
         dataf=[dict(i) for i in chefs.data]
         idf=[i['id'] for i in dataf]
@@ -117,7 +117,7 @@ def Information2(request):
                         chef.menage=True
                         chef.save(update_fields=['menage'])
                     moyenne_age.append(ages)
-                    
+
                 dataR['age']=ages
                 dataR['nationalite']=["score","{}".format(nationalite(nationalites))]
                 dataR['sexe']=["score","{}".format(sexesChef(sexes))]
