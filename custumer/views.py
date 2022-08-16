@@ -73,6 +73,16 @@ class ListAdmin(generics.ListAPIView):
         user = self.request.user
         return NewUser.objects.filter(is_user=True)
 
+class ListSuperAdmin(generics.ListAPIView):
+    permission_classes=[AllowAny]
+    model=NewUser
+    serializer_class=AdminSerializer
+    filter_backends = [DjangoFilterBackend,SearchFilter]
+    search_fields=["user_name","commune","first_name","start_date","adresse"]
+    def get_queryset(self):
+        user = self.request.user
+        return NewUser.objects.filter(is_superuser=True)
+
 class ListRecenser(generics.ListAPIView):
     permission_classes=[AllowAny]
     model=Chef_menage
