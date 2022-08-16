@@ -91,6 +91,8 @@ class Chef_menage(Personne):
     vulnerableCondi=models.BooleanField(default=False)
     vulnerableEtude=models.BooleanField(default=False)
     vulnerableOccup=models.BooleanField(default=False)
+    individu=models.BooleanField(default=False)
+    menage=models.BooleanField(default=False)
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
 

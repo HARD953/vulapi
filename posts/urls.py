@@ -8,6 +8,7 @@ from .vulnerablephy import*
 from .vulnerableetude import*
 from .vulnerableoccu import*
 from .generale import*
+from .individu import*
 
 
 urlpatterns=[
@@ -28,7 +29,7 @@ urlpatterns=[
     path('charge/', ChargeList.as_view(),name='charge'),
     path('dcharge/<int:pk>/', ChargeDetail.as_view(),name='charge-detail'),
     path('recenser/', RecensementView.as_view(),name='charge'),
-    
+
     #Information traiter
     path('analyses2/',Information),
     path('analyses/',Information2),
@@ -38,4 +39,5 @@ urlpatterns=[
     path('vulnerableetud/',vulnerableet),
     path('vulnerableoccup/',vulnerableoc),
     path('vulnerablegs/',vulnerableg),
+    path('individus/',vulnerableI)
 ]

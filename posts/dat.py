@@ -108,7 +108,16 @@ def Information2(request):
                     immigres=z['immigre']
                     villes=z['commune']
                     milieu_ru=z['milieu_r']
+                    if z['nombre_enfant_v']==0 and z['nom_personne_charge']==0 and z['conjoints']==0:
+                        chef=Chef_menage.objects.get(id=i)
+                        chef.individu=True
+                        chef.save(update_fields=['individu'])
+                    else:
+                        chef=Chef_menage.objects.get(id=i)
+                        chef.menage=True
+                        chef.save(update_fields=['menage'])
                     moyenne_age.append(ages)
+                    
                 dataR['age']=ages
                 dataR['nationalite']=["score","{}".format(nationalite(nationalites))]
                 dataR['sexe']=["score","{}".format(sexesChef(sexes))]
@@ -270,19 +279,19 @@ def Information2(request):
 
             if condition6>0:
                 chef=Chef_menage.objects.get(id=i)
-                chef.vulnerableCondi=False
+                chef.vulnerableCondi=True
                 chef.save(update_fields=['vulnerableCondi'])
             if moyenneHand(handicapR)>0: 
                 chef=Chef_menage.objects.get(id=i)
-                chef.vulnerablePhy=False
+                chef.vulnerablePhy=True
                 chef.save(update_fields=['vulnerablePhy'])
             if EducationMenage(w)>condition6:
                 chef=Chef_menage.objects.get(id=i)
-                chef.vulnerableEtude=False
+                chef.vulnerableEtude=True
                 chef.save(update_fields=['vulnerableEtude'])
             if moyenneOccup(occupationg)>condition6:
                 chef=Chef_menage.objects.get(id=i)
-                chef.vulnerableOccup=False
+                chef.vulnerableOccup=True
                 chef.save(update_fields=['vulnerableOccup'])
 
             data1["{}".format(i)]=data
