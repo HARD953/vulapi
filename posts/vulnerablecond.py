@@ -25,23 +25,24 @@ def vulnerablec(request):
     if request.method=="GET":
         chef=Chef_menage.objects.filter(vulnerableCondi=True)
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
-        dataf=[dict(i) for i in chefs.data]
-        idf=[i['id'] for i in dataf]
-        data1={}
-        for i in idf:
-            data={}
-            data['chefmenage']=[dict(s) for s in PostChefMSerializer(Chef_menage.objects.filter(id=i),context={'request': request},many=True).data]
-            data['enfant']=[dict(s) for s in EnfantS(Enfant.objects.filter(parentf=i),context={'request': request},many=True).data]
-            data['charge']=[dict(s) for s in PostChargeSerializer(Charge.objects.filter(parentg=i),context={'request': request},many=True).data]
-            data['conjoint']=[dict(s) for s in PostConjointSerializer(Conjoint.objects.filter(idc=i),context={'request': request},many=True).data]
-            data['recenser']=[dict(s) for s in RecensementS(Recenser.objects.filter(parent=i),context={'request': request},many=True).data]
-            data['equipement']=[dict(s) for s in EquipementS(Equipement.objects.filter(parente=i),context={'request': request},many=True).data]
-            data['commodite']=[dict(s) for s in CommoditeS(Commodite.objects.filter(parentc=i),context={'request': request},many=True).data]
-            data['deces']=[dict(s) for s in DeceS(Deces.objects.filter(parentd=i),context={'request': request},many=True).data]
-            data1["{}".format(i)]=data
-        return JsonResponse({"data":data1, "status":status.HTTP_200_OK,"message":"liste des récensers"})
-    else:
-        return Response({'message':'Personne'})
+        return JsonResponse({'data':chefs.data,'status':status.HTTP_200_OK})
+    #     dataf=[dict(i) for i in chefs.data]
+    #     idf=[i['id'] for i in dataf]
+    #     data1={}
+    #     for i in idf:
+    #         data={}
+    #         data['chefmenage']=[dict(s) for s in PostChefMSerializer(Chef_menage.objects.filter(id=i),context={'request': request},many=True).data]
+    #         data['enfant']=[dict(s) for s in EnfantS(Enfant.objects.filter(parentf=i),context={'request': request},many=True).data]
+    #         data['charge']=[dict(s) for s in PostChargeSerializer(Charge.objects.filter(parentg=i),context={'request': request},many=True).data]
+    #         data['conjoint']=[dict(s) for s in PostConjointSerializer(Conjoint.objects.filter(idc=i),context={'request': request},many=True).data]
+    #         data['recenser']=[dict(s) for s in RecensementS(Recenser.objects.filter(parent=i),context={'request': request},many=True).data]
+    #         data['equipement']=[dict(s) for s in EquipementS(Equipement.objects.filter(parente=i),context={'request': request},many=True).data]
+    #         data['commodite']=[dict(s) for s in CommoditeS(Commodite.objects.filter(parentc=i),context={'request': request},many=True).data]
+    #         data['deces']=[dict(s) for s in DeceS(Deces.objects.filter(parentd=i),context={'request': request},many=True).data]
+    #         data1["{}".format(i)]=data
+    #     return JsonResponse({"data":data1, "status":status.HTTP_200_OK,"message":"liste des récensers"})
+    # else:
+    #     return Response({'message':'Personne'})
 
 
 

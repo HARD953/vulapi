@@ -9,6 +9,7 @@ from .vulnerableetude import*
 from .vulnerableoccu import*
 from .generale import*
 from .individu import*
+from .informationg import*
 
 
 urlpatterns=[
@@ -39,5 +40,6 @@ urlpatterns=[
     path('vulnerableetud/',vulnerableet),
     path('vulnerableoccup/',vulnerableoc),
     path('vulnerablegs/',vulnerableg),
-    path('individus/',vulnerableI)
+    path('individus/',vulnerableI),
+    path('information/<int:pk>',info),
 ]
