@@ -21,20 +21,89 @@ from posts.models import*
 from posts.serializers import*
 # Create your views here.
 
-class CreateAgent(generics.CreateAPIView):
-    queryset=NewUser.objects.all()
+class CreateAgent(APIView):
     permission_classes=[AllowAny]
-    serializer_class=UserSerializer
+    def post(self,request):
+        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        data=request.data
+        if data['is_staff']=="is_staff":
+            data['is_staff']=True
+        else:
+            data['is_staff']=False
 
-class CreateAdmin(generics.CreateAPIView):
-    queryset=NewUser.objects.all()
-    permission_classes=[AllowAny]
-    serializer_class=AdminSerializer
+        if data['is_active']=="is_active":
+            data['is_active']=True
+        else:
+            data['is_active']=False
+    
+        if data['is_agent']=="is_agent":
+            data['is_agent']=True
+        else:
+            data['is_agent']=False
+        serializer = UserSerializer(data=data)
+        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.error})
 
-class CreateSuperAdmin(generics.CreateAPIView):
-    queryset=NewUser.objects.all()
+
+# class CreateAgent(APIView):
+#     queryset=NewUser.objects.all()
+#     permission_classes=[AllowAny]
+#     serializer_class=UserSerializer
+
+class CreateAdmin(APIView):
     permission_classes=[AllowAny]
-    serializer_class=SuperAdminSerializer
+    def post(self,request):
+        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        data=request.data
+        if data['is_staff']=="is_staff":
+            data['is_staff']=True
+        else:
+            data['is_staff']=False
+
+        if data['is_active']=="is_active":
+            data['is_active']=True
+        else:
+            data['is_active']=False
+    
+        if data['is_user']=="is_user":
+            data['is_user']=True
+        else:
+            data['is_user']=False
+        serializer = AdminSerializer(data=data)
+        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.error})
+
+class CreateSuperAdmin(APIView):
+    permission_classes=[AllowAny]
+    def post(self,request):
+        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        data=request.data
+        if data['is_staff']=="is_staff":
+            data['is_staff']=True
+        else:
+            data['is_staff']=False
+
+        if data['is_active']=="is_active":
+            data['is_active']=True
+        else:
+            data['is_active']=False
+    
+        if data['is_superuser']=="is_superuser":
+            data['is_superuser']=True
+        else:
+            data['is_superuser']=False
+        serializer = SuperAdminSerializer(data=data)
+        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.error})
 
 # class FilterRecensement(filters.FilterSet):
 #     agent=filters.CharFilter(lookup_expr='icontains')
