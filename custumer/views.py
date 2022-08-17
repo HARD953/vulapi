@@ -28,7 +28,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class CreateAgent(APIView):
     permission_classes=[AllowAny]
     def post(self,request):
-        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        message='Enregistrement reussi'
         data=request.data
         if data['is_staff']=="is_staff":
             data['is_staff']=True
@@ -44,12 +44,13 @@ class CreateAgent(APIView):
             data['is_agent']=True
         else:
             data['is_agent']=False
+            
         serializer = UserSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
         if serializer.is_valid():
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
-        return Response({'message':serializer.error})
+        return Response({'message':serializer.errors})
 
 
 # class CreateAgent(APIView):
@@ -60,7 +61,7 @@ class CreateAgent(APIView):
 class CreateAdmin(APIView):
     permission_classes=[AllowAny]
     def post(self,request):
-        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        message='Enregistrement reussi'
         data=request.data
         if data['is_staff']=="is_staff":
             data['is_staff']=True
@@ -81,12 +82,12 @@ class CreateAdmin(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
-        return Response({'message':serializer.error})
+        return Response({'message':serializer.errors})
 
 class CreateSuperAdmin(APIView):
     permission_classes=[AllowAny]
     def post(self,request):
-        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        message='Enregistrement reussi'
         data=request.data
         if data['is_staff']=="is_staff":
             data['is_staff']=True
@@ -107,7 +108,7 @@ class CreateSuperAdmin(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
-        return Response({'message':serializer.error})
+        return Response({'message':serializer.errors})
 
 # class FilterRecensement(filters.FilterSet):
 #     agent=filters.CharFilter(lookup_expr='icontains')
