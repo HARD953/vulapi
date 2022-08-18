@@ -176,10 +176,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-# REST_FRAMEWORK = {
-#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-#     'PAGE_SIZE': 10
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination'
+}
 
 
 STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
@@ -196,7 +195,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "https://localhost:3000",
     "https://127.0.0.1:3000",
-    "https://127.0.0.1:8000"
+    "https://127.0.0.1:8000",
     "https://dashlanfia.herokuapp.com/"]
 
 CORS_ALLOW_METHODS = [
