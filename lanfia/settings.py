@@ -26,9 +26,9 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost','https://dashlanfia.herokuapp.com/', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['0.0.0.0',"https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
 
-
+#'https://dashlanfia.herokuapp.com/'
 # Application definition
 
 INSTALLED_APPS = [
@@ -176,10 +176,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
 
 
 STATIC_ROOT= os.path.join(BASE_DIR,'staticfiles')
@@ -196,8 +196,9 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "https://localhost:3000",
     "https://127.0.0.1:3000",
-    "https://127.0.0.1:8000",
+    "https://127.0.0.1:8000"
     "https://dashlanfia.herokuapp.com/"]
+
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",
