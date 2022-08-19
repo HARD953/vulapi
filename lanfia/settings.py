@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0',"https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['0.0.0.0',"https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
 
 #'https://dashlanfia.herokuapp.com/'
 # Application definition
@@ -196,7 +196,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
-    "https://dashlanfia.herokuapp.com/"]
+    "https://dashlanfia.herokuapp.com/",
+    "https://dashblanfia.herokuapp.com/"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
