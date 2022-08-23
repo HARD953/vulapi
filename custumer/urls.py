@@ -3,6 +3,7 @@ from .views import*
 from .superadmin import*
 from .admins import*
 from rest_framework.urlpatterns import format_suffix_patterns
+from .critere import*
 
 from .views import MyTokenObtainPairView
 from rest_framework_simplejwt.views import (
@@ -61,6 +62,19 @@ urlpatterns=format_suffix_patterns([
     path('equipementad/<int:pk>/', EquipementListad.as_view()),
     path('decesad/<int:pk>/', DecesListad.as_view()),
     path('chargead/<int:pk>/', ChargeListad.as_view()),
+    path('affecter/', Affecter.as_view()),
+
+
+    path('criterechef/', CritereCh.as_view()),
+    path('criterech/', CritereCha.as_view()),
+    path('critereen/', CritereEn.as_view()),
+    path('critereco/', CritereCo.as_view()),
+    path('criterecom/', CritereCom.as_view()),
+    path('critereeq/', CritereEq.as_view()),
+    path('criterege/', CritereGe.as_view()),
+    path('critereme/', CritereMe.as_view()),
+    path('critereha/', CritereHa.as_view()),
+    path('criterede/', CritereDe.as_view()),
 
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),

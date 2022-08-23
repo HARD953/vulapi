@@ -205,6 +205,26 @@ class ChargeList(generics.ListCreateAPIView):
         return Charge.objects.filter(owner8=user)
     def perform_create(self, serializer):
         serializer.save(owner8=self.request.user)
+
+class EnfantRList(generics.ListCreateAPIView):
+    permission_classes=[IsAgentAuthenticated]
+    model=Enfant_R
+    serializer_class=PostEnfantRSerializer
+    def get_queryset(self):
+        user = self.request.user
+        return Enfant_R.objects.filter(owner9=user)
+    def perform_create(self, serializer):
+        serializer.save(owner9=self.request.user)
+
+class EnfantRDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
+    permission_classes=[IsAgentAuthenticated]
+    model=Enfant_R
+    serializer_class=PostEnfantRSerializer
+    def get_queryset(self):
+        user = self.request.user
+        return Enfant_R.objects.filter(owner9=user)
+    def perform_create(self, serializer):
+        serializer.save(owner9=self.request.user)
   
 class ChargeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
     permission_classes=[IsAgentAuthenticated]

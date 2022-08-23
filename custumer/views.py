@@ -110,6 +110,8 @@ class CreateSuperAdmin(APIView):
             return Response({'message':message,'data':serializer.data})            
         return Response({'message':serializer.errors})
 
+
+
 # class FilterRecensement(filters.FilterSet):
 #     agent=filters.CharFilter(lookup_expr='icontains')
 #     class Meta:
@@ -156,6 +158,7 @@ class ListSuperAdmin(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return NewUser.objects.filter(is_superuser=True)
+
 
 class ListRecenser(generics.ListAPIView):
     permission_classes=[AllowAny]

@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0',"https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+#ALLOWED_HOSTS = ['0.0.0.0',"https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
 
 #'https://dashlanfia.herokuapp.com/'
 # Application definition
@@ -88,26 +89,26 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd45v6qail6bs33', 
-        'USER': 'nqzugyytngytjw', 
-        'PASSWORD': '2fc8d02b267061811aa290b354dab99c1b6b127df976f4fcb48a9ecae580949a',
-        'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com', 
-        'PORT': '5432',
-    }
-}
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'lanfiaApi', 
-#         'USER': 'postgres', 
-#         'PASSWORD': 'issa01',
-#         'HOST': '127.0.0.1', 
+#         'NAME': 'd45v6qail6bs33', 
+#         'USER': 'nqzugyytngytjw', 
+#         'PASSWORD': '2fc8d02b267061811aa290b354dab99c1b6b127df976f4fcb48a9ecae580949a',
+#         'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com', 
 #         'PORT': '5432',
 #     }
-# }   
+# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'lanfiaApi', 
+        'USER': 'postgres', 
+        'PASSWORD': 'issa01',
+        'HOST': '127.0.0.1', 
+        'PORT': '5432',
+    }
+}   
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -195,9 +196,17 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "https://localhost:3000",
     "https://127.0.0.1:3000",
-    "https://127.0.0.1:8000",
-    "https://dashlanfia.herokuapp.com/",
-    "https://dashblanfia.herokuapp.com/"]
+    "https://127.0.0.1:8000"]
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "http://127.0.0.1:8000",
+#     "https://localhost:3000",
+#     "https://127.0.0.1:3000",
+#     "https://127.0.0.1:8000",
+#     "https://dashlanfia.herokuapp.com/",
+#     "https://dashblanfia.herokuapp.com/"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",

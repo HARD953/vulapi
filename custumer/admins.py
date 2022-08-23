@@ -199,6 +199,8 @@ class Affecter(APIView):
         return Response({'message':serializer.errors})
 
 
+
+
     # def get(self,request,pk):
     #     try:
     #         affectations = Affecter.objects.get(pk=pk)

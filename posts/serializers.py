@@ -47,3 +47,9 @@ class PostChargeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Charge
         fields=['owner8','id','url','annee_naissance','immigre','intention_ret','parentg','sexesd','niveau_etude','occupation','handicap']
+
+class PostEnfantRSerializer(serializers.HyperlinkedModelSerializer):
+    owner9 = serializers.ReadOnlyField(source='owner9.user_name')
+    class Meta:
+        model = Enfant_R
+        fields=['nom','prenom','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']

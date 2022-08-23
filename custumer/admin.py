@@ -9,3 +9,14 @@ class UserAdminConfig(UserAdmin):
 
 admin.site.register(NewUser,UserAdminConfig)
 admin.site.register(Affectation)
+admin.site.register(CritereChef)
+admin.site.register(CritereConj)
+admin.site.register(CritereEnfant)
+admin.site.register(CritereCharge   )
+admin.site.register(CritereCommodite)
+admin.site.register(CritereEquipement)
+admin.site.register(CritereDeces)
+admin.site.register(CritereHabitat)
+admin.site.register(CritereGeneral)
+
+admin.site.register(Quartier)

@@ -1,8 +1,10 @@
 from venv import create
 from django.db import models
 from django.contrib.auth.models import AbstractUser,PermissionsMixin, AbstractBaseUser,BaseUserManager
-
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+
+from posts.critere.indicateur import moyenneage, niveau, occupations
 
 # Create your models here.
 
@@ -73,6 +75,11 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     def __str__(self):
         return self.user_name
 
+class Quartier(models.Model):
+    commune=models.CharField(max_length=100,blank=False)
+    quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
+    def __str__(self):
+        return self.quartier
 
 class Affectation(models.Model):
     agent=models.ForeignKey(NewUser,on_delete=models.CASCADE)
@@ -81,6 +88,77 @@ class Affectation(models.Model):
     create=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.user_name
+
+class CritereChef(models.Model):
+    sexeChef=ArrayField(models.FloatField())
+    agechef=ArrayField(models.FloatField())
+    nationalite=ArrayField(models.FloatField())
+    niveauEtude=ArrayField(models.FloatField())
+    maladie=ArrayField(models.FloatField())
+    handicap=ArrayField(models.FloatField())
+    occupations=ArrayField(models.FloatField())
+    x="chefmenage"
+    def __str__(self):
+        return self.x
+
+class CritereConj(models.Model):
+    agec=ArrayField(models.FloatField())
+    niveauEtude=ArrayField(models.FloatField())
+    maladie=ArrayField(models.FloatField())
+    handicap=ArrayField(models.FloatField())
+    occupations=ArrayField(models.FloatField())
+
+class CritereEnfant(models.Model):
+    agec=ArrayField(models.FloatField())
+    niveauEtude=ArrayField(models.FloatField())
+    maladie=ArrayField(models.FloatField())
+    handicap=ArrayField(models.FloatField())
+    
+
+class CritereCharge(models.Model):
+    agec=ArrayField(models.FloatField())
+    niveauEtude=ArrayField(models.FloatField())
+    maladie=ArrayField(models.FloatField())
+    handicap=ArrayField(models.FloatField())
+    occupations=ArrayField(models.FloatField())
+
+
+
+class CritereCommodite(models.Model):
+    eclairage=ArrayField(models.FloatField())
+    cuisson=ArrayField(models.FloatField())
+    aeaux=ArrayField(models.FloatField())
+    ordure=ArrayField(models.FloatField())
+    nombrep=ArrayField(models.FloatField())
+    aisance=ArrayField(models.FloatField())
+    loyer=ArrayField(models.FloatField())
+    typelogement=ArrayField(models.FloatField())
+
+class CritereEquipement(models.Model):
+    moyend=ArrayField(models.FloatField())
+    equipee=ArrayField(models.FloatField())
+    equipepo=ArrayField(models.FloatField())
+
+class CritereDeces(models.Model):
+    agec=ArrayField(models.FloatField())
+    
+class CritereMenage(models.Model):
+    moyenneage=ArrayField(models.FloatField())
+    niveauEtudeM=ArrayField(models.FloatField())
+    typeMenage=ArrayField(models.FloatField())
+    occupations=ArrayField(models.FloatField())
+
+class CritereHabitat(models.Model):
+    ville=ArrayField(models.FloatField())
+    quartier=ArrayField(models.FloatField())
+
+class CritereGeneral(models.Model):
+    conditionvie=ArrayField(models.FloatField())
+    conditionphy=ArrayField(models.FloatField())
+    conditionoccup=ArrayField(models.FloatField())
+    conditionnivee=ArrayField(models.FloatField())
+
+
 
 
 

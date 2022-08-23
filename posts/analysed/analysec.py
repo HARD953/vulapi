@@ -1,5 +1,6 @@
-from .models import*
-from .serializers import*
+from posts.critere.criterechef import criterechef
+from posts.models import*
+from posts.serializers import*
 from django.http import HttpResponseGone,JsonResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -21,8 +22,18 @@ from rest_framework import status
 from django.http import Http404
 from datetime import date
 import pandas as pd
+from critere.criterecha import*
+from critere.criterechef import*
+from critere.critereco import*
+from critere.critereconj import*
+from critere.criterede import*
+from critere.critereenf import*
+from critere.critereeq import*
+from critere.criterege import*
+from critere.critereme import*
+from critere.critereha import*
 
-from posts.indicateur import*
+from posts.critere.indicateur import*
 
 # def niveau_etude_menage()
 # x="1998-07-21"
@@ -102,10 +113,11 @@ def Information2(request):
                 nbr=nbr+1
                 for z in data['chefmenage']:
                     age=z['annee_naissance'].split("-")
-                    ages=calculate_age(date(int(age[0]),int(age[1]),int(age[2])))
-                    nationalites=z['nationalite']
-                    sexes=z['sexes']
-                    immigres=z['immigre']
+                    ages=criterechef(["age",calculate_age(date(int(age[0]),int(age[1]),int(age[2])))])
+                    nationalites=criterechef(["nationalite",z['nationalite']])
+                    sexes=criterechef(["sexe",z['sexes']])
+                    immigres=criterechef(["immigre",z['immigre']])
+                    
                     villes=z['commune']
                     milieu_ru=z['milieu_r']
                     if z['nombre_enfant_v']==0 and z['nom_personne_charge']==0 and z['conjoints']==0:
@@ -116,25 +128,40 @@ def Information2(request):
                         chef=Chef_menage.objects.get(id=i)
                         chef.menage=True
                         chef.save(update_fields=['menage'])
+                    
                     moyenne_age.append(ages)
+
+                    conditionphy.append(ages)
+                    conditionphy.append(sexes)
 
                 dataR['age']=ages
                 dataR['nationalite']=["score","{}".format(nationalite(nationalites))]
                 dataR['sexe']=["score","{}".format(sexesChef(sexes))]
                 dataR['immigre']=["score","{}".format(immigre(immigres))]
+
                 condition1=(immigre(immigres)+nationalite(nationalites)+sexesChef(sexes)+ageMenage(ages))/4
+
             data['recenser']=[dict(s) for s in RecensementS(Recenser.objects.filter(parent=i),context={'request': request},many=True).data]
             if data['recenser']:
                 for z in data['recenser']:
-                    niveau_etude=z['niveau_instruction']
-                    occupation=z['occupation_actuelle']
-                    handicaps=z['handicap']
-                    situation_matrimoniale=z['situation_matrimoniale']
-                    maladie=z['maladie']
+                    niveau_etude=criterechef(["niveau",z['niveau_instruction']])
+                    occupation=criterechef(["occupation",z['occupation_actuelle']])
+                    handicaps=criterechef(["handicap",z['handicap']])
+                    situation_matrimoniale=criterechef(["situation",z['situation_matrimoniale']])
+                    maladie=criterechef(["maladie",z['maladie']])
+
                     handicapR.append(handicaps)
                     maladieR.append(maladie)
                     niveau_scolaire.append(niveau_etude)
                     occupationg.append(occupation)
+
+                    conditionphy.append(handicaps)
+                    conditionphy.append(maladie)
+
+                    conditionetude.append(occupation)
+                    conditionniveau.append(niveau_etude)
+
+
 
                 dataR['niveau']=["score","{}".format(niveau(niveau_etude))]
                 dataR['occupation']=["score","{}".format(occupations(occupation))]
@@ -148,13 +175,17 @@ def Information2(request):
                 for z in data['enfant']:
                     nbr=nbr+1
                     age=z['annee_naissance'].split("-")
-                    ages=calculate_age(date(int(age[0]),int(age[1]),int(age[2])))
-                    niveau_etude=z['niveau_etude']
-                    handica=z['handicap']
+                    ages=critereenf(["age",calculate_age(date(int(age[0]),int(age[1]),int(age[2])))])
+                    niveau_etude=critereenf(["niveau",z['niveau_etude']])
+                    handica=critereenf(["handicap",z['handicap']])
 
                     moyenne_age.append(ages)
                     handicapR.append(handica)
                     niveau_scolaire.append(niveau_etude)
+
+                    conditionphy.append(handica)
+                    conditionphy.append(maladie)
+                    conditionniveau.append(niveau_etude)
 
                 dataE['age']=["score","{}".format(handicap(handica))]
                 dataE['niveau']=["score","{}".format(niveau(niveau_etude))]
@@ -165,15 +196,21 @@ def Information2(request):
                 for s in data['charge']:
                     nbr=nbr+1
                     age=s['annee_naissance'].split("-")
-                    ages=calculate_age(date(int(age[0]),int(age[1]),int(age[2])))
-                    niveau_etude=s['niveau_etude']
-                    occupation=s['occupation']
-                    handica=s['handicap']
+                    ages=criterecha(["age",calculate_age(date(int(age[0]),int(age[1]),int(age[2])))])
+                    niveau_etude=criterecha(["niveau",s['niveau_etude']])
+                    occupation=criterecha(["occupation",s['occupation']])
+                    handica=criterecha(["handicap",s['handicap']])
 
                     occupationg.append(occupation)
                     handicapR.append(handica)
                     moyenne_age.append(ages)
                     niveau_scolaire.append(niveau_etude)
+
+                    conditionphy.append(handica)
+                    conditionphy.append(maladie)
+                    conditionetude.append(occupation)
+                    conditionetude.append(occupation)
+                    conditionniveau.append(niveau_etude)
 
                 dataC['age']=["score","{}".format(handicap(handica))]
                 dataC['niveau']=["score","{}".format(niveau(niveau_etude))]
@@ -182,33 +219,36 @@ def Information2(request):
             dataF['Charge']=dataC
             data['conjoint']=[dict(s) for s in PostConjointSerializer(Conjoint.objects.filter(idc=i),context={'request': request},many=True).data]
             if data['conjoint']:
-                
                 for x in data['conjoint']:
                     nbr=nbr+1
                     age=x['annee_naissance'].split("-")
-                    ages=calculate_age(date(int(age[0]),int(age[1]),int(age[2])))
-                    niveau_etude=x['niveau_etude']
-                    occupation=x['occupation']
-                    handica=x['handicap']
+                    ages=critereconj(["age",calculate_age(date(int(age[0]),int(age[1]),int(age[2])))])
+                    niveau_etude=critereconj(["niveau",x['niveau_etude']])
+                    occupation=critereconj(["occupation",x['occupation']])
+                    handica=critereconj(["handicap",x['handicap']])
 
                     occupationg.append(occupation)
                     handicapR.append(handica)
                     moyenne_age.append(ages)
                     niveau_scolaire.append(niveau_etude)
 
+                    conditionphy.append(handica)
+                    conditionphy.append(maladie)
+                    conditionetude.append(occupation)
+                    conditionniveau.append(niveau_etude)
+
                 dataCo['age']=["score","{}".format(handicap(handica))]
                 dataCo['niveau']=["score","{}".format(niveau(handica))]
                 dataCo['occupation']=["score","{}".format(occupations(handica))]
                 dataCo['handicap']=["score","{}".format(handicap(handica))]
-
             dataF['Conjoint']=dataCo
             data['equipement']=[dict(s) for s in EquipementS(Equipement.objects.filter(parente=i),context={'request': request},many=True).data]
             if data['equipement']:
                 for x in data['equipement']:
-                    moyen_deplacement=x['moyen_deplacement'].split("+")
-                    equipement_electr=x['equipement_electr'].split("+")
-                    equipement_audio=x['equipement_audio'].split("+")
-                    proprietaires=x['proprietaire']
+                    moyen_deplacement=critereequ(["moyend",x['moyen_deplacement'].split("+")])
+                    equipement_electr=critereequ(["equipee",x['equipement_electr'].split("+")])
+                    equipement_audio=critereequ(["equipeo",x['equipement_audio'].split("+")])
+                    proprietaires=critereco(["loyer",x['proprietaire']])
                     equipsd.append(moyen_deplacement)
                     equipse.append(equipement_electr)
                     equipsa.append(equipement_audio)
@@ -223,15 +263,26 @@ def Information2(request):
             data['commodite']=[dict(s) for s in CommoditeS(Commodite.objects.filter(parentc=i),context={'request': request},many=True).data]
             if data['commodite']:
                 for x in data['commodite']:
-                    nombre_piece=x['nombre_piece']
-                    typelogement=x['typelogement']
-                    alimentation_eau=x['alimentation_eau']
-                    eclairage=x['eclairage']
-                    lieu_aisance=x['lieu_aisance']
-                    cuissons=x['cuisson']
+
+                    nombre_piece=critereco(["logement1",x['nombre_piece']])
+                    typelogement=critereco(["logement2",x['typelogement']])
+                    alimentation_eau=critereco(["eaux",x['alimentation_eau']])
+                    eclairage=critereco(["eclairage",x['eclairage']])
+                    lieu_aisance=critereco(["aisance",x['lieu_aisance']])
+                    cuissons=critereco(["cuisson",x['cuisson']])
+
                     natur_m=x['nature_mur']
                     natur_t=x['nature_toit']
                     natur_s=x['nature_sol']
+
+                    conditionvie.append(nombre_piece)
+                    conditionvie.append(typelogement)
+                    conditionvie.append(alimentation_eau)
+                    conditionvie.append(eclairage)
+                    conditionvie.append(lieu_aisance)
+                    conditionvie.append(cuissons)
+
+
                     comodite.append(eclairage)
                     comodite.append(nombre_piece)
                     comodite.append(typelogement)

@@ -1,5 +1,5 @@
-from .models import*
-from .serializers import*
+from posts.models import*
+from posts.serializers import*
 from django.http import HttpResponseGone,JsonResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -22,9 +22,9 @@ from django.http import Http404
 from datetime import date
 
 
-def vulnerableoc(request):
+def vulnerableet(request):
     if request.method=="GET":
-        chef=Chef_menage.objects.filter(vulnerableOccup=True)
+        chef=Chef_menage.objects.filter(vulnerableEtude=True)
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
         return JsonResponse({'data':chefs.data,'status':status.HTTP_200_OK})
     #     dataf=[dict(i) for i in chefs.data]

@@ -1,5 +1,5 @@
-from .models import*
-from .serializers import*
+from posts.models import*
+from posts.serializers import*
 from django.http import HttpResponseGone,JsonResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -21,9 +21,11 @@ from rest_framework import status
 from django.http import Http404
 from datetime import date
 
-def vulnerableI(request):
+
+
+def vulnerablep(request):
     if request.method=="GET":
-        chef=Chef_menage.objects.filter(individu=True)
+        chef=Chef_menage.objects.filter(vulnerablePhy=True)
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
         return JsonResponse({'data':chefs.data,'status':status.HTTP_200_OK})
     #     dataf=[dict(i) for i in chefs.data]
@@ -40,7 +42,7 @@ def vulnerableI(request):
     #         data['commodite']=[dict(s) for s in CommoditeS(Commodite.objects.filter(parentc=i),context={'request': request},many=True).data]
     #         data['deces']=[dict(s) for s in DeceS(Deces.objects.filter(parentd=i),context={'request': request},many=True).data]
     #         data1["{}".format(i)]=data
-    #     return JsonResponse({"data":data, "status":status.HTTP_200_OK,"message":"liste des récensers"})
+    #     return JsonResponse({"data":data1, "status":status.HTTP_200_OK,"message":"liste des récensers"})
     # else:
     #     return Response({'message':'Personne'})
 

@@ -1,5 +1,5 @@
-from .models import*
-from .serializers import*
+from posts.models import*
+from posts.serializers import*
 from django.http import HttpResponseGone,JsonResponse
 from django.shortcuts import render
 from rest_framework.views import APIView
@@ -39,8 +39,7 @@ def info(request,pk):
             data['equipement']=[dict(s) for s in EquipementS(Equipement.objects.filter(parente=i),context={'request': request},many=True).data]
             data['commodite']=[dict(s) for s in CommoditeS(Commodite.objects.filter(parentc=i),context={'request': request},many=True).data]
             data['deces']=[dict(s) for s in DeceS(Deces.objects.filter(parentd=i),context={'request': request},many=True).data]
-            data1["{}".format(i)]=data
-        return JsonResponse({"data":data1, "status":status.HTTP_200_OK,"message":"liste des récensers"})
+        return JsonResponse(data)
     else:
         return Response({'message':'Personne'})
 

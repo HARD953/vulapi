@@ -178,7 +178,7 @@ class Deces(models.Model):
     class Meta:
         ordering=['parentd']
     def __str__(self):
-        return '{}_{}'.format(self.nom_decede,self.prenom_decede)
+        return '{}_{}'.format(self.parentd)
 
 class Charge(models.Model):
     parentg=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
@@ -192,9 +192,29 @@ class Charge(models.Model):
     intention_ret=models.BooleanField()
     list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
     handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
-    
+    def __str__(self):
+        return '{}_{}'.format(self.parentg)
+
+class Enfant_R(models.Model):
+    nom=models.CharField(max_length=100,blank=False)
+    prenom=models.CharField(max_length=100,blank=False)
+    annee_naissance=models.DateField(blank=False)
+    owner9  = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enfant_rue', on_delete=models.CASCADE,null=True)
+    niveau_etude=models.CharField(max_length=100,blank=True,default='master')
+    sexe=(('M','Maxculin'),('F','Feminin'))
+    sexes=models.CharField(max_length=1,choices=sexe)
+    list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
+    handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
+    battue=models.BooleanField(default=False)
+    tuteur=models.BooleanField(default=False)
+    pere=models.BooleanField(default=False)
+    mere=models.BooleanField(default=False)
+    scolariser=models.BooleanField(default=False)
+    commune=models.CharField(max_length=100,blank=False)
+    quartier=models.CharField(max_length=100,blank=False)
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
+    #x=['nom','prenom','annee_naissance','owner4','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue']
 
 
 

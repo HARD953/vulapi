@@ -2,14 +2,19 @@ from django.urls import path,include
 from .views import*
 from rest_framework.urlpatterns import format_suffix_patterns
 from .analyse import*
-from .dat import *
-from .vulnerablecond import*
-from .vulnerablephy import*
-from .vulnerableetude import*
-from .vulnerableoccu import*
-from .generale import*
-from .individu import*
-from .informationg import*
+from .analysed.analysev import *
+from .vulnera.vulnerablecond import*
+from .vulnera.vulnerablephy import*
+from .vulnera.vulnerableetude import*
+from .vulnera.vulnerableoccu import*
+from .recenserg.generale import*
+from .recenserg.individu import*
+from .analysed.informationg import*
+from .critere.indicateurs import*
+from .statistiquesr.statistique import*
+from .statistiquesr.statistique3 import*
+from .statistiquesr.statistique2 import*
+from .analysed.analysecr import*
 
 
 urlpatterns=[
@@ -30,6 +35,8 @@ urlpatterns=[
     path('charge/', ChargeList.as_view(),name='charge'),
     path('dcharge/<int:pk>/', ChargeDetail.as_view(),name='charge-detail'),
     path('recenser/', RecensementView.as_view(),name='charge'),
+    path('enfantr/', EnfantRList.as_view(),name='lenfant'),
+    path('denfantr/<int:pk>/', EnfantRDetail.as_view(),name='enfant-rue'),
     
     #Information traiter
     path('analyses2/',Information),
@@ -39,7 +46,23 @@ urlpatterns=[
     path('vulnerablecon/',vulnerablec),
     path('vulnerableetud/',vulnerableet),
     path('vulnerableoccup/',vulnerableoc),
-    path('vulnerablegs/',vulnerableg),
+    path('menage/',vulnerableg),
     path('individus/',vulnerableI),
-    path('information/<int:pk>',info),
+    #Information détailler
+    path('information/<int:pk>/',info),
+    path('informationd/<int:pk>/',ana),
+    #Les statistiques pour le superadmin
+    path('staticirclem/',statcircleM),
+    path('staticirclei/',statcircleI),
+    path('statibarm/',statbarM),
+    path('statibari/',statbarI),
+
+    path('statistiquegm/',statcircleMGeneral),
+    path('statistiquegi/',statcircleIGeneral),
+
+    path('homme/<str:slug>/',homme),
+    path('individug/',individug),
+    path('enfantru/<str:slug>/',enfant),
+    path('enfantg/',enfantg),
+
 ]

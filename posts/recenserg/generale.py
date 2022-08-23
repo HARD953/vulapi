@@ -1,5 +1,5 @@
-from .models import*
-from .serializers import*
+from posts.models import*
+from posts.serializers import*
 from django.http import HttpResponseGone,JsonResponse
 from django.shortcuts import render
 from rest_framework.views import APIView

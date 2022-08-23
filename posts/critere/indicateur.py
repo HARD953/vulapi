@@ -1,5 +1,7 @@
 from datetime import date
 from re import I
+from custumer.models import*
+
 def calculate_age(born):
     today = date.today()
     return int(today.year - born.year - ((today.month, today.day) < (born.month, born.day)))
@@ -195,14 +197,6 @@ def typeMenage(type):
     else:
         return 0
 
-# def nature_mur(natur):
-#     pass
-# def nature_toit(natur):
-#     pass
-# def nature_sol(natur):
-#     pass
-
-
 
 def ville(ville):
     if ville=="ABIDJAN":
@@ -215,8 +209,6 @@ def proprietaire(prop):
         return 0
     else:
         return 1
-
-
 
 def accessibilite(localisation):
     pass

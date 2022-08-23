@@ -7,6 +7,11 @@ class AffectaSerializer(serializers.ModelSerializer):
         model = Affectation
         fields = '__all__'
 
+class QuartierSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quartier
+        fields = '__all__'
+
 
 class PostChefMSerializer(serializers.HyperlinkedModelSerializer):
     owner1 = serializers.ReadOnlyField(source='owner1.user_name')
