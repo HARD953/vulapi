@@ -50,23 +50,22 @@ def statcircleM(request):
 def statcircleI(request):
     if request.method=="GET":
         if request.user.is_authenticated:
+            data={}
+            data1={}
             if request.user.is_superuser:
-                data1={}
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,individu=True).count()
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True).count()
                 data={}
-                data["menage"]=data1
+                data["individu"]=data1
                 return JsonResponse(data)
             else:
-                data1={}
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,individu=True,commune=request.user.commune).count()
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True,commune=request.user.commune).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True,commune=request.user.commune).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True,commune=request.user.commune).count()
-                data={}
-                data["menage"]=data1
+                data["individu"]=data1
                 return JsonResponse(data)
         else:
             return Response({'message':'Personne'})
@@ -93,7 +92,7 @@ def statbarM(request):
                     data["condition"]=data2
                     data["etude"]=data3
                     data["sans-emploi"]=data4
-                return JsonResponse(data)
+                return JsonResponse({"menage":data})
             else:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
@@ -112,7 +111,9 @@ def statbarM(request):
                     data["condition"]=data2
                     data["etude"]=data3
                     data["sans-emploi"]=data4
-                return JsonResponse(data)
+                return JsonResponse({"menage":data})
+        else:
+            return Response({'message':'Personne'})
 
 def statbarI(request):
     if request.method=="GET":
@@ -135,7 +136,7 @@ def statbarI(request):
                     data["condition"]=data2
                     data["etude"]=data3
                     data["sans-emploi"]=data4
-                return JsonResponse(data)
+                return JsonResponse({"individu":data})
             else:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
@@ -154,8 +155,8 @@ def statbarI(request):
                     data["condition"]=data2
                     data["etude"]=data3
                     data["sans-emploi"]=data4
-                return JsonResponse(data)
-
+                return JsonResponse({"individu":data})
+        return Response({'message':'Personne'})
 
 def statevaluation(request,slug,slug2):
     if request.method=="GET":
