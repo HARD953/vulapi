@@ -43,7 +43,7 @@ def individug(request):
                     data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=request.user.commune,quartier=quartier).count()
                 return JsonResponse(data)
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 def homme(request,slug):
     if request.method=="GET":
@@ -65,7 +65,7 @@ def homme(request,slug):
                     data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=request.user.commune,quartier=quartier,sexes=slug).count()
                 return JsonResponse(data)
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 def enfantg(request):
     if request.method=="GET":
@@ -87,7 +87,7 @@ def enfantg(request):
                     data["{}".format(quartier)]=Enfant_R.objects.filter(commune=request.user.commune,quartier=quartier).count()
                 return JsonResponse(data)
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 
 def enfant(request,slug):
@@ -110,7 +110,7 @@ def enfant(request,slug):
                     data["{}".format(quartier)]=Enfant_R.objects.filter(commune=request.user.commune,quartier=quartier,sexes=slug).count()
                 return JsonResponse(data)
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 
 

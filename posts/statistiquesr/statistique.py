@@ -45,7 +45,7 @@ def statcircleM(request):
                 data["menage"]=data1
                 return JsonResponse(data)
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 def statcircleI(request):
     if request.method=="GET":
@@ -68,7 +68,7 @@ def statcircleI(request):
                 data["individu"]=data1
                 return JsonResponse(data)
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 
 def statbarM(request):
@@ -113,7 +113,7 @@ def statbarM(request):
                     data["sans-emploi"]=data4
                 return JsonResponse({"menage":data})
         else:
-            return Response({'message':'Personne'})
+            return JsonResponse({'message':'Personne'})
 
 def statbarI(request):
     if request.method=="GET":
@@ -156,7 +156,7 @@ def statbarI(request):
                     data["etude"]=data3
                     data["sans-emploi"]=data4
                 return JsonResponse({"individu":data})
-        return Response({'message':'Personne'})
+        return JsonResponse({'message':'Personne'})
 
 def statevaluation(request,slug,slug2):
     if request.method=="GET":
@@ -167,7 +167,7 @@ def statevaluation(request,slug,slug2):
         data["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True,commune=slug,quartier=slug2).count()
         return JsonResponse(data)
     else:
-        return Response({'message':'Personne'})
+        return JsonResponse({'message':'Personne'})
 
 # def statbar(request,slug,slug2):
 #     if request.method=="GET":
