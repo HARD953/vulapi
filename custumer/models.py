@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,PermissionsMixin, AbstractBaseUser,BaseUserManager
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+from distutils.command.upload import upload
 
 from posts.critere.indicateur import moyenneage, niveau, occupations
 
@@ -43,6 +44,8 @@ class CustumerAccountManager(BaseUserManager):
 #         return '{}_{}'.format(self.commune,self.quartier)
 
 class NewUser(AbstractBaseUser,PermissionsMixin):
+    def nameFile(instance, filename):
+        return '/'.join(['images', str(instance.user_name), filename])
     user_name=models.CharField(max_length=30,unique=True)
     first_name=models.CharField(max_length=30)
     start_date=models.DateTimeField(default=timezone.now)
@@ -50,7 +53,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     adresse=models.CharField(max_length=300, blank=True, null=True)
     about_me=models.TextField(max_length=500, blank=True, null=True)
     create=models.DateTimeField(auto_now_add=True)
-    profile_image=models.ImageField(null=True)
+    profile_image=models.ImageField(upload_to=nameFile,blank=True)
     is_active=models.BooleanField(default=True)
     is_staff=models.BooleanField(default=True)
     is_superuser=models.BooleanField(default=False)
@@ -71,7 +74,6 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
 
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=['user_name','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune']
-    
     def __str__(self):
         return self.user_name
 

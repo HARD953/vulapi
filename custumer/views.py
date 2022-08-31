@@ -58,6 +58,7 @@ class CreateAgent(APIView):
 #     permission_classes=[AllowAny]
 #     serializer_class=UserSerializer
 
+
 class CreateAdmin(APIView):
     permission_classes=[AllowAny]
     def post(self,request):
@@ -160,6 +161,10 @@ class ListSuperAdmin(generics.ListAPIView):
         return NewUser.objects.filter(is_superuser=True)
 
 
+
+
+
+
 class ListRecenser(generics.ListAPIView):
     permission_classes=[AllowAny]
     model=Chef_menage
@@ -199,6 +204,8 @@ class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
     queryset=NewUser.objects.all()
     permission_classes=[AllowAny]
     serializer_class=AdminSerializer
+
+
 
 #How make to connect when we use token jwt
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -295,3 +302,38 @@ class LoginView(APIView):
 #         serializer_context = {'request': request}
 #         user_data=UserSerializer(user,context=serializer_context).data
 #         return Response(user_data)
+
+class DetailConecter(generics.ListAPIView):
+    model=NewUser
+    permission_classes=[AllowAny]
+    serializer_class=GeneraleSerialiser
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return NewUser.objects.filter(user_name=self.request.user.user_name)
+            
+
+def detaAdmin(request,pk):
+    if request.method=="GET":
+        chef=NewUser.objects.filter(id=pk)
+        chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        data={}
+        data['admin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        data['agentcree']=NewUser.objects.filter(is_agent=True,commune=chefs[0]["commune"]).count()
+        return JsonResponse({'chefs':data})
+   
+
+def detaAgent(request,pk):
+    if request.method=="GET":
+        chef=NewUser.objects.filter(id=pk)
+        chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        data={}
+        data['agent']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        data['individu']=(Chef_menage.objects.filter(owner1=pk,individu=True)).count()
+        data['menage']=(Chef_menage.objects.filter(owner1=pk,menage=True)).count()
+        data['vulnerable_physique']=(Chef_menage.objects.filter(owner1=pk,vulnerablePhy=True)).count()
+        data['vulnerable_conditionv']=(Chef_menage.objects.filter(owner1=pk,vulnerableCondi=True)).count()
+        data['vulnerable_etude']=(Chef_menage.objects.filter(owner1=pk,vulnerableEtude=True)).count()
+        data['vulnerable_sansE']=(Chef_menage.objects.filter(owner1=pk,vulnerableOccup=True)).count()
+        return JsonResponse({'data':data})
+    else:
+        return Response({'message':'Personne'})

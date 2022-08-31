@@ -5,6 +5,7 @@ from .admins import*
 from rest_framework.urlpatterns import format_suffix_patterns
 from .critere import*
 
+
 from .views import MyTokenObtainPairView
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -21,7 +22,11 @@ urlpatterns=format_suffix_patterns([
     path('alsuperadmin/', ListSuperAdmin.as_view(),name='registers-superadmin-detail'),
     path('allagent/', ListAllAgent.as_view(),name='registers-admin-detail'),
 
-    path('admin/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
+    path('detailadimn/', DetailConecter.as_view(),name='adm'),
+    path('infoadmin/<int:pk>', detaAdmin),
+    path('infoagent/<int:pk>', detaAgent),
+
+    path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
     path('agent/<int:pk>', DetailAgent.as_view(),name='registers-admin-detail'),
 
 #Superadmin
