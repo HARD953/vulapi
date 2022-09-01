@@ -309,7 +309,7 @@ class DetailConecter(generics.ListAPIView):
     serializer_class=GeneraleSerialiser
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return NewUser.objects.filter(user_name=self.request.user.user_name)
+            return NewUser.objects.filter(email=self.request.user.email)
             
 
 def detaAdmin(request,pk):

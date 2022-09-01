@@ -238,7 +238,6 @@ class ChargeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
     def perform_create(self, serializer):
         serializer.save(owner8=self.request.user)
 
-
 class ListRecenser(generics.ListAPIView):
     permission_classes=[IsAgentAuthenticated]
     model=Chef_menage
