@@ -163,8 +163,6 @@ class ListSuperAdmin(generics.ListAPIView):
 
 
 
-
-
 class ListRecenser(generics.ListAPIView):
     permission_classes=[AllowAny]
     model=Chef_menage
@@ -248,8 +246,6 @@ class BlacklistTokenUpdateView(APIView):
         
 
 
-
-
 class LoginView(APIView):
     def post(self,request):
         email=request.data['email']
@@ -309,7 +305,7 @@ class DetailConecter(generics.ListAPIView):
     serializer_class=GeneraleSerialiser
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return NewUser.objects.filter(email=self.request.user.email)
+            return NewUser.objects.filter(user_name=self.request.user.user_name)
             
 
 def detaAdmin(request,pk):
