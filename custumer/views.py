@@ -212,7 +212,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        token['user_name'] = user.email
+        token['email'] = user.email
         return token
 
 class MyTokenObtainPairView(TokenObtainPairView):
