@@ -206,20 +206,23 @@ class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
 
 
 #How make to connect when we use token jwt
+
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['email'] = user.email
+        
         return token
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
+
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
     authentication_classes = ()
-
+    
     def post(self, request):
         try:
             refresh_token = request.data["refresh_token"]

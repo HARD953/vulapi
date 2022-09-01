@@ -69,10 +69,9 @@ class SuperAdminSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class GeneraleSerialiser(serializers.HyperlinkedModelSerializer):
-    owner = serializers.ReadOnlyField(source='owner.user_name')
     class Meta:
         model = NewUser
-        fields=['id','start_date','email','user_name','commune','first_name','password','adresse','about_me','is_user','is_superuser','is_agent','owner','is_active','is_staff','profile_image','create']
+        fields=['id','start_date','email','user_name','commune','first_name','password','adresse','about_me','is_user','is_superuser','is_agent','is_active','is_staff','profile_image','create']
         extra_kwargs ={
             'password':{'write_only':True}
         }
