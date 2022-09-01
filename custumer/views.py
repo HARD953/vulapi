@@ -299,13 +299,30 @@ class LoginView(APIView):
 #         user_data=UserSerializer(user,context=serializer_context).data
 #         return Response(user_data)
 
-class DetailConecter(generics.ListAPIView):
-    model=NewUser
-    permission_classes=[AllowAny]
-    serializer_class=GeneraleSerialiser
-    def get_queryset(self):
+class DetailConecter(APIView):
+    def get(self,request):
         if self.request.user.is_authenticated:
-            return NewUser.objects.filter(user_name=self.request.user.user_name)
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+            serializer=GeneraleSerialiser(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        else:
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
+
+# class DetailConecter(generics.ListAPIView):
+#     model=NewUser
+#     permission_classes=[AllowAny]
+#     serializer_class=GeneraleSerialiser
+#     def get_queryset(self):
+#         if self.request.user.is_authenticated:
+#             print(self.request.user)
+#             return NewUser.objects.filter(user_name=self.request.user.user_name)
+
+# class DetailConecter(generics.ListAPIView):
+#     model=NewUser
+#     permission_classes=[AllowAny]
+#     serializer_class=GeneraleSerialiser
+#     def get_queryset(self):    
+#         return NewUser.objects.all()
             
 
 def detaAdmin(request,pk):

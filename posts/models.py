@@ -125,6 +125,8 @@ class Conjoint(models.Model):
     list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
     handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
     owner2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_conjoint', on_delete=models.CASCADE,null=True)
+    maladie=models.CharField(max_length=100,blank=False)
+
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
 
@@ -137,6 +139,8 @@ class Enfant(models.Model):
     sexes=models.CharField(max_length=1,choices=sexe)
     list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
     handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
+    maladie=models.CharField(max_length=100,blank=False)
+
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)
         
@@ -146,9 +150,7 @@ class Commodite(models.Model):
     nombre_piece=models.IntegerField(default=1)
     nombre_piece_dormir=models.IntegerField(default=1)
     typelogement=models.CharField(max_length=100,blank=False)
-    nature_mur=models.CharField(max_length=100,blank=False)
-    nature_toit=models.CharField(max_length=100,blank=False)
-    nature_sol=models.CharField(max_length=100,blank=False)
+    
     lieu_aisance=models.CharField(max_length=100,blank=False)
     alimentation_eau=models.CharField(max_length=100,blank=False)
     eclairage=models.CharField(max_length=100,blank=False)
@@ -192,6 +194,8 @@ class Charge(models.Model):
     intention_ret=models.BooleanField()
     list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
     handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
+    maladie=models.CharField(max_length=100,blank=False)
+
     def __str__(self):
         return '{}_{}'.format(self.parentg)
 
@@ -199,6 +203,8 @@ class Enfant_R(models.Model):
     nom=models.CharField(max_length=100,blank=False)
     prenom=models.CharField(max_length=100,blank=False)
     annee_naissance=models.DateField(blank=False)
+    maladie=models.CharField(max_length=100,blank=False)
+
     owner9  = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enfant_rue', on_delete=models.CASCADE,null=True)
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     sexe=(('M','Maxculin'),('F','Feminin'))
