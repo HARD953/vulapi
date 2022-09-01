@@ -75,7 +75,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=['user_name','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune']
     def __str__(self):
-        return self.user_name
+        return self.email
 
 class Quartier(models.Model):
     commune=models.CharField(max_length=100,blank=False)
