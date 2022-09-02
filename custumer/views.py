@@ -32,7 +32,9 @@ class CreateAgent(APIView):
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
-            return Response({'status':status.HTTP_400_BAD_REQUEST})
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+            serializer=GeneraleSerialiser(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
             
     permission_classes=[AllowAny]
     def post(self,request):
@@ -75,10 +77,11 @@ class CreateAdmin(APIView):
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
-            return Response({'status':status.HTTP_400_BAD_REQUEST})
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+            serializer=GeneraleSerialiser(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
 
     def post(self,request):
-        
         message='Enregistrement reussi'
         data=request.data
         if data['is_staff']=="is_staff":
@@ -109,7 +112,9 @@ class CreateSuperAdmin(APIView):
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
-            return Response({'status':status.HTTP_400_BAD_REQUEST})
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+            serializer=GeneraleSerialiser(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
     
     def post(self,request):
         message='Enregistrement reussi'
