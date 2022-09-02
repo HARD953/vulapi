@@ -303,13 +303,12 @@ class LoginView(APIView):
 #         return Response(user_data)
 
 class DetailConecter(APIView):
+    permission_classes=[AllowAny]
     def get(self,request):
-        if self.request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
-        else:
-            return Response({'status':status.HTTP_400_BAD_REQUEST})
+        dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+        serializer=GeneraleSerialiser(dons, many=True)
+        return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        
 
 # class DetailConecter(generics.ListAPIView):
 #     model=NewUser
