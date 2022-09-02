@@ -27,8 +27,9 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 class CreateAgent(APIView):
     def get(self,request):
-        if request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=request.user.user_name)
+        if self.request.user.is_authenticated:
+            print(self.request.user)
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
@@ -70,8 +71,8 @@ class CreateAgent(APIView):
 class CreateAdmin(APIView):
     permission_classes=[AllowAny]
     def get(self,request):
-        if request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=request.user.user_name)
+        if self.request.user.is_authenticated:
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
@@ -103,8 +104,8 @@ class CreateAdmin(APIView):
 
 class CreateSuperAdmin(APIView):
     def get(self,request):
-        if request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=request.user.user_name)
+        if self.request.user.is_authenticated:
+            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
