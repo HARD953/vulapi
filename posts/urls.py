@@ -16,7 +16,6 @@ from .statistiquesr.statistique3 import*
 from .statistiquesr.statistique2 import*
 from .analysed.analysecr import*
 
-
 urlpatterns=[
     path('chefmenage/', ChefMenageList.as_view(),name='chef_menage-list'),
     path('dchefmenage/<int:pk>/', ChefMenageDetail.as_view(),name='chef_menage-detail'),
