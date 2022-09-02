@@ -68,9 +68,21 @@ class SuperAdminSerializer(serializers.HyperlinkedModelSerializer):
         return instance
 
 
-class GeneraleSerialiser(serializers.HyperlinkedModelSerializer):
+class GeneraleSerialiser(serializers.ModelSerializer):
     class Meta:
         model = NewUser
         fields=['id','start_date','email','user_name','commune','first_name','password','adresse','about_me','is_user','is_superuser','is_agent','is_active','is_staff','profile_image','create']
+        extra_kwargs ={
+            'password':{'write_only':True}
+        }
+
+    def create(self,validated_data):
+        password=validated_data.pop('password',None)
+        instance =self.Meta.model(**validated_data)
+
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
         
 
