@@ -22,7 +22,7 @@ urlpatterns=format_suffix_patterns([
     path('alsuperadmin/', ListSuperAdmin.as_view(),name='registers-superadmin-detail'),
     path('allagent/', ListAllAgent.as_view(),name='registers-admin-detail'),
 
-    path('detailadimn/', DetailConecter.as_view(),name='adm'),
+    path('detailadimn/', DetailConecter.as_view(),name='detail-des-admin'),
     path('infoadmin/<int:pk>', detaAdmin),
     path('infoagent/<int:pk>', detaAgent),
 
