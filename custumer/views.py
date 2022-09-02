@@ -27,14 +27,12 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 class CreateAgent(APIView):
     def get(self,request):
-        if self.request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+        if request.user.is_authenticated:
+            dons=NewUser.objects.filter(user_name=request.user.user_name)
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
             
     permission_classes=[AllowAny]
     def post(self,request):
@@ -72,14 +70,12 @@ class CreateAgent(APIView):
 class CreateAdmin(APIView):
     permission_classes=[AllowAny]
     def get(self,request):
-        if self.request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+        if request.user.is_authenticated:
+            dons=NewUser.objects.filter(user_name=request.user.user_name)
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
 
     def post(self,request):
         message='Enregistrement reussi'
@@ -107,14 +103,12 @@ class CreateAdmin(APIView):
 
 class CreateSuperAdmin(APIView):
     def get(self,request):
-        if self.request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+        if request.user.is_authenticated:
+            dons=NewUser.objects.filter(user_name=request.user.user_name)
             serializer=GeneraleSerialiser(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
     
     def post(self,request):
         message='Enregistrement reussi'

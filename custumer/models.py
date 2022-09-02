@@ -1,4 +1,3 @@
-from venv import create
 from django.db import models
 from django.contrib.auth.models import AbstractUser,PermissionsMixin, AbstractBaseUser,BaseUserManager
 from django.contrib.postgres.fields import ArrayField
@@ -6,6 +5,7 @@ from django.utils import timezone
 from distutils.command.upload import upload
 
 from posts.critere.indicateur import moyenneage, niveau, occupations
+from django.conf import settings
 
 # Create your models here.
 
