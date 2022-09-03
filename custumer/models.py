@@ -59,6 +59,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     is_superuser=models.BooleanField(default=True)
     is_user=models.BooleanField(default=False)
     is_agent=models.BooleanField(default=False)
+    responsable=models.CharField(max_length=30,default="issa")
 
     district_list=(('A','Abidjan'),('B','Bas_Sassandra'),('C','Comoe'),('D','Denguele'),('G','Goh_Djiboua'),('L','Lacs'),('La','Lagunes'),('M','Montagnes'),('SM','Sassandra_Marahoue'),('Sa','Savanes'),('Va','Vallee_du_Bandama'),('W','Woroba'),('Y','Yamoussoukro'),('Za','Zanzan'))
     district=models.CharField(max_length=100,blank=False,choices=district_list)
@@ -73,7 +74,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     objects=CustumerAccountManager()
 
     USERNAME_FIELD='email'
-    REQUIRED_FIELDS=['user_name','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune']
+    REQUIRED_FIELDS=['user_name','responsable','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune']
     def __str__(self):
         return self.email
 

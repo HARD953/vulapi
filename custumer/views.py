@@ -28,14 +28,17 @@ from rest_framework_simplejwt.tokens import RefreshToken
 class CreateAgent(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
-            print(self.request.user)
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            if self.request.user.is_superuser:
+                dons=NewUser.objects.filter(is_agent=True)
+                serializer=GeneraleSerialiser(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            else:
+                dons=NewUser.objects.filter(commune=self.request.user.commune,is_agent=True)
+                serializer=GeneraleSerialiser(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
             
-    permission_classes=[AllowAny]
     def post(self,request):
         message='Enregistrement reussi'
         data=request.data
@@ -53,6 +56,8 @@ class CreateAgent(APIView):
             data['is_agent']=True
         else:
             data['is_agent']=False
+
+        data['responsable']=self.request.user
             
         serializer = UserSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
@@ -61,20 +66,44 @@ class CreateAgent(APIView):
             return Response({'message':message,'data':serializer.data})            
         return Response({'message':serializer.errors})
 
+class CrudAgent(APIView):
+    def get_object(self, pk):
+        try:
+            return NewUser.objects.get(pk=pk)
+        except NewUser.DoesNotExist:
+            raise Http404
 
-# class CreateAgent(APIView):
-#     queryset=NewUser.objects.all()
-#     permission_classes=[AllowAny]
-#     serializer_class=UserSerializer
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        print(snippet)
+        serializer = GeneraleSerialiser(snippet)
+        return Response(serializer.data)
 
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = GeneraleSerialiser(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 class CreateAdmin(APIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     def get(self,request):
         if self.request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            if self.request.user.is_superuser:
+                dons=NewUser.objects.filter(is_user=True)
+                serializer=GeneraleSerialiser(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            else:
+                dons=NewUser.objects.filter(is_user=True,commune=self.request.user.commune)
+                serializer=GeneraleSerialiser(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
 
@@ -95,6 +124,9 @@ class CreateAdmin(APIView):
             data['is_user']=True
         else:
             data['is_user']=False
+
+        data['responsable']=self.request.user
+
         serializer = AdminSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
         if serializer.is_valid():
@@ -102,12 +134,44 @@ class CreateAdmin(APIView):
             return Response({'message':message,'data':serializer.data})            
         return Response({'message':serializer.errors})
 
+class CrudAdmin(APIView):
+    def get_object(self, pk):
+        try:
+            return NewUser.objects.get(pk=pk)
+        except NewUser.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        print(snippet)
+        serializer = GeneraleSerialiser(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = GeneraleSerialiser(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
 class CreateSuperAdmin(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
-            dons=NewUser.objects.filter(user_name=self.request.user.user_name)
-            serializer=GeneraleSerialiser(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            if self.request.user.is_superuser:
+                dons=NewUser.objects.filter(is_superuser=True)
+                serializer=GeneraleSerialiser(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            else:
+                dons=NewUser.objects.filter(is_superuser=True,commune=self.request.user.commune)
+                serializer=GeneraleSerialiser(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
     
@@ -128,6 +192,9 @@ class CreateSuperAdmin(APIView):
             data['is_superuser']=True
         else:
             data['is_superuser']=False
+
+        
+
         serializer = SuperAdminSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
         if serializer.is_valid():
@@ -136,12 +203,32 @@ class CreateSuperAdmin(APIView):
         return Response({'message':serializer.errors})
 
 
+class CrudSuperadmin(APIView):
+    def get_object(self, pk):
+        try:
+            return NewUser.objects.get(pk=pk)
+        except NewUser.DoesNotExist:
+            raise Http404
 
-# class FilterRecensement(filters.FilterSet):
-#     agent=filters.CharFilter(lookup_expr='icontains')
-#     class Meta:
-#         model:NewUser
-#         fields=("agent","commune")
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        print(snippet)
+        serializer = GeneraleSerialiser(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = GeneraleSerialiser(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 class ListAgent(generics.ListAPIView):
@@ -272,7 +359,6 @@ class BlacklistTokenUpdateView(APIView):
 #         return Response(user_data)
         
 
-
 class LoginView(APIView):
     def post(self,request):
         email=request.data['email']
@@ -295,36 +381,6 @@ class LoginView(APIView):
         }
         return response
 
-# class LogoutView(APIView):
-#     def post(self, request):
-#         response=Response()
-#         response.delete_cookie('jwt')
-#         response.data ={
-#             'message':'success'
-#         }
-#         return response
-
-
-# class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
-#     permission_classes=[IsAdminAuthenticated]
-#     def list(self, request):
-#         queryset = NewUser.objects.filter(is_agent=True,localite=request.POST['commue'])
-#         serializer = UserSerializer(queryset, many=True)
-#         return Response(serializer.data)
-
-# class DetailSuperAdmin(generics.RetrieveUpdateDestroyAPIView):
-#     queryset=NewUser.objects.all()
-#     permission_classes=[AllowAny]
-#     serializer_class=SuperAdminSerializer
-
-#Select All information for user who as connected
-# class RecensementView(APIView):
-#     permission_classes=[IsAdminAuthenticated]
-#     def get(self,request):
-#         user=NewUser.objects.get(pk=pk,is_agent=True,localite=request.POST['commue'])
-#         serializer_context = {'request': request}
-#         user_data=UserSerializer(user,context=serializer_context).data
-#         return Response(user_data)
 
 class DetailConecter(APIView):
     permission_classes=[AllowAny]
@@ -351,30 +407,43 @@ class DetailConecter(APIView):
 #     serializer_class=GeneraleSerialiser
 #     def get_queryset(self):    
 #         return NewUser.objects.all()
-            
 
-def detaAdmin(request,pk):
-    if request.method=="GET":
-        chef=NewUser.objects.filter(id=pk)
+class DetaSuperadmin(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request,slug):
+        chef=NewUser.objects.filter(email=slug)
         chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        print(chefs)
+        data={}
+        data['superadmin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        data['admin']=NewUser.objects.filter(is_user=True,responsable=chefs[0]["user_name"]).count()
+        return JsonResponse({'chefs':data})
+
+class DetaAdmin(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request,slug):
+        chef=NewUser.objects.filter(email=slug)
+        chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        print(chefs)
         data={}
         data['admin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
-        data['agentcree']=NewUser.objects.filter(is_agent=True,commune=chefs[0]["commune"]).count()
+        data['agentcree']=NewUser.objects.filter(is_agent=True,responsable=chefs[0]["user_name"]).count()
         return JsonResponse({'chefs':data})
-   
 
-def detaAgent(request,pk):
-    if request.method=="GET":
-        chef=NewUser.objects.filter(id=pk)
+
+class DetaAgent(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request,slug):
+        chef=NewUser.objects.filter(email=slug,is_agent=True)
         chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        dataf=[dict(i) for i in chefs]
+        idf=[i['id'] for i in dataf]
         data={}
         data['agent']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
-        data['individu']=(Chef_menage.objects.filter(owner1=pk,individu=True)).count()
-        data['menage']=(Chef_menage.objects.filter(owner1=pk,menage=True)).count()
-        data['vulnerable_physique']=(Chef_menage.objects.filter(owner1=pk,vulnerablePhy=True)).count()
-        data['vulnerable_conditionv']=(Chef_menage.objects.filter(owner1=pk,vulnerableCondi=True)).count()
-        data['vulnerable_etude']=(Chef_menage.objects.filter(owner1=pk,vulnerableEtude=True)).count()
-        data['vulnerable_sansE']=(Chef_menage.objects.filter(owner1=pk,vulnerableOccup=True)).count()
+        data['individu']=(Chef_menage.objects.filter(owner1=idf[0],individu=True)).count()
+        data['menage']=(Chef_menage.objects.filter(owner1=idf[0],menage=True)).count()
+        data['vulnerable_physique']=(Chef_menage.objects.filter(owner1=idf[0],vulnerablePhy=True)).count()
+        data['vulnerable_conditionv']=(Chef_menage.objects.filter(owner1=idf[0],vulnerableCondi=True)).count()
+        data['vulnerable_etude']=(Chef_menage.objects.filter(owner1=idf[0],vulnerableEtude=True)).count()
+        data['vulnerable_sansE']=(Chef_menage.objects.filter(owner1=idf[0],vulnerableOccup=True)).count()
         return JsonResponse({'data':data})
-    else:
-        return Response({'message':'Personne'})
