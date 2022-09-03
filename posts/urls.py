@@ -53,7 +53,7 @@ urlpatterns=[
     #Les statistiques pour le superadmin
     path('staticirclem/',StatcircleM.as_view()),
     path('staticirclei/',StatcircleI.as_view()),
-    path('statibarm/',StatbarM.as_vieew()),
+    path('statibarm/',StatbarM.as_view()),
     path('statibari/',StatbarI.as_view()),
 
     path('statistiquegm/',statcircleMGeneral),

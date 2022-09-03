@@ -45,7 +45,6 @@ def statcircleMGeneral(request):
         else:
             return JsonResponse({"message":"error"})
 
-
 def statcircleIGeneral(request):
     if request.method=="GET":
         if request.user.is_authenticated:
