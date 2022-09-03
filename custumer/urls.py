@@ -31,8 +31,8 @@ urlpatterns=format_suffix_patterns([
     path('alsuperadmin/', ListSuperAdmin.as_view(),name='registers-superadmin-detail'),
     path('allagent/', ListAllAgent.as_view(),name='registers-admin-detail'),
 
-    path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
-    path('agent/<int:pk>', DetailAgent.as_view(),name='registers-admin-detail'),
+    # path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
+    # path('agent/<int:pk>', DetailAgent.as_view(),name='registers-admin-detail'),
 
 #Superadmin
     path('chefmenages/', ChefMenageList.as_view(),name='chef_menage-list'),
