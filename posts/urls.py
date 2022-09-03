@@ -56,8 +56,8 @@ urlpatterns=[
     path('statibarm/',StatbarM.as_view()),
     path('statibari/',StatbarI.as_view()),
 
-    path('statistiquegm/',statcircleMGeneral),
-    path('statistiquegi/',statcircleIGeneral),
+    path('statistiquegm/',StatcircleMGeneral.as_view()),
+    path('statistiquegi/',StatcircleIGeneral.as_view()),
 
     path('homme/<str:slug>/',homme),
     path('individug/',individug),

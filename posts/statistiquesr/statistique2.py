@@ -23,10 +23,10 @@ from rest_framework import status
 from django.http import Http404
 from datetime import date
 
-def statcircleMGeneral(request):
-    if request.method=="GET":
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
+class StatcircleMGeneral(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['commune'] for i in dataf]
@@ -40,15 +40,16 @@ def statcircleMGeneral(request):
                 quartierT=[i['quartier'] for i in dataf]
                 data={}
                 for quartier in quartierT:
-                    data["{}".format(quartier)]=Chef_menage.objects.filter(menage=True,commune=request.user.commune,quartier=quartier).count()
+                    data["{}".format(quartier)]=Chef_menage.objects.filter(menage=True,commune=self.request.user.commune,quartier=quartier).count()
                 return JsonResponse(data)
         else:
             return JsonResponse({"message":"error"})
 
-def statcircleIGeneral(request):
-    if request.method=="GET":
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
+
+class StatcircleIGeneral(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['commune'] for i in dataf]
@@ -62,7 +63,7 @@ def statcircleIGeneral(request):
                 quartierT=[i['quartier'] for i in dataf]
                 data={}
                 for quartier in quartierT:
-                    data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=request.user.commune,quartier=quartier).count()
+                    data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=self.request.user.commune,quartier=quartier).count()
                 return JsonResponse(data)
         else:
             return JsonResponse({"message":"error"})
