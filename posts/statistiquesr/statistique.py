@@ -26,7 +26,7 @@ from datetime import date
 class StatcircleM(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
-            if request.user.is_superuser:
+            if self.request.user.is_superuser:
                 data1={}
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,menage=True).count()
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,menage=True).count()
@@ -48,12 +48,12 @@ class StatcircleM(APIView):
             return JsonResponse({'message':'Personne'})
 
 
-def statcircleI(request):
-    if request.method=="GET":
-        if request.user.is_authenticated:
+class StatcircleI(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
             data={}
             data1={}
-            if request.user.is_superuser:
+            if self.request.user.is_superuser:
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,individu=True).count()
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True).count()
@@ -72,10 +72,10 @@ def statcircleI(request):
             return JsonResponse({'message':'Personne'})
 
 
-def statbarM(request):
-    if request.method=="GET":
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
+class StatbarM(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['commune'] for i in dataf]
@@ -116,10 +116,10 @@ def statbarM(request):
         else:
             return JsonResponse({'message':'Personne'})
 
-def statbarI(request):
-    if request.method=="GET":
-        if request.user.is_authenticated:
-            if request.user.is_superuser:
+class StatbarI(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['commune'] for i in dataf]

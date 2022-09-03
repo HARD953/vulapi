@@ -52,9 +52,9 @@ urlpatterns=[
     path('informationd/<int:pk>/',ana),
     #Les statistiques pour le superadmin
     path('staticirclem/',StatcircleM.as_view()),
-    path('staticirclei/',statcircleI),
-    path('statibarm/',statbarM),
-    path('statibari/',statbarI),
+    path('staticirclei/',StatcircleI.as_view()),
+    path('statibarm/',StatbarM.as_vieew()),
+    path('statibari/',StatbarI.as_view()),
 
     path('statistiquegm/',statcircleMGeneral),
     path('statistiquegi/',statcircleIGeneral),
