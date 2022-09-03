@@ -17,8 +17,8 @@ urlpatterns=format_suffix_patterns([
     path('agent/', CreateAgent.as_view(),name='registers-agent'),
 
     path('superadminc/<int:pk>/', CrudSuperadmin.as_view()),
-    path('adminsc/<str:slug>/', CrudAdmin.as_view()),
-    path('agentc/<str:slug>/', CrudAgent.as_view()),
+    path('adminsc/<int:pk>/', CrudAdmin.as_view()),
+    path('agentc/<int:pk>/', CrudAgent.as_view()),
 
     path('detailadimn/', DetailConecter.as_view(),name='detail-des-admin'),
     path('infoadmin/<str:slug>/', DetaAdmin.as_view()),
@@ -26,10 +26,6 @@ urlpatterns=format_suffix_patterns([
     path('infosuper/<str:slug>/', DetaSuperadmin.as_view()),
 
     path('effecter/', Affecter.as_view(),name='affecter-agent'),
-
-    path('aladmin/', ListAdmin.as_view(),name='registers-sadmin-detail'),
-    path('alsuperadmin/', ListSuperAdmin.as_view(),name='registers-superadmin-detail'),
-    path('allagent/', ListAllAgent.as_view(),name='registers-admin-detail'),
 
     # path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
     # path('agent/<int:pk>', DetailAgent.as_view(),name='registers-admin-detail'),

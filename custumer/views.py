@@ -93,7 +93,6 @@ class CrudAgent(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class CreateAdmin(APIView):
-    permission_classes=[IsSuperAdminAuthenticated]
     def get(self,request):
         if self.request.user.is_authenticated:
             if self.request.user.is_superuser:
@@ -229,93 +228,6 @@ class CrudSuperadmin(APIView):
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
-
-class ListAgent(generics.ListAPIView):
-    permission_classes=[AllowAny]
-    model=NewUser
-    serializer_class=UserSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=["user_name","commune","first_name","start_date","adresse"]
-    def get_queryset(self):
-        user = self.request.user
-        return NewUser.objects.filter(commune=user.commune,is_agent=True)
-
-class ListAllAgent(generics.ListAPIView):
-    permission_classes=[AllowAny]
-    model=NewUser
-    serializer_class=UserSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=["user_name","commune","first_name","start_date","adresse"]
-    def get_queryset(self):
-        user = self.request.user
-        return NewUser.objects.filter(is_agent=True)
-
-class ListAdmin(generics.ListAPIView):
-    permission_classes=[AllowAny]
-    model=NewUser
-    serializer_class=AdminSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=["user_name","commune","first_name","start_date","adresse"]
-    def get_queryset(self):
-        user = self.request.user
-        return NewUser.objects.filter(is_user=True)
-
-class ListSuperAdmin(generics.ListAPIView):
-    permission_classes=[AllowAny]
-    model=NewUser
-    serializer_class=AdminSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=["user_name","commune","first_name","start_date","adresse"]
-    def get_queryset(self):
-        user = self.request.user
-        return NewUser.objects.filter(is_superuser=True)
-
-
-
-
-class ListRecenser(generics.ListAPIView):
-    permission_classes=[AllowAny]
-    model=Chef_menage
-    serializer_class=PostChefMSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=['district','region','departement','sous_prefecture','commune','milieu_r','quartier']
-    def get_queryset(self):
-        user = self.request.user
-        return Chef_menage.objects.all()
-
-class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[AllowAny]
-    model=Chef_menage
-    serializer_class=PostChefMSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=["user_name","commune","first_name","start_date","adresse"]
-    def get_queryset(self):
-        user = self.request.user
-        return Chef_menage.objects.all()
-
-class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[AllowAny]
-    model=NewUser
-    serializer_class=AdminSerializer
-    filter_backends = [DjangoFilterBackend,SearchFilter]
-    search_fields=["user_name","commune","first_name","start_date","adresse"]
-    def get_queryset(self):
-        user = self.request.user
-        return NewUser.objects.filter(is_user=True)
-
-# class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
-#     queryset=NewUser.objects.all()
-#     permission_classes=[IsAdminAuthenticated]
-#     serializer_class=UserSerializer
-
-class DetailAdmin(generics.RetrieveUpdateDestroyAPIView):
-    queryset=NewUser.objects.all()
-    permission_classes=[AllowAny]
-    serializer_class=AdminSerializer
-
-
-
 #How make to connect when we use token jwt
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -343,44 +255,6 @@ class BlacklistTokenUpdateView(APIView):
         except Exception as e:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-# def get1(request):
-#     if request.method=="GET":
-#         recenser=NewUser.objects.all()
-#         serializer = UserSerializer(recenser, many=True)
-#         return JsonResponse(serializer.data, safe=False)
-
-# Select All information for user who as connected
-# class RecensementView(APIView):
-#     permission_classes=[AdminAuthenticated]
-#     def get(self,request):
-#         user=NewUser.objects.get(user_name=request.user)
-#         serializer_context = {'request': request}
-#         user_data=UserSerializer(user,context=serializer_context).data
-#         return Response(user_data)
-        
-
-class LoginView(APIView):
-    def post(self,request):
-        email=request.data['email']
-        password=request.data['password']
-        user=NewUser.objects.filter(email=email).first()
-        if user is None:
-            raise AuthenticationFailed('User not found')
-        if not user.check_password(password):
-            raise AuthenticationFailed('Incorrect Password')
-        payload={
-            'id':user.id,
-            'exp':datetime.datetime.utcnow() + datetime.timedelta(minutes=1),
-            'iat':datetime.datetime.utcnow()
-            }
-        token =jwt.encode(payload, 'secret',algorithm='HS256')
-        response =Response()
-        response.set_cookie(key='jwt',value=token,httponly=True)
-        response.data ={
-            'jwt':token
-        }
-        return response
-
 
 class DetailConecter(APIView):
     permission_classes=[AllowAny]
@@ -392,21 +266,8 @@ class DetailConecter(APIView):
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
 
-# class DetailConecter(generics.ListAPIView):
-#     model=NewUser
-#     permission_classes=[AllowAny]
-#     serializer_class=GeneraleSerialiser
-#     def get_queryset(self):
-#         if self.request.user.is_authenticated:
-#             print(self.request.user)
-#             return NewUser.objects.filter(user_name=self.request.user.user_name)
 
-# class DetailConecter(generics.ListAPIView):
-#     model=NewUser
-#     permission_classes=[AllowAny]
-#     serializer_class=GeneraleSerialiser
-#     def get_queryset(self):    
-#         return NewUser.objects.all()
+
 
 class DetaSuperadmin(APIView):
     permission_classes=[AllowAny]
@@ -416,7 +277,7 @@ class DetaSuperadmin(APIView):
         print(chefs)
         data={}
         data['superadmin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
-        data['admin']=NewUser.objects.filter(is_user=True,responsable=chefs[0]["user_name"]).count()
+        data['admin/agent']=NewUser.objects.filter(responsable=chefs[0]["user_name"]).count()
         return JsonResponse({'chefs':data})
 
 class DetaAdmin(APIView):
@@ -447,3 +308,15 @@ class DetaAgent(APIView):
         data['vulnerable_etude']=(Chef_menage.objects.filter(owner1=idf[0],vulnerableEtude=True)).count()
         data['vulnerable_sansE']=(Chef_menage.objects.filter(owner1=idf[0],vulnerableOccup=True)).count()
         return JsonResponse({'data':data})
+
+
+class Affecter(APIView):
+    def post(self,request):
+        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        data=request.data
+        serializer = AffectaSerializer(data=data)
+        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.errors})
