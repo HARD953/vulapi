@@ -59,9 +59,9 @@ urlpatterns=[
     path('statistiquegm/',StatcircleMGeneral.as_view()),
     path('statistiquegi/',StatcircleIGeneral.as_view()),
 
-    path('homme/<str:slug>/',homme),
-    path('individug/',individug),
-    path('enfantru/<str:slug>/',enfant),
-    path('enfantg/',enfantg),
+    path('homme/<str:slug>/',Homme.as_view()),
+    path('individug/',Individug.as_view()),
+    path('enfantru/<str:slug>/',Enfant.as_view()),
+    path('enfantg/',Enfantg.as_view()),
 
 ]
