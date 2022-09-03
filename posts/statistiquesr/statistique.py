@@ -23,9 +23,9 @@ from rest_framework import status
 from django.http import Http404
 from datetime import date
 
-def statcircleM(request):
-    if request.method=="GET":
-        if request.user.is_authenticated:
+class StatcircleM(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
             if request.user.is_superuser:
                 data1={}
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,menage=True).count()
@@ -46,6 +46,7 @@ def statcircleM(request):
                 return JsonResponse(data)
         else:
             return JsonResponse({'message':'Personne'})
+
 
 def statcircleI(request):
     if request.method=="GET":

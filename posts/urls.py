@@ -51,7 +51,7 @@ urlpatterns=[
     path('information/<int:pk>/',info),
     path('informationd/<int:pk>/',ana),
     #Les statistiques pour le superadmin
-    path('staticirclem/',statcircleM),
+    path('staticirclem/',StatcircleM.as_view()),
     path('staticirclei/',statcircleI),
     path('statibarm/',statbarM),
     path('statibari/',statbarI),
