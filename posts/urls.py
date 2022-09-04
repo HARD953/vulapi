@@ -17,6 +17,9 @@ from .statistiquesr.statistique2 import*
 from .analysed.analysecr import*
 
 urlpatterns=[
+    path('recenser/', RecensementView.as_view()),
+    path('recenserenf/', RecensementEnfent.as_view()),
+
     path('chefmenage/', ChefMenageList.as_view(),name='chef_menage-list'),
     path('dchefmenage/<int:pk>/', ChefMenageDetail.as_view(),name='chef_menage-detail'),
     path('conjoint/', ConjointList.as_view(),name='conjoint'),
@@ -33,7 +36,6 @@ urlpatterns=[
     path('ddeces/<int:pk>/', DecesDetail.as_view(),name='deces-detail'),
     path('charge/', ChargeList.as_view(),name='charge'),
     path('dcharge/<int:pk>/', ChargeDetail.as_view(),name='charge-detail'),
-    path('recenser/', RecensementView.as_view(),name='charge'),
     path('enfantr/', EnfantRList.as_view(),name='lenfant'),
     path('denfantr/<int:pk>/', EnfantRDetail.as_view(),name='enfant-rue'),
     
@@ -65,5 +67,7 @@ urlpatterns=[
     path('enfantf/',Enfant_F.as_view()),
     path('enfanth/',Enfant_H.as_view()),
     path('enfantg/',Enfantg.as_view()),
+    path('test1/',Test1View.as_view()),
+    path('test2/',Test2View.as_view()),
 
 ]

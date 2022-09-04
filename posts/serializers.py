@@ -1,3 +1,4 @@
+from dataclasses import fields
 from rest_framework import serializers
 from .models import *
 
@@ -53,3 +54,14 @@ class PostEnfantRSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Enfant_R
         fields=['nom','prenom','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']
+
+
+class Tes1Serializer(serializers.ModelSerializer):
+    class Meta:
+        model=Test1
+        fields='__all__'
+
+class Tes2Serializer(serializers.ModelSerializer):
+    class Meta:
+        model=Test2
+        fields='__all__'

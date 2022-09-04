@@ -69,7 +69,6 @@ urlpatterns=format_suffix_patterns([
     path('chargead/<int:pk>/', ChargeListad.as_view()),
     path('affecter/', Affecter.as_view()),
 
-
     path('criterechef/', CritereCh.as_view()),
     path('criterech/', CritereCha.as_view()),
     path('critereen/', CritereEn.as_view()),

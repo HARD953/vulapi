@@ -223,6 +223,24 @@ class Enfant_R(models.Model):
     #x=['nom','prenom','annee_naissance','owner4','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue']
 
 
+class Test1(models.Model):
+    nom=models.CharField(max_length=255)
+    prenom=models.CharField(max_length=255)
+
+    def __str__(self):
+        return '{}'.format(self.nom)
+
+class Test2(models.Model):
+    classe=models.CharField(max_length=255)
+    niveau=models.CharField(max_length=255)
+
+    def __str__(self):
+        return '{}'.format(self.classe)
+        
+        
+
+
+
 
 
 

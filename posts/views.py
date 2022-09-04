@@ -12,6 +12,8 @@ from posts.permissions import *
 from django_filters.rest_framework import DjangoFilterBackend 
 from rest_framework.filters import SearchFilter
 # Create your views here.
+from rest_framework import status
+
 
 class WritePermission(BasePermission):
     def has_object_permission(self,request,view,obj):
@@ -251,20 +253,9 @@ class ListRecenser(generics.ListAPIView):
 
 
 
-class RecensementView(APIView):
-    permission_classes=[IsAgentAuthenticated]
-    analyse={}
+class RecensementView(APIView):        
     def post(self,request):
         data=request.data
-        if self.request.user.is_authenticated:
-            data['donateur']=self.request.user.user_name
-            serializer = PostChefMSerializer(data=data)
-        else:
-            data['donateur']='issa'
-            serializer = PostChefMSerializer(data=data)
-        error_message=None
-        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
-
         if data['Chef_menage']:
             for chef_menage in data['chef_menage']:
                 serializerche = PostChefMSerializer(data=chef_menage)
@@ -285,13 +276,11 @@ class RecensementView(APIView):
                 serializere=EnfantS(data=enfant)
                 if serializere.is_valid():
                     serializere.save()
-
         if data['Charge']:
             for charge in data['Charge']:
                 serializerch=PostChargeSerializer(data=charge)
                 if serializerch.is_valid():
                     serializerch.save()
-
         if data['Commodite']:
             for commodite in data['Commodite']:
                 serializerc=CommoditeS(data=commodite)
@@ -302,13 +291,48 @@ class RecensementView(APIView):
                 serializereq=EquipementS(data=equipement)
                 if serializereq.is_valid():
                     serializereq.save()
-        if data['Deces']:
-            for deces in data['Deces']:
-                serializerd=DeceS(data=deces)
-                if serializerd.is_valid():
-                    serializerd.save()
-            return JsonResponse(serializerd.data, status=201)
-        return JsonResponse(serializerd.errors, status=400)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+class RecensementEnfent(APIView):
+    def post(self,request):
+        data=self.request.data
+        serializer = PostEnfantRSerializer(data=data)
+        message='Insertion Done'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Test1View(APIView):
+    def post(self,request):
+        data=self.request.data
+        if data['test1']:
+            serializer = Tes1Serializer(data=data['test1'])
+            message='Insertion Done'
+            if serializer.is_valid():
+                serializer.save()
+                print("reuissi1")
+        if data['test2']:
+            serializer1 = Tes2Serializer(data=data['test2'])
+            print(data['test2'])
+            message='Insertion Done'
+            if serializer1.is_valid():
+                serializer1.save()
+                print("reuissi2")          
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class Test2View(APIView):
+    def post(self,request):
+        data=self.request.data
+        serializer = Tes2Serializer(data=data)
+        message='Insertion Done'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+            
 
 
     # def get(self,request,pk):
