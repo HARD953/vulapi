@@ -88,7 +88,7 @@ class Chef_menage(Personne):
     individu=models.BooleanField(default=False)
     menage=models.BooleanField(default=False)
     def __str__(self):
-        return '{}_{}'.format(self.nom,self.prenom)
+        return '{}_{}'.format(self.nom,self.first_name)
 
 class Recenser(models.Model):
     parent=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
@@ -122,7 +122,7 @@ class Conjoint(models.Model):
     maladie=models.CharField(max_length=100,blank=False)
 
     def __str__(self):
-        return '{}_{}'.format(self.nom,self.prenom)
+        return '{}_{}'.format(self.idc)
 
 class Enfant(models.Model):
     parentf=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
@@ -136,7 +136,7 @@ class Enfant(models.Model):
     maladie=models.CharField(max_length=100,blank=False)
 
     def __str__(self):
-        return '{}_{}'.format(self.nom,self.prenom)
+        return '{}_{}'.format(self.parentf)
         
 class Commodite(models.Model):
     parentc=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
@@ -210,7 +210,7 @@ class Enfant_R(NewUser):
     scolariser=models.BooleanField(default=False)
     quartier=models.CharField(max_length=100,blank=False)
     def __str__(self):
-        return '{}_{}'.format(self.nom,self.first_name)
+        return '{}_{}'.format(self.nom)
     #x=['nom','prenom','annee_naissance','owner4','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue']
 
 
