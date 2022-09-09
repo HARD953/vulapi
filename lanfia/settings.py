@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd45v6qail6bs33', 
-        'USER': 'nqzugyytngytjw', 
-        'PASSWORD': '2fc8d02b267061811aa290b354dab99c1b6b127df976f4fcb48a9ecae580949a',
-        'HOST': 'ec2-34-203-182-65.compute-1.amazonaws.com', 
+        'NAME': 'dqbngt21hel08', 
+        'USER': 'ckfflvhqoujmpv', 
+        'PASSWORD': '293ee56762260b968d6492b3002e149b6a4c2ca7cc19941348eee061ec05c574',
+        'HOST': 'ec2-35-168-122-84.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
 }
