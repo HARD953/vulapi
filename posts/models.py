@@ -5,6 +5,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,PermissionsMixin, AbstractBaseUser,BaseUserManager
 from django.utils import timezone
 
+from custumer.models import NewUser
+
 # Create your models here.
 
 # class District(models.Model):
@@ -45,9 +47,8 @@ from django.utils import timezone
 #     def __str__(self):
 #         return '{}_{}'.format(self.agentr,self.localite)
 
-class Personne(models.Model):
+class Personne(NewUser):
     nom=models.CharField(max_length=100,blank=False)
-    prenom=models.CharField(max_length=100,blank=False)
     annee_naissance=models.DateField(blank=False)
     lieu_de_naissance=models.CharField(max_length=100,blank=False,default="abidjan")
     nationalite=models.CharField(max_length=100,blank=False,default="ivoirienne")
@@ -57,13 +58,6 @@ class Personne(models.Model):
     ethnie=models.CharField(max_length=100,blank=False)
     numero=models.CharField(max_length=100,blank=False)
     #Localisation
-    district_list=(('A','Abidjan'),('B','Bas_Sassandra'),('C','Comoe'),('D','Denguele'),('G','Goh_Djiboua'),('L','Lacs'),('La','Lagunes'),('M','Montagnes'),('SM','Sassandra_Marahoue'),('Sa','Savanes'),('Va','Vallee_du_Bandama'),('W','Woroba'),('Y','Yamoussoukro'),('Za','Zanzan'))
-    district=models.CharField(max_length=100,blank=False,choices=district_list)
-    list_region=(('A','Abidjan'),('AT','Agneby_tiassa'),('Ba','Bafing'),('Ba','Bagoue'),('Be','Belier'),('B','Bere'),('Bo','Bounkani'),('Ca','Cavally'),('Fo','Folon'),('Gb','Gbeke'),('Gbo','Gbokle'),('Go','Goh'),('Gu','Guemon'),('In','Indenie_djuablin'),('Ka','Kabadougou'),('Na','Nawa'),('Lo','Loh_Djiboua'),('If',' Iffou'),('Mo','Moronou'),('Nz','Nzi'),('LM','La_Me'),('To','Tonkpi'),('Hs','Haut_Sassandra'),('Mr','Marahoué'),('Po','Poro'),('Tc','Tchologo'),('Ha','Hambol'),('Go','Gontougou'),('Sp','San_pedro'),('Sc','Sud_Comoe'),('Wo','Worodougou'))
-    region=models.CharField(max_length=100,blank=False,choices=list_region)
-    departement=models.CharField(max_length=100,blank=False)
-    sous_prefecture=models.CharField(max_length=100,blank=False)
-    commune=models.CharField(max_length=100,blank=False)
     milieu_r=models.CharField(max_length=100,blank=False,default='urbain')
     quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
     class Meta:
@@ -199,12 +193,10 @@ class Charge(models.Model):
     def __str__(self):
         return '{}_{}'.format(self.parentg)
 
-class Enfant_R(models.Model):
+class Enfant_R(NewUser):
     nom=models.CharField(max_length=100,blank=False)
-    prenom=models.CharField(max_length=100,blank=False)
     annee_naissance=models.DateField(blank=False)
     maladie=models.CharField(max_length=100,blank=False)
-
     owner9  = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enfant_rue', on_delete=models.CASCADE,null=True)
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     sexe=(('M','Maxculin'),('F','Feminin'))
@@ -216,7 +208,6 @@ class Enfant_R(models.Model):
     pere=models.BooleanField(default=False)
     mere=models.BooleanField(default=False)
     scolariser=models.BooleanField(default=False)
-    commune=models.CharField(max_length=100,blank=False)
     quartier=models.CharField(max_length=100,blank=False)
     def __str__(self):
         return '{}_{}'.format(self.nom,self.prenom)

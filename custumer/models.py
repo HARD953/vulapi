@@ -54,9 +54,9 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     about_me=models.TextField(max_length=500, blank=True, null=True)
     create=models.DateTimeField(auto_now_add=True)
     profile_image=models.ImageField(upload_to=nameFile,blank=True)
-    is_active=models.BooleanField(default=True)
-    is_staff=models.BooleanField(default=True)
-    is_superuser=models.BooleanField(default=True)
+    is_active=models.BooleanField(default=False)
+    is_staff=models.BooleanField(default=False)
+    is_superuser=models.BooleanField(default=False)
     is_user=models.BooleanField(default=False)
     is_agent=models.BooleanField(default=False)
     responsable=models.CharField(max_length=30,default="issa")
@@ -74,7 +74,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     objects=CustumerAccountManager()
 
     USERNAME_FIELD='email'
-    REQUIRED_FIELDS=['user_name','responsable','first_name','adresse','about_me','is_active','is_staff','is_superuser','is_user','is_agent','district','region','departement','sous_prefecture','commune']
+    REQUIRED_FIELDS=['user_name','responsable','first_name']
     def __str__(self):
         return self.email
 
