@@ -41,7 +41,7 @@ class CreateAgent(APIView):
             
     def post(self,request):
         message='Enregistrement reussi'
-        data=request.data
+        data=self.request.data
         if data['is_staff']=="is_staff":
             data['is_staff']=True
         else:
@@ -108,7 +108,7 @@ class CreateAdmin(APIView):
 
     def post(self,request):
         message='Enregistrement reussi'
-        data=request.data
+        data=self.request.data
         if data['is_staff']=="is_staff":
             data['is_staff']=True
         else:
@@ -176,7 +176,7 @@ class CreateSuperAdmin(APIView):
     
     def post(self,request):
         message='Enregistrement reussi'
-        data=request.data
+        data=self.request.data
         if data['is_staff']=="is_staff":
             data['is_staff']=True
         else:
