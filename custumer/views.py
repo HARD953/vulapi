@@ -57,7 +57,7 @@ class CreateAgent(APIView):
         else:
             data['is_agent']=False
 
-        data['responsable']=self.request.user
+        data['responsable']=self.request.user.user_name
             
         serializer = UserSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
@@ -124,7 +124,7 @@ class CreateAdmin(APIView):
         else:
             data['is_user']=False
 
-        data['responsable']=self.request.user
+        data['responsable']=self.request.user.user_name
 
         serializer = AdminSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
@@ -192,7 +192,7 @@ class CreateSuperAdmin(APIView):
         else:
             data['is_superuser']=False
 
-        
+        data['responsable']=self.request.user.user_name
 
         serializer = SuperAdminSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
