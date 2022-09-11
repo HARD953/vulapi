@@ -210,7 +210,7 @@ class Enfant_R(NewUser):
     scolariser=models.BooleanField(default=False)
     quartier=models.CharField(max_length=100,blank=False)
     def __str__(self):
-        return '{}_{}'.format(self.nom)
+        return '{}'.format(self.nom)
     #x=['nom','prenom','annee_naissance','owner4','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue']
 
 
