@@ -6,8 +6,20 @@ class PostChefMSerializer(serializers.HyperlinkedModelSerializer):
     owner1 = serializers.ReadOnlyField(source='owner1.user_name')
     class Meta:
         model = Chef_menage
-        fields=['create','profile_image','email','user_name','owner1','id','url','nom','first_name','annee_naissance','lieu_de_naissance','nationalite','numero_cni','sexes','ethnie','numero','type_menage','nombre_enfant','nombre_enfant_v','nom_personne_charge','conjoints','immigre','district','region','departement','sous_prefecture','commune','milieu_r','quartier','date_depart','motif','age_depart','migrant','lieu_residence_a','annee_deplace','intention_ret']
+        fields=['create','password','profile_image','email','user_name','owner1','id','url','nom','first_name','annee_naissance','lieu_de_naissance','nationalite','numero_cni','sexes','ethnie','numero','type_menage','nombre_enfant','nombre_enfant_v','nom_personne_charge','conjoints','immigre','district','region','departement','sous_prefecture','commune','milieu_r','quartier','date_depart','motif','age_depart','migrant','lieu_residence_a','annee_deplace','intention_ret']
+        extra_kwargs ={
+            'password':{'write_only':True}
+        }
 
+    def create(self,validated_data):
+        password=validated_data.pop('password',None)
+        instance =self.Meta.model(**validated_data)
+
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+        
 class PostConjointSerializer(serializers.HyperlinkedModelSerializer):
     owner2 = serializers.ReadOnlyField(source='owner2.user_name')
     class Meta:
@@ -53,7 +65,20 @@ class PostEnfantRSerializer(serializers.HyperlinkedModelSerializer):
     owner9 = serializers.ReadOnlyField(source='owner9.user_name')
     class Meta:
         model = Enfant_R
-        fields=['create','profile_image','email','user_name','nom','first_name','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']
+        fields=['create','password','profile_image','email','user_name','nom','first_name','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']
+        extra_kwargs ={
+            'password':{'write_only':True}
+        }
+
+    def create(self,validated_data):
+        password=validated_data.pop('password',None)
+        instance =self.Meta.model(**validated_data)
+
+        if password is not None:
+            instance.set_password(password)
+        instance.save()
+        return instance
+
 
 
 class Tes1Serializer(serializers.ModelSerializer):

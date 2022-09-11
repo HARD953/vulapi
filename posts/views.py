@@ -22,7 +22,6 @@ class WritePermission(BasePermission):
         return obj.id==request.user
 
 class ChefMenageList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -34,7 +33,6 @@ class ChefMenageList(generics.ListCreateAPIView):
         serializer.save(owner1=self.request.user)
 
 class ChefMenageDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -47,7 +45,6 @@ class ChefMenageDetail(generics.RetrieveUpdateDestroyAPIView):
 
 #Les Conjoint
 class ConjointList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Conjoint
     serializer_class=PostConjointSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -59,7 +56,6 @@ class ConjointList(generics.ListCreateAPIView):
         serializer.save(owner2=self.request.user)
   
 class ConjointDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Conjoint
     serializer_class=PostConjointSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -72,7 +68,6 @@ class ConjointDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
 
 #Les Recensés
 class RecenserList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Recenser
     serializer_class=RecensementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -84,7 +79,6 @@ class RecenserList(generics.ListCreateAPIView):
         serializer.save(owner3=self.request.user)
   
 class RecenserDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Recenser
     serializer_class=RecensementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -97,7 +91,6 @@ class RecenserDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
 
 #Les Enfants
 class EnfantList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Enfant
     serializer_class=EnfantS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -109,7 +102,6 @@ class EnfantList(generics.ListCreateAPIView):
         serializer.save(owner4=self.request.user)
   
 class EnfantDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Enfant
     serializer_class=EnfantS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -122,7 +114,6 @@ class EnfantDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
 
 #Les commodites
 class CommoditeList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Commodite
     serializer_class=CommoditeS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -134,7 +125,6 @@ class CommoditeList(generics.ListCreateAPIView):
         serializer.save(owner5=self.request.user)
   
 class CommoditeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Commodite
     serializer_class=CommoditeS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -147,7 +137,6 @@ class CommoditeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
 
 #Les equipements
 class EquipementList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Equipement
     serializer_class=EquipementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -159,7 +148,6 @@ class EquipementList(generics.ListCreateAPIView):
         serializer.save(owner6=self.request.user)
   
 class EquipementDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Equipement
     serializer_class=EquipementS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -172,7 +160,6 @@ class EquipementDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
 
 #Les deces
 class DecesList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Deces
     serializer_class=DeceS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -184,7 +171,6 @@ class DecesList(generics.ListCreateAPIView):
         serializer.save(owner7=self.request.user)
   
 class DecesDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Deces
     serializer_class=DeceS
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -197,7 +183,6 @@ class DecesDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
 
 #les charges
 class ChargeList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Charge
     serializer_class=PostChargeSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -209,7 +194,6 @@ class ChargeList(generics.ListCreateAPIView):
         serializer.save(owner8=self.request.user)
 
 class EnfantRList(generics.ListCreateAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Enfant_R
     serializer_class=PostEnfantRSerializer
     def get_queryset(self):
@@ -219,7 +203,6 @@ class EnfantRList(generics.ListCreateAPIView):
         serializer.save(owner9=self.request.user)
 
 class EnfantRDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Enfant_R
     serializer_class=PostEnfantRSerializer
     def get_queryset(self):
@@ -229,7 +212,6 @@ class EnfantRDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
         serializer.save(owner9=self.request.user)
   
 class ChargeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
-    permission_classes=[IsAgentAuthenticated]
     model=Charge
     serializer_class=PostChargeSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -241,7 +223,6 @@ class ChargeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
         serializer.save(owner8=self.request.user)
 
 class ListRecenser(generics.ListAPIView):
-    permission_classes=[IsAgentAuthenticated]
     model=Chef_menage
     serializer_class=PostChefMSerializer
     filter_backends = [DjangoFilterBackend,SearchFilter]
@@ -249,8 +230,6 @@ class ListRecenser(generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
         return Chef_menage.objects.filter(owner=user)
-
-
 
 
 class RecensementView(APIView):        

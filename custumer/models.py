@@ -54,13 +54,13 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     about_me=models.TextField(max_length=500, blank=True, null=True)
     create=models.DateTimeField(auto_now_add=True)
     profile_image=models.ImageField(upload_to=nameFile,blank=True)
-    is_active=models.BooleanField(default=False)
-    is_staff=models.BooleanField(default=False)
+    is_active=models.BooleanField(default=True)
+    is_staff=models.BooleanField(default=True)
     is_superuser=models.BooleanField(default=False)
     is_user=models.BooleanField(default=False)
     is_agent=models.BooleanField(default=False)
     responsable=models.CharField(max_length=30,default="issa")
-
+    
     district_list=(('A','Abidjan'),('B','Bas_Sassandra'),('C','Comoe'),('D','Denguele'),('G','Goh_Djiboua'),('L','Lacs'),('La','Lagunes'),('M','Montagnes'),('SM','Sassandra_Marahoue'),('Sa','Savanes'),('Va','Vallee_du_Bandama'),('W','Woroba'),('Y','Yamoussoukro'),('Za','Zanzan'))
     district=models.CharField(max_length=100,blank=False,choices=district_list)
     list_region=(('A','Abidjan'),('AT','Agneby_tiassa'),('Ba','Bafing'),('Ba','Bagoue'),('Be','Belier'),('B','Bere'),('Bo','Bounkani'),('Ca','Cavally'),('Fo','Folon'),('Gb','Gbeke'),('Gbo','Gbokle'),('Go','Goh'),('Gu','Guemon'),('In','Indenie_djuablin'),('Ka','Kabadougou'),('Na','Nawa'),('Lo','Loh_Djiboua'),('If',' Iffou'),('Mo','Moronou'),('Nz','Nzi'),('LM','La_Me'),('To','Tonkpi'),('Hs','Haut_Sassandra'),('Mr','Marahoué'),('Po','Poro'),('Tc','Tchologo'),('Ha','Hambol'),('Go','Gontougou'),('Sp','San_pedro'),('Sc','Sud_Comoe'),('Wo','Worodougou'))
@@ -86,7 +86,6 @@ class Quartier(models.Model):
 
 class Affectation(models.Model):
     agent=models.ForeignKey(NewUser,on_delete=models.CASCADE)
-    commune=models.CharField(max_length=100,blank=False)
     quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
     create=models.DateTimeField(auto_now_add=True)
     def __str__(self):
