@@ -21,6 +21,7 @@ urlpatterns=format_suffix_patterns([
     path('agentc/<int:pk>/', CrudAgent.as_view()),
 
     path('detailadimn/', DetailConecter.as_view(),name='detail-des-admin'),
+    
     path('infoadmin/<str:slug>/', DetaAdmin.as_view()),
     path('infoagent/<str:slug>/', DetaAgent.as_view()),
     path('infosuper/<str:slug>/', DetaSuperadmin.as_view()),

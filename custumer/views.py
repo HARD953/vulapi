@@ -21,6 +21,7 @@ from posts.models import*
 from posts.serializers import*
 from rest_framework import status
 from django.http import Http404
+from .serializers1 import AffectaSerializer
 
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
