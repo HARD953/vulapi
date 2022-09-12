@@ -90,7 +90,7 @@ class Affectation(models.Model):
     quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
     create=models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.user_name
+        return self.agent
 
 class CritereChef(models.Model):
     sexeChef=ArrayField(models.FloatField())
