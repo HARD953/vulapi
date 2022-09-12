@@ -269,13 +269,11 @@ class DetailConecter(APIView):
 
 
 
-
 class DetaSuperadmin(APIView):
     permission_classes=[AllowAny]
     def get(self,request,slug):
-        chef=NewUser.objects.filter(email=slug)
+        chef=NewUser.objects.filter(email=slug,is_superuser=True)
         chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
-        print(chefs)
         data={}
         data['superadmin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
         data['admin/agent']=NewUser.objects.filter(responsable=chefs[0]["user_name"]).count()
@@ -284,9 +282,8 @@ class DetaSuperadmin(APIView):
 class DetaAdmin(APIView):
     permission_classes=[AllowAny]
     def get(self,request,slug):
-        chef=NewUser.objects.filter(email=slug)
+        chef=NewUser.objects.filter(email=slug,is_user=True)
         chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
-        print(chefs)
         data={}
         data['admin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
         data['agentcree']=NewUser.objects.filter(is_agent=True,responsable=chefs[0]["user_name"]).count()

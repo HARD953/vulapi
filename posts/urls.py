@@ -47,6 +47,7 @@ urlpatterns=[
     path('vulnerablecon/',vulnerablec),
     path('vulnerableetud/',vulnerableet),
     path('vulnerableoccup/',vulnerableoc),
+    
     path('menage/',vulnerableg),
     path('individus/',vulnerableI),
     #Information détailler

@@ -59,6 +59,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     is_superuser=models.BooleanField(default=False)
     is_user=models.BooleanField(default=False)
     is_agent=models.BooleanField(default=False)
+    last_login = models.DateTimeField(('last_login'), default=timezone.now())
     responsable=models.CharField(max_length=30,default="issa")
     
     district_list=(('A','Abidjan'),('B','Bas_Sassandra'),('C','Comoe'),('D','Denguele'),('G','Goh_Djiboua'),('L','Lacs'),('La','Lagunes'),('M','Montagnes'),('SM','Sassandra_Marahoue'),('Sa','Savanes'),('Va','Vallee_du_Bandama'),('W','Woroba'),('Y','Yamoussoukro'),('Za','Zanzan'))
