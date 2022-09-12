@@ -309,6 +309,15 @@ class DetaAgent(APIView):
 
 
 class Affecter(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            dons=Affectation.objects.filter(agent=self.request.user.user_name)
+            serializer=AffectaSerializer(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        else:
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
+
     def post(self,request):
         message='Merci pour votre contribution:\n nous vous contacterons dans peut'
         data=request.data

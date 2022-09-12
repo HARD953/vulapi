@@ -86,7 +86,7 @@ class Quartier(models.Model):
         return self.quartier
 
 class Affectation(models.Model):
-    agent=models.ForeignKey(NewUser,on_delete=models.CASCADE)
+    agent=models.CharField(max_length=100,blank=False)
     quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
     create=models.DateTimeField(auto_now_add=True)
     def __str__(self):
