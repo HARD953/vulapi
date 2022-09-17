@@ -12,6 +12,11 @@ class QuartierSerializer(serializers.ModelSerializer):
         model = Quartier
         fields = '__all__'
 
+class ZoneSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Zone
+        fields = '__all__'
+
 
 class PostChefMSerializer(serializers.HyperlinkedModelSerializer):
     owner1 = serializers.ReadOnlyField(source='owner1.user_name')

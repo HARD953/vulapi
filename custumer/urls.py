@@ -26,7 +26,12 @@ urlpatterns=format_suffix_patterns([
     path('infoagent/<str:slug>/', DetaAgent.as_view()),
     path('infosuper/<str:slug>/', DetaSuperadmin.as_view()),
 
-    path('effecter/', Affecter.as_view(),name='affecter-agent'),
+    path('effecter/', Affecter.as_view()),
+    path('effecterc/<int:pk>/', CrudAffectation.as_view()),
+    path('zone/', Zonez.as_view()),
+    path('zonec/<int:pk>/', CrudZone.as_view()),
+    path('localite/', Quartierl.as_view()),
+    path('localite/<int:pk>/', CrudQuartier.as_view()),
 
     # path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
     # path('agent/<int:pk>', DetailAgent.as_view(),name='registers-admin-detail'),

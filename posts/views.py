@@ -234,39 +234,46 @@ class ListRecenser(generics.ListAPIView):
 
 class RecensementView(APIView):        
     def post(self,request):
-        data=request.data
+        data=self.request.data
         if data['Chef_menage']:
             for chef_menage in data['chef_menage']:
+                data['Chef_menage']['owner1']=self.request.user.user_name
                 serializerche = PostChefMSerializer(data=chef_menage)
                 if serializerche.is_valid():
                     serializerche.save()
         if data['Conjoint']:
             for conjoint in data['Conjoint']:
+                data['Conjoint']['owner2']=self.request.user.user_name
                 serializerco = PostConjointSerializer(data=conjoint)
                 if serializerco.is_valid():
                     serializerco.save()
         if data['Recenser']:
             for recenser in data['Recenser']:
+                data['Recenser']['owner3']=self.request.user.user_name
                 serializerr = RecensementS(data=recenser)
                 if serializerr.is_valid():
                     serializerr.save()
         if data['Enfant']:
             for enfant in data['Enfant']:
+                data['Enfant']['owner4']=self.request.user.user_name
                 serializere=EnfantS(data=enfant)
                 if serializere.is_valid():
                     serializere.save()
         if data['Charge']:
             for charge in data['Charge']:
+                data['Charge']['owner8']=self.request.user.user_name
                 serializerch=PostChargeSerializer(data=charge)
                 if serializerch.is_valid():
                     serializerch.save()
         if data['Commodite']:
             for commodite in data['Commodite']:
+                data['Commodite']['owner5']=self.request.user.user_name
                 serializerc=CommoditeS(data=commodite)
                 if serializerc.is_valid():
                     serializerc.save()
         if data['Equipement']:
             for equipement in data['Equipement']:
+                data['Equipement']['owner6']=self.request.user.user_name
                 serializereq=EquipementS(data=equipement)
                 if serializereq.is_valid():
                     serializereq.save()
@@ -278,6 +285,7 @@ class RecensementEnfent(APIView):
         serializer = PostEnfantRSerializer(data=data)
         message='Insertion Done'
         if serializer.is_valid():
+            data['chef_menage']['owner9']=self.request.user.user_name
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

@@ -55,7 +55,7 @@ class Homme(APIView):
                 quartierT=[i['commune'] for i in dataf]
                 data={}
                 for quartier in quartierT:
-                    data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=quartier,sexes="H").count()
+                    data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=quartier,sexes="M").count()
                 return JsonResponse(data)
             else:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
@@ -63,11 +63,10 @@ class Homme(APIView):
                 quartierT=[i['quartier'] for i in dataf]
                 data={}
                 for quartier in quartierT:
-                    data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=self.request.user.commune,quartier=quartier,sexes="H").count()
+                    data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=self.request.user.commune,quartier=quartier,sexes="M").count()
                 return JsonResponse(data)
         else:
             return JsonResponse({'message':'Personne'})
-
 
 class Femme(APIView):
     def get(self,request):
@@ -147,7 +146,7 @@ class Enfant_H(APIView):
                 quartierT=[i['commune'] for i in dataf]
                 data={}
                 for quartier in quartierT:
-                    data["{}".format(quartier)]=Enfant_R.objects.filter(commune=quartier,sexes="H").count()
+                    data["{}".format(quartier)]=Enfant_R.objects.filter(commune=quartier,sexes="M").count()
                 return JsonResponse(data)
             else:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data

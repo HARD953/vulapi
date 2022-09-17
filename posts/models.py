@@ -56,7 +56,7 @@ class Personne(NewUser):
     sexe=(('M','Maxculin'),('F','Feminin'))
     sexes=models.CharField(max_length=1,choices=sexe)
     ethnie=models.CharField(max_length=100,blank=False)
-    numero=models.CharField(max_length=100,blank=False)
+    numero=models.CharField(max_length=100,blank=False,unique=True)
     #Localisation
     milieu_r=models.CharField(max_length=100,blank=False,default='urbain')
     quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')

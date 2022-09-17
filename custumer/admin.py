@@ -14,5 +14,5 @@ admin.site.register(CritereEquipement)
 admin.site.register(CritereDeces)
 admin.site.register(CritereHabitat)
 admin.site.register(CritereGeneral)
-
 admin.site.register(Quartier)
+admin.site.register(Zone)

@@ -21,7 +21,7 @@ from posts.models import*
 from posts.serializers import*
 from rest_framework import status
 from django.http import Http404
-from .serializers1 import AffectaSerializer
+from .serializers1 import *
 
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
@@ -76,7 +76,6 @@ class CrudAgent(APIView):
 
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        print(snippet)
         serializer = GeneraleSerialiser(snippet)
         return Response(serializer.data)
 
@@ -143,7 +142,6 @@ class CrudAdmin(APIView):
 
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        print(snippet)
         serializer = GeneraleSerialiser(snippet)
         return Response(serializer.data)
 
@@ -212,7 +210,6 @@ class CrudSuperadmin(APIView):
 
     def get(self, request, pk, format=None):
         snippet = self.get_object(pk)
-        print(snippet)
         serializer = GeneraleSerialiser(snippet)
         return Response(serializer.data)
 
@@ -267,8 +264,6 @@ class DetailConecter(APIView):
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
 
-
-
 class DetaSuperadmin(APIView):
     permission_classes=[AllowAny]
     def get(self,request,slug):
@@ -288,7 +283,6 @@ class DetaAdmin(APIView):
         data['admin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
         data['agentcree']=NewUser.objects.filter(is_agent=True,responsable=chefs[0]["user_name"]).count()
         return JsonResponse({'chefs':data})
-
 
 class DetaAgent(APIView):
     permission_classes=[AllowAny]
@@ -312,18 +306,149 @@ class Affecter(APIView):
     permission_classes=[AllowAny]
     def get(self,request):
         if self.request.user.is_authenticated:
-            dons=Affectation.objects.filter(agent=self.request.user.user_name)
-            serializer=AffectaSerializer(dons, many=True)
+            if self.request.user.is_superuser:
+                dons=Affectation.objects.all()
+                serializer=AffectaSerializer(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            elif self.request.user.is_user:
+                dons=Affectation.objects.filter(commune=self.request.user.commune)
+                serializer=AffectaSerializer(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            else:
+                dons=Affectation.objects.filter(agent=self.request.user.user_name,status=False)
+                serializer=AffectaSerializer(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        return Response({'status':status.HTTP_400_BAD_REQUEST})
+
+    def post(self,request):
+        message='Merci pour votre contribution'
+        data=self.request.data
+        data['owner']=self.request.user.user_name
+        serializer = AffectaSerializer(data=data)
+        message='Merci pour votre contribution'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.errors})
+
+class CrudAffectation(APIView):
+    def get_object(self, pk):
+        try:
+            return Affecter.objects.get(pk=pk)
+        except Affecter.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = AffectaSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = AffectaSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class Zonez(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                dons=Zone.objects.all()
+                serializer=ZoneSerializer(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            else:
+                dons=Zone.objects.filter(commune=self.request.user.commune)
+                serializer=ZoneSerializer(dons, many=True)
+                return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        return Response({'status':status.HTTP_400_BAD_REQUEST})
+
+    def post(self,request):
+        message='Merci pour votre contribution'
+        data=self.request.data
+        data['commune']=self.request.user.commune
+        serializer = ZoneSerializer(data=data)
+        message='Merci pour votre contribution'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response({'message':serializer.errors})
+
+class CrudZone(APIView):
+    def get_object(self, pk):
+        try:
+            return Zone.objects.get(pk=pk)
+        except Zone.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = ZoneSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = ZoneSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class Quartierl(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            dons=Quartier.objects.all()
+            serializer=QuartierSerializer(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
 
     def post(self,request):
-        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
+        message='Merci pour votre contribution'
         data=request.data
-        serializer = AffectaSerializer(data=data)
-        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
+        serializer = QuartierSerializer(data=data)
+        message='Merci pour votre contribution'
         if serializer.is_valid():
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
         return Response({'message':serializer.errors})
+
+class CrudQuartier(APIView):
+    def get_object(self, pk):
+        try:
+            return Quartier.objects.get(pk=pk)
+        except Quartier.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = QuartierSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        serializer = QuartierSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
