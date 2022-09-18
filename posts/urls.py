@@ -61,7 +61,7 @@ urlpatterns=[
 
     path('statistiquegm/',StatcircleMGeneral.as_view()),
     path('statistiquegi/',StatcircleIGeneral.as_view()),
-
+    path('statgeneral/',StatGeneral.as_view()),
     path('homme/',Homme.as_view()),
     path('femme/',Femme.as_view()),
     path('individug/',Individug.as_view()),

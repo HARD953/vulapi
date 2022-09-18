@@ -92,7 +92,7 @@ class StatbarM(APIView):
                     data["physique"]=data1
                     data["condition"]=data2
                     data["etude"]=data3
-                    data["sans-emploi"]=data4
+                    data["emploi"]=data4
                 return JsonResponse({"menage":data})
             else:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
@@ -111,7 +111,7 @@ class StatbarM(APIView):
                     data["physique"]=data1
                     data["condition"]=data2
                     data["etude"]=data3
-                    data["sans-emploi"]=data4
+                    data["emploi"]=data4
                 return JsonResponse({"menage":data})
         else:
             return JsonResponse({'message':'Personne'})
@@ -136,7 +136,7 @@ class StatbarI(APIView):
                     data["physique"]=data1
                     data["condition"]=data2
                     data["etude"]=data3
-                    data["sans-emploi"]=data4
+                    data["emploi"]=data4
                 return JsonResponse({"individu":data})
             else:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
@@ -155,7 +155,7 @@ class StatbarI(APIView):
                     data["physique"]=data1
                     data["condition"]=data2
                     data["etude"]=data3
-                    data["sans-emploi"]=data4
+                    data["emploi"]=data4
                 return JsonResponse({"individu":data})
         return JsonResponse({'message':'Personne'})
 

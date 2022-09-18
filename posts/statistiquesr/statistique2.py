@@ -44,8 +44,7 @@ class StatcircleMGeneral(APIView):
                 return JsonResponse(data)
         else:
             return JsonResponse({"message":"error"})
-
-
+            
 class StatcircleIGeneral(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
@@ -64,6 +63,20 @@ class StatcircleIGeneral(APIView):
                 data={}
                 for quartier in quartierT:
                     data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=self.request.user.commune,quartier=quartier).count()
+                return JsonResponse(data)
+        else:
+            return JsonResponse({"message":"error"})
+
+class StatGeneral(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser:
+                data={}
+                data["TotalG"]=Chef_menage.objects.all().count()
+                return JsonResponse(data)
+            else:
+                data={}
+                data["Total"]=Chef_menage.objects.filter(commune=self.request.user.commune).count()
                 return JsonResponse(data)
         else:
             return JsonResponse({"message":"error"})
