@@ -303,7 +303,6 @@ class DetaAgent(APIView):
 
 
 class Affecter(APIView):
-    permission_classes=[AllowAny]
     def get(self,request):
         if self.request.user.is_authenticated:
             if self.request.user.is_superuser:

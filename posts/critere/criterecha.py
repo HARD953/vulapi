@@ -5,7 +5,6 @@ from custumer.serializersc import*
 from django.http import HttpResponseGone,JsonResponse
 from rest_framework.response import Response
 
-
 def criterecha(request,data):
     if request.method=="GET":
         critere=[]
