@@ -356,7 +356,6 @@ class CrudAffectation(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
 class Zonez(APIView):
     permission_classes=[AllowAny]
     def get(self,request):

@@ -187,17 +187,6 @@ class ChargeListad(generics.RetrieveUpdateDestroyAPIView):
         user = self.request.user
         return Charge.objects.filter(commune=user.commune)
 
-class Affecter(APIView):
-    def post(self,request):
-        message='Merci pour votre contribution:\n nous vous contacterons dans peut'
-        data=request.data
-        serializer = AffectaSerializer(data=data)
-        message='Merci pour votre contribution:\n nous vous contacterons dans peu'
-        if serializer.is_valid():
-            serializer.save()
-            return Response({'message':message,'data':serializer.data})            
-        return Response({'message':serializer.errors})
-
 
 
 
