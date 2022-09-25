@@ -301,7 +301,6 @@ class DetaAgent(APIView):
         data['vulnerable_sansE']=(Chef_menage.objects.filter(owner1=idf[0],vulnerableOccup=True)).count()
         return JsonResponse({'data':data})
 
-
 class Affecter(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:

@@ -44,6 +44,7 @@ urlpatterns=[
     path('analyses/',Information2),
     #Information simple
     path('vulnerablephys/',vulnerablep),
+    path('vulnerables/',vulnerablep),
     path('vulnerablecon/',vulnerablec),
     path('vulnerableetud/',vulnerableet),
     path('vulnerableoccup/',vulnerableoc),
