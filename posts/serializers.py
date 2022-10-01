@@ -6,7 +6,7 @@ class PostChefMSerializer(serializers.HyperlinkedModelSerializer):
     owner1 = serializers.ReadOnlyField(source='owner1.user_name')
     class Meta:
         model = Chef_menage
-        fields=['create','password','profile_image','email','user_name','owner1','id','url','nom','first_name','annee_naissance','lieu_de_naissance','nationalite','numero_cni','sexes','ethnie','numero','type_menage','nombre_enfant','nombre_enfant_v','nom_personne_charge','conjoints','immigre','district','region','departement','sous_prefecture','commune','milieu_r','quartier','date_depart','motif','age_depart','migrant','lieu_residence_a','annee_deplace','intention_ret']
+        fields=['id','create','password','profile_image','email','user_name','owner1','id','url','nom','first_name','annee_naissance','lieu_de_naissance','nationalite','numero_cni','sexes','ethnie','numero','type_menage','nombre_enfant','nombre_enfant_v','nom_personne_charge','conjoints','immigre','district','region','departement','sous_prefecture','commune','milieu_r','quartier','date_depart','motif','age_depart','migrant','lieu_residence_a','annee_deplace','intention_ret']
         extra_kwargs ={
             'password':{'write_only':True}
         }

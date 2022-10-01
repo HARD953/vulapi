@@ -86,6 +86,16 @@ urlpatterns=format_suffix_patterns([
     path('critereha/', CritereHa.as_view()),
     path('criterede/', CritereDe.as_view()),
 
+    path('crudchef/<int:pk>/', CrudCh.as_view()),
+    path('crudch/<int:pk>/', CrudCha.as_view()),
+    path('cruden/<int:pk>/', CrudEn.as_view()),
+    path('crudco/<int:pk>/', CrudCo.as_view()),
+    path('crudcom/<int:pk>/', CrudCom.as_view()),
+    path('crudeq/<int:pk>/', CrudEq.as_view()),
+    path('crudge/<int:pk>/', CrudGe.as_view()),
+    path('crudme/<int:pk>/', CrudMe.as_view()),
+    path('crudha/<int:pk>/', CrudHa.as_view()),
+    path('crudde/<int:pk>/', CrudDe.as_view()),
 
     path('token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
