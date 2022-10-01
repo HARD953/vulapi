@@ -32,7 +32,7 @@ class StatcircleM(APIView):
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,menage=True).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,menage=True).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,menage=True).count()
-                data1['Total']=Chef_menage.objects.filter(menage=True)
+                data1['Total']=Chef_menage.objects.filter(menage=True).count()
                 data={}
                 data["menage"]=data1
                 return JsonResponse(data)
@@ -42,7 +42,7 @@ class StatcircleM(APIView):
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,menage=True,commune=request.user.commune).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,menage=True,commune=request.user.commune).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,menage=True,commune=request.user.commune).count()
-                data1['Total']=Chef_menage.objects.filter(menage=True,commune=request.user.commune)
+                data1['Total']=Chef_menage.objects.filter(menage=True,commune=request.user.commune).count()
                 data={}
                 data["menage"]=data1
                 return JsonResponse(data)
@@ -59,7 +59,7 @@ class StatcircleI(APIView):
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True).count()
-                data1['Total']=Chef_menage.objects.filter(individu=True)
+                data1['Total']=Chef_menage.objects.filter(individu=True).count()
                 data={}
                 data["individu"]=data1
                 return JsonResponse(data)
@@ -69,7 +69,7 @@ class StatcircleI(APIView):
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True,commune=request.user.commune).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True,commune=request.user.commune).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True,commune=request.user.commune).count()
-                data1['Total']=Chef_menage.objects.filter(individu=True,commune=request.user.commune)
+                data1['Total']=Chef_menage.objects.filter(individu=True,commune=request.user.commune).count()
                 data["individu"]=data1
                 return JsonResponse(data)
         else:
