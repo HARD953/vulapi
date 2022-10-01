@@ -136,7 +136,7 @@ class Enfant(models.Model):
     maladie=models.CharField(max_length=100,blank=False)
 
     def __str__(self):
-        return '{}_{}'.format(self.parentf)
+        return '{}'.format(self.parentf)
         
 class Commodite(models.Model):
     parentc=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)

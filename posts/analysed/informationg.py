@@ -28,7 +28,6 @@ def info(request,pk):
         # return JsonResponse({'data':chefs.data,'status':status.HTTP_200_OK})
         dataf=[dict(i) for i in chefs.data]
         idf=[i['id'] for i in dataf]
-        data1={}
         for i in idf:
             data={}
             data['chefmenage']=[dict(s) for s in PostChefMSerializer(Chef_menage.objects.filter(id=i),context={'request': request},many=True).data]

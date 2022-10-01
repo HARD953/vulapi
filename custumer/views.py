@@ -22,7 +22,7 @@ from posts.serializers import*
 from rest_framework import status
 from django.http import Http404
 from .serializers1 import *
-
+import requests
 from rest_framework_simplejwt.tokens import RefreshToken
 # Create your views here.
 
@@ -59,7 +59,7 @@ class CreateAgent(APIView):
             data['is_agent']=False
 
         data['responsable']=self.request.user.user_name
-            
+        
         serializer = UserSerializer(data=data)
         message='Merci pour votre contribution:\n nous vous contacterons dans peu'
         if serializer.is_valid():
@@ -271,7 +271,7 @@ class DetaSuperadmin(APIView):
         chefs=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
         data={}
         data['superadmin']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
-        data['admin/agent']=NewUser.objects.filter(responsable=chefs[0]["user_name"]).count()
+        data['adminagent']=NewUser.objects.filter(responsable=chefs[0]["user_name"]).count()
         return JsonResponse({'chefs':data})
 
 class DetaAdmin(APIView):
@@ -409,11 +409,20 @@ class Quartierl(APIView):
     permission_classes=[AllowAny]
     def get(self,request):
         if self.request.user.is_authenticated:
-            dons=Quartier.objects.all()
-            serializer=QuartierSerializer(dons, many=True)
-            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+            if self.request.user.is_superuser:
+                quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
+                dataf=[dict(i) for i in quartiers]
+                quartierT=[i['commune'] for i in dataf]
+                data={}
+                for quartier in quartierT:
+                    data["{}".format(quartier)]=QuartierSerializer(Quartier.objects.filter(commune=quartier),context={'request': request},many=True)
+                return JsonResponse({'data':data,'status':status.HTTP_200_OK})
+            else:
+                data={}
+                data["quartier"]=QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True)
+                return JsonResponse({'data':data,'status':status.HTTP_200_OK})
         else:
-            return Response({'status':status.HTTP_400_BAD_REQUEST})
+            return JsonResponse({'status':status.HTTP_400_BAD_REQUEST})
 
     def post(self,request):
         message='Merci pour votre contribution'
@@ -449,3 +458,6 @@ class CrudQuartier(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+

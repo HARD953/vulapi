@@ -32,6 +32,7 @@ class StatcircleM(APIView):
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,menage=True).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,menage=True).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,menage=True).count()
+                data1['Total']=Chef_menage.objects.filter(menage=True)
                 data={}
                 data["menage"]=data1
                 return JsonResponse(data)
@@ -41,6 +42,7 @@ class StatcircleM(APIView):
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,menage=True,commune=request.user.commune).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,menage=True,commune=request.user.commune).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,menage=True,commune=request.user.commune).count()
+                data1['Total']=Chef_menage.objects.filter(menage=True,commune=request.user.commune)
                 data={}
                 data["menage"]=data1
                 return JsonResponse(data)
@@ -51,26 +53,27 @@ class StatcircleM(APIView):
 class StatcircleI(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
-            data={}
-            data1={}
             if self.request.user.is_superuser:
+                data1={}
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,individu=True).count()
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True).count()
+                data1['Total']=Chef_menage.objects.filter(individu=True)
                 data={}
                 data["individu"]=data1
                 return JsonResponse(data)
             else:
+                data1={}
                 data1["physique"]=Chef_menage.objects.filter(vulnerablePhy=True,individu=True,commune=request.user.commune).count()
                 data1["condition"]=Chef_menage.objects.filter(vulnerableCondi=True,individu=True,commune=request.user.commune).count()
                 data1["etude"]=Chef_menage.objects.filter(vulnerableEtude=True,individu=True,commune=request.user.commune).count()
                 data1["occupation"]=Chef_menage.objects.filter(vulnerableOccup=True,individu=True,commune=request.user.commune).count()
+                data1['Total']=Chef_menage.objects.filter(individu=True,commune=request.user.commune)
                 data["individu"]=data1
                 return JsonResponse(data)
         else:
             return JsonResponse({'message':'Personne'})
-
 
 class StatbarM(APIView):
     def get(self,request):
@@ -156,6 +159,7 @@ class StatbarI(APIView):
                     data["condition"]=data2
                     data["etude"]=data3
                     data["emploi"]=data4
+
                 return JsonResponse({"individu":data})
         return JsonResponse({'message':'Personne'})
 

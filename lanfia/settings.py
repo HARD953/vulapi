@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com","https://apivulnerable.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
-ALLOWED_HOSTS = ['0.0.0.0',"https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com","https://apivulnerable.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+#ALLOWED_HOSTS = ['0.0.0.0',"https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
 
 #'https://dashlanfia.herokuapp.com/'
 # Application definition
@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd5pcbig9dkst8f', 
-        'USER': 'tumprvacwxxgxm', 
-        'PASSWORD': '08f4ec1220562fe971faed12614704e88ee6908cbacc73433a9ab9c2e29d46f3',
-        'HOST': 'ec2-54-91-223-99.compute-1.amazonaws.com', 
+        'NAME': 'dco743lhg529k', 
+        'USER': 'lfpeeixuqzznbd', 
+        'PASSWORD': 'b481d1a2a8aeadc64a9bdb727086381f9baa15cfd9a790e4d8080329d9fd9ac1',
+        'HOST': 'ec2-3-229-165-146.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
 }
@@ -192,13 +192,13 @@ django_heroku.settings(locals())
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 AUTH_USER_MODEL = 'custumer.NewUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:3000",
-#     "http://127.0.0.1:8000",
-#     "https://localhost:3000",
-#     "https://127.0.0.1:3000",
-#     "https://127.0.0.1:8000"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+    "https://localhost:3000",
+    "https://127.0.0.1:3000",
+    "https://127.0.0.1:8000"]
 
 
 CORS_ALLOWED_ORIGINS = [

@@ -21,7 +21,6 @@ from rest_framework import status
 from django.http import Http404
 from datetime import date
 
-
 def vulnerableoc(request):
     if request.method=="GET":
         chef=Chef_menage.objects.all(vulnerableOccup=True)
