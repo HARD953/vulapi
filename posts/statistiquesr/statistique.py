@@ -159,7 +159,6 @@ class StatbarI(APIView):
                     data["condition"]=data2
                     data["etude"]=data3
                     data["emploi"]=data4
-
                 return JsonResponse({"individu":data})
         return JsonResponse({'message':'Personne'})
 
