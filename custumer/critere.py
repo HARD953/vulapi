@@ -38,8 +38,7 @@ class CrudCh(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerChef
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereChef.objects.all()
+        return CritereChef.objects.all()
 
 
 class CritereCo(generics.ListCreateAPIView):
@@ -54,8 +53,7 @@ class CrudCo(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerConj
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereConj.objects.all()
+        return CritereConj.objects.all()
 
 class CritereEn(generics.ListCreateAPIView):
     permission_classes=[AllowAny]
@@ -69,8 +67,7 @@ class CrudEn(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerEnfant
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereEnfant.objects.all()
+        return CritereEnfant.objects.all()
 
 class CritereCha(generics.ListCreateAPIView):
     permission_classes=[AllowAny]
@@ -84,8 +81,7 @@ class CrudCha(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerCharge
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereCharge.objects.all()
+        return CritereCharge.objects.all()
 
 class CritereEq(generics.ListCreateAPIView):
     permission_classes=[AllowAny]
@@ -99,8 +95,7 @@ class CrudEq(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerEquipement
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereEquipement.objects.all()
+        return CritereEquipement.objects.all()
 
 class CritereCom(generics.ListCreateAPIView):
     permission_classes=[AllowAny]
@@ -114,8 +109,7 @@ class CrudCom(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerCharge
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereCharge.objects.all()
+        return CritereCharge.objects.all()
 
 
 class CritereDe(generics.ListCreateAPIView):
@@ -130,8 +124,7 @@ class CrudDe(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerDeces
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereDeces.objects.all()
+        return CritereDeces.objects.all()
 
 
 class CritereHa(generics.ListCreateAPIView):
@@ -146,8 +139,7 @@ class CrudHa(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerHabitat
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereHabitat.objects.all()
+        return CritereHabitat.objects.all()
 
 
 class CritereGe(generics.ListCreateAPIView):
@@ -162,8 +154,7 @@ class CrudGe(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerGeneral
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereGeneral.objects.all()
+        return CritereGeneral.objects.all()
 
 
 class CritereMe(generics.ListCreateAPIView):
@@ -178,8 +169,7 @@ class CrudMe(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerMenage
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereMenage.objects.all()
+        return CritereMenage.objects.all()
 
 class QuartierS(generics.ListCreateAPIView):
     permission_classes=[AllowAny]
@@ -193,5 +183,4 @@ class CrudCha(generics.RetrieveUpdateDestroyAPIView):
     permission_classes=[AllowAny]
     serializer_class=MySerializerCharge
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return CritereCharge.objects.all()
+        return CritereCharge.objects.all()
