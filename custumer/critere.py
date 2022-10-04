@@ -107,7 +107,7 @@ class CritereCom(generics.ListCreateAPIView):
 class CrudCom(generics.RetrieveUpdateDestroyAPIView):
     model=CritereCommodite
     permission_classes=[AllowAny]
-    serializer_class=MySerializerCharge
+    serializer_class=MySerializerCommodite
     def get_queryset(self):
         return CritereCommodite.objects.all()
 
