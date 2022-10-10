@@ -319,6 +319,62 @@ class Test2View(APIView):
             return Response({'message':message,'data':serializer.data})            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+
+
+class EffectuerDonsArg(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            dons=DonsArgent.objects.filter(beneficiaire=self.request.user.user_name)
+            serializer=EffectuerArgSerializer(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        else:
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
+    
+    def post(self,request):
+        data=self.request.data
+        serializer = EffectuerArgSerializer(data=data)
+        message='Insertion Done'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})            
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class EffectuerDonsObj(APIView):
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            dons=DonsNature.objects.filter(beneficiaire=self.request.user.user_name)
+            serializer=EffectuerNatSerializer(dons, many=True)
+            return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+        else:
+            return Response({'status':status.HTTP_400_BAD_REQUEST})
+
+    def post(self,request):
+        data=self.request.data
+        serializer = EffectuerNatSerializer(data=data)
+        message='Insertion Done'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})        
+
+#Liste des dons détailler ou non par utilisateur
+class Argend(generics.RetrieveUpdateDestroyAPIView):
+    model=DonsArgent
+    permission_classes=[AllowAny]
+    serializer_class=EffectuerArgSerializer
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return DonsArgent.objects.filter(beneficiaire=self.request.user.user_name)
+
+class Natured(generics.RetrieveUpdateDestroyAPIView):
+    model=DonsNature
+    permission_classes=[AllowAny]
+    serializer_class=EffectuerNatSerializer
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return DonsNature.objects.filter(beneficiaire=self.request.user.user_name)
+
             
 
 

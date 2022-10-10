@@ -72,4 +72,9 @@ urlpatterns=[
     path('test1/',Test1View.as_view()),
     path('test2/',Test2View.as_view()),
 
+    path('argend/<int:pk>/', Argend.as_view(),name='detail-donard'),
+    path('natured/<int:pk>/', Natured.as_view(),name='detail-donnd'),
+
+    path('efdoargent/',EffectuerDonsArg.as_view(),name='registers-donArg'),
+    path('efdoobjet/',EffectuerDonsObj.as_view(),name='registers-donOjets'),
 ]

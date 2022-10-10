@@ -90,3 +90,13 @@ class Tes2Serializer(serializers.ModelSerializer):
     class Meta:
         model=Test2
         fields='__all__'
+
+
+class EffectuerArgSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DonsArgent
+        fields = ["id","beneficiaire","donateur","typeDons","montant","create","typePersonne"]
+class EffectuerNatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DonsNature
+        fields = ["id","beneficiaire","donateur","typeDons","categorieObjet","typeObjet","lieu_reception","Etat","photo","create","typePersonne"]

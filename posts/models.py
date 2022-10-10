@@ -228,7 +228,38 @@ class Test2(models.Model):
     def __str__(self):
         return '{}'.format(self.classe)
         
-        
+
+
+class DonsArgent(models.Model):
+    beneficiaire=models.CharField(max_length=30,default='issa')
+    donateur=models.CharField(max_length=30,default='issa')
+    typeDons=models.CharField(max_length=30,default='null')
+    montant=models.CharField(max_length=100,default='null')
+    typePersonne=models.CharField(max_length=100,default='null')
+    create=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{}'.format(self.beneficiaire) 
+
+class DonsNature(models.Model):
+    def nameFile(instance, filename):
+        return '/'.join(['images', str(instance.donateur), filename])
+    beneficiaire=models.CharField(max_length=30,default='issa')
+    donateur=models.CharField(max_length=30,default='issa')
+    typeDons=models.CharField(max_length=30,default='null')
+    categorieObjet=models.CharField(max_length=100,default='null')
+    typeObjet=models.CharField(max_length=30,default='null')
+    lieu_reception=models.CharField(max_length=100,default='null')
+    photo=models.ImageField(upload_to=nameFile,blank=True)
+    Etat=models.CharField(max_length=100,default='null')
+    typePersonne=models.CharField(max_length=100,default='null')
+    create=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{}'.format(self.beneficiaire)
+   
+    
+   
 
 
 

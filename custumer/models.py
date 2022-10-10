@@ -53,7 +53,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
     email=models.EmailField(max_length=255,unique=True)
     adresse=models.CharField(max_length=300, blank=True, null=True)
     about_me=models.TextField(max_length=500, blank=True, null=True)
-    create=models.DateField(auto_now_add=True)
+    create=models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     profile_image=models.ImageField(upload_to=nameFile,blank=True,default="issa")
     is_active=models.BooleanField(default=True)
@@ -209,6 +209,8 @@ class CritereGeneral(models.Model):
     x="generale"
     def __str__(self):
         return self.x
+
+
 
 
 

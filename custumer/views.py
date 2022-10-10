@@ -293,6 +293,7 @@ class DetaAgent(APIView):
         idf=[i['id'] for i in dataf]
         data={}
         data['agent']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
+        data['personneR']=(Chef_menage.objects.filter(owner1=idf[0])).count()
         data['individu']=(Chef_menage.objects.filter(owner1=idf[0],individu=True)).count()
         data['menage']=(Chef_menage.objects.filter(owner1=idf[0],menage=True)).count()
         data['vulnerable_physique']=(Chef_menage.objects.filter(owner1=idf[0],vulnerablePhy=True)).count()
@@ -458,6 +459,10 @@ class CrudQuartier(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+
 
 
 

@@ -126,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -192,13 +191,15 @@ django_heroku.settings(locals())
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 AUTH_USER_MODEL = 'custumer.NewUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:3000",
 #     "http://127.0.0.1:3000",
 #     "http://127.0.0.1:8000",
 #     "https://localhost:3000",
 #     "https://127.0.0.1:3000",
-#     "https://127.0.0.1:8000"]
+#     "https://127.0.0.1:8000",
+#     "http://127.0.0.1:9000"]
 
 
 CORS_ALLOWED_ORIGINS = [
