@@ -92,9 +92,9 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8u6nlg150n3fj', 
-        'USER': 'kvpkhdaqxbvjdl', 
-        'PASSWORD': '303fc739cfcfd3449341ed8245eccf53782da2afecc7a272fecc5fee47182095',
+        'NAME': 'da3pkgmnae672t', 
+        'USER': 'ermtfcyzfbuaic', 
+        'PASSWORD': '581b742d6969d00030dbfe7825301453002d54b1dba612fff8b4a2bf7061fd23',
         'HOST': 'ec2-3-208-79-113.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
@@ -222,7 +222,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
