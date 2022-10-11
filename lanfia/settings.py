@@ -27,8 +27,10 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 DEBUG = True
 
 #ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com","https://apivulnerable.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
-ALLOWED_HOSTS = ['0.0.0.0',"https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['0.0.0.0',"http://lanfiadon.herokuapp.com/","https://lanfiadon.herokuapp.com/","https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
 
+
+    
 #'https://dashlanfia.herokuapp.com/'
 # Application definition
 
@@ -130,12 +132,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
 ],
-     'DEFAULT_FILTER_BACKENDS':[
-         'django_filters.rest_framework.DjangoFilterBackend',  
-],
- 'DEFAULT_AUTHENTICATION_CLASSES': [
-     'rest_framework_simplejwt.authentication.JWTAuthentication'
-    ],
+#      'DEFAULT_FILTER_BACKENDS':[
+#          'django_filters.rest_framework.DjangoFilterBackend',  
+# ],
+#  'DEFAULT_AUTHENTICATION_CLASSES': [
+#      'rest_framework_simplejwt.authentication.JWTAuthentication'
+#     ],
 }
 
 # REST_FRAMEWORK = {
@@ -210,6 +212,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
     "https://dashlanfia.herokuapp.com/",
+    "https://lanfiadon.herokuapp.com/",
+    "http://lanfiadon.herokuapp.com/",
     "https://dashblanfia.herokuapp.com/"]
 
 CORS_ALLOW_METHODS = [
