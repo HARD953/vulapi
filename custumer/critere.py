@@ -27,7 +27,7 @@ from django.http import Http404
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class CritereCh(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereChef
     serializer_class=MySerializerChef
     def get_queryset(self):
@@ -35,14 +35,14 @@ class CritereCh(generics.ListCreateAPIView):
 
 class CrudCh(generics.RetrieveUpdateDestroyAPIView):
     model=CritereChef
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerChef
     def get_queryset(self):
         return CritereChef.objects.all()
 
 
 class CritereCo(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereConj
     serializer_class=MySerializerConj
     def get_queryset(self):
@@ -50,13 +50,13 @@ class CritereCo(generics.ListCreateAPIView):
 
 class CrudCo(generics.RetrieveUpdateDestroyAPIView):
     model=CritereConj
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerConj
     def get_queryset(self):
         return CritereConj.objects.all()
 
 class CritereEn(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereEnfant
     serializer_class=MySerializerEnfant
     def get_queryset(self):
@@ -64,13 +64,13 @@ class CritereEn(generics.ListCreateAPIView):
 
 class CrudEn(generics.RetrieveUpdateDestroyAPIView):
     model=CritereEnfant
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerEnfant
     def get_queryset(self):
         return CritereEnfant.objects.all()
 
 class CritereCha(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereCharge
     serializer_class=MySerializerCharge
     def get_queryset(self):
@@ -78,13 +78,13 @@ class CritereCha(generics.ListCreateAPIView):
 
 class CrudCha(generics.RetrieveUpdateDestroyAPIView):
     model=CritereCharge
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerCharge
     def get_queryset(self):
         return CritereCharge.objects.all()
 
 class CritereEq(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereEquipement
     serializer_class=MySerializerEquipement
     def get_queryset(self):
@@ -92,13 +92,13 @@ class CritereEq(generics.ListCreateAPIView):
 
 class CrudEq(generics.RetrieveUpdateDestroyAPIView):
     model=CritereEquipement
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerEquipement
     def get_queryset(self):
         return CritereEquipement.objects.all()
 
 class CritereCom(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereCommodite
     serializer_class=MySerializerCommodite
     def get_queryset(self):
@@ -106,14 +106,14 @@ class CritereCom(generics.ListCreateAPIView):
 
 class CrudCom(generics.RetrieveUpdateDestroyAPIView):
     model=CritereCommodite
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerCommodite
     def get_queryset(self):
         return CritereCommodite.objects.all()
 
 
 class CritereDe(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereDeces
     serializer_class=MySerializerDeces
     def get_queryset(self):
@@ -121,14 +121,14 @@ class CritereDe(generics.ListCreateAPIView):
 
 class CrudDe(generics.RetrieveUpdateDestroyAPIView):
     model=CritereDeces
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerDeces
     def get_queryset(self):
         return CritereDeces.objects.all()
 
 
 class CritereHa(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereHabitat
     serializer_class=MySerializerHabitat
     def get_queryset(self):
@@ -136,14 +136,14 @@ class CritereHa(generics.ListCreateAPIView):
 
 class CrudHa(generics.RetrieveUpdateDestroyAPIView):
     model=CritereHabitat
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerHabitat
     def get_queryset(self):
         return CritereHabitat.objects.all()
 
 
 class CritereGe(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereGeneral
     serializer_class=MySerializerGeneral
     def get_queryset(self):
@@ -151,14 +151,14 @@ class CritereGe(generics.ListCreateAPIView):
 
 class CrudGe(generics.RetrieveUpdateDestroyAPIView):
     model=CritereGeneral
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerGeneral
     def get_queryset(self):
         return CritereGeneral.objects.all()
 
 
 class CritereMe(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=CritereMenage
     serializer_class=MySerializerMenage
     def get_queryset(self):
@@ -166,13 +166,13 @@ class CritereMe(generics.ListCreateAPIView):
 
 class CrudMe(generics.RetrieveUpdateDestroyAPIView):
     model=CritereMenage
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerMenage
     def get_queryset(self):
         return CritereMenage.objects.all()
 
 class QuartierS(generics.ListCreateAPIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     model=Quartier
     serializer_class=QuartierSerializer
     def get_queryset(self):
@@ -180,7 +180,7 @@ class QuartierS(generics.ListCreateAPIView):
 
 class CrudCha(generics.RetrieveUpdateDestroyAPIView):
     model=CritereCharge
-    permission_classes=[AllowAny]
+    permission_classes=[IsSuperAdminAuthenticated]
     serializer_class=MySerializerCharge
     def get_queryset(self):
         return CritereCharge.objects.all()
