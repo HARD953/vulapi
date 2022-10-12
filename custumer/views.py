@@ -112,17 +112,17 @@ class CreateAdmin(APIView):
         if data['is_staff']=="is_staff":
             data['is_staff']=True
         else:
-            data['is_staff']=False
+            data['is_staff']=True
 
         if data['is_active']=="is_active":
             data['is_active']=True
         else:
-            data['is_active']=False
+            data['is_active']=True
     
         if data['is_user']=="is_user":
             data['is_user']=True
         else:
-            data['is_user']=False
+            data['is_user']=True
 
         data['responsable']=self.request.user.user_name
 
