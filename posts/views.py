@@ -325,7 +325,7 @@ class Test2View(APIView):
 class EffectuerDonsArg(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
-            dons=DonsArgent.objects.filter(beneficiaire=self.request.user.user_name)
+            dons=DonsArgent.objects.filter(beneficiaire=self.request.user.user_name,status=False)
             serializer=EffectuerArgSerializer(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
@@ -344,7 +344,7 @@ class EffectuerDonsArg(APIView):
 class EffectuerDonsObj(APIView):
     def get(self,request):
         if self.request.user.is_authenticated:
-            dons=DonsNature.objects.filter(beneficiaire=self.request.user.user_name)
+            dons=DonsNature.objects.filter(beneficiaire=self.request.user.user_name,status=False)
             serializer=EffectuerNatSerializer(dons, many=True)
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
@@ -365,7 +365,7 @@ class Argend(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=EffectuerArgSerializer
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return DonsArgent.objects.filter(beneficiaire=self.request.user.user_name)
+            return DonsArgent.objects.filter(beneficiaire=self.request.user.user_name,status=False)
 
 class Natured(generics.RetrieveUpdateDestroyAPIView):
     model=DonsNature
@@ -373,7 +373,7 @@ class Natured(generics.RetrieveUpdateDestroyAPIView):
     serializer_class=EffectuerNatSerializer
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return DonsNature.objects.filter(beneficiaire=self.request.user.user_name)
+            return DonsNature.objects.filter(beneficiaire=self.request.user.user_name,status=False)
 
             
 

@@ -134,6 +134,7 @@ class CreateAdmin(APIView):
         return Response({'message':serializer.errors})
 
 class CrudAdmin(APIView):
+    permission_classes=[IsSuperAdminAuthenticated]
     def get_object(self, pk):
         try:
             return NewUser.objects.get(pk=pk)
@@ -160,6 +161,7 @@ class CrudAdmin(APIView):
 
 
 class CreateSuperAdmin(APIView):
+    permission_classes=[IsSuperAdminAuthenticated]
     def get(self,request):
         if self.request.user.is_authenticated:
             if self.request.user.is_superuser:
@@ -202,6 +204,7 @@ class CreateSuperAdmin(APIView):
 
 
 class CrudSuperadmin(APIView):
+    permission_classes=[IsSuperAdminAuthenticated]
     def get_object(self, pk):
         try:
             return NewUser.objects.get(pk=pk)
@@ -294,6 +297,7 @@ class DetaAgent(APIView):
         data={}
         data['agent']=[dict(i) for i in GeneraleSerialiser(chef,context={'request': request},many=True).data]
         data['personneR']=(Chef_menage.objects.filter(owner1=idf[0])).count()
+        data['enfantR']=(Enfant_R.objects.filter(owner1=idf[0])).count()
         data['individu']=(Chef_menage.objects.filter(owner1=idf[0],individu=True)).count()
         data['menage']=(Chef_menage.objects.filter(owner1=idf[0],menage=True)).count()
         data['vulnerable_physique']=(Chef_menage.objects.filter(owner1=idf[0],vulnerablePhy=True)).count()

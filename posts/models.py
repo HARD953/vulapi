@@ -137,7 +137,7 @@ class Enfant(models.Model):
 
     def __str__(self):
         return '{}'.format(self.parentf)
-        
+  
 class Commodite(models.Model):
     parentc=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
     owner5 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_commodite', on_delete=models.CASCADE,null=True)
@@ -228,16 +228,15 @@ class Test2(models.Model):
     def __str__(self):
         return '{}'.format(self.classe)
         
-
-
 class DonsArgent(models.Model):
     beneficiaire=models.CharField(max_length=30,default='issa')
     donateur=models.CharField(max_length=30,default='issa')
+    typePersonne=models.CharField(max_length=100,default='null')
     typeDons=models.CharField(max_length=30,default='null')
     montant=models.CharField(max_length=100,default='null')
-    typePersonne=models.CharField(max_length=100,default='null')
     create=models.DateTimeField(auto_now_add=True)
-
+    status=models.BooleanField(default=False)
+    idTransaction=models.CharField(max_length=100,default='null')
     def __str__(self):
         return '{}'.format(self.beneficiaire) 
 
@@ -246,15 +245,16 @@ class DonsNature(models.Model):
         return '/'.join(['images', str(instance.donateur), filename])
     beneficiaire=models.CharField(max_length=30,default='issa')
     donateur=models.CharField(max_length=30,default='issa')
+    typePersonne=models.CharField(max_length=100,default='null')
     typeDons=models.CharField(max_length=30,default='null')
     categorieObjet=models.CharField(max_length=100,default='null')
     typeObjet=models.CharField(max_length=30,default='null')
     lieu_reception=models.CharField(max_length=100,default='null')
     photo=models.ImageField(upload_to=nameFile,blank=True)
     Etat=models.CharField(max_length=100,default='null')
-    typePersonne=models.CharField(max_length=100,default='null')
     create=models.DateTimeField(auto_now_add=True)
-
+    status=models.BooleanField(default=False)
+    idTransaction=models.CharField(max_length=100,default='null')
     def __str__(self):
         return '{}'.format(self.beneficiaire)
    
