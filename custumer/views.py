@@ -420,11 +420,11 @@ class Quartierl(APIView):
                 quartierT=[i['commune'] for i in dataf]
                 data={}
                 for quartier in quartierT:
-                    data["{}".format(quartier)]=QuartierSerializer(Quartier.objects.filter(commune=quartier),context={'request': request},many=True)
+                    data["{}".format(quartier)]=[dict(s) for s in QuartierSerializer(Quartier.objects.filter(commune=quartier),context={'request': request},many=True).data]
                 return JsonResponse({'data':data,'status':status.HTTP_200_OK})
             else:
                 data={}
-                data["quartier"]=QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True)
+                data["quartier"]=[dict(s) for s in QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True).data]
                 return JsonResponse({'data':data,'status':status.HTTP_200_OK})
         else:
             return JsonResponse({'status':status.HTTP_400_BAD_REQUEST})
