@@ -282,10 +282,10 @@ class RecensementView(APIView):
 class RecensementEnfent(APIView):
     def post(self,request):
         data=self.request.data
-        serializer = PostEnfantRSerializer(data=data)
         message='Insertion Done'
+        data['chef_menage']['owner9']=self.request.user.user_name
+        serializer = PostEnfantRSerializer(data=data)
         if serializer.is_valid():
-            data['chef_menage']['owner9']=self.request.user.user_name
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -294,20 +294,10 @@ class RecensementEnfent(APIView):
 class Test1View(APIView):
     def post(self,request):
         data=self.request.data
-        if data['test1']:
-            serializer = Tes1Serializer(data=data['test1'])
-            message='Insertion Done'
-            if serializer.is_valid():
-                serializer.save()
-                print("reuissi1")
-        if data['test2']:
-            serializer1 = Tes2Serializer(data=data['test2'])
-            print(data['test2'])
-            message='Insertion Done'
-            if serializer1.is_valid():
-                serializer1.save()
-                print("reuissi2")          
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer = Tes1Serializer(data=data, many=True)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
 
 class Test2View(APIView):
     def post(self,request):
@@ -333,13 +323,13 @@ class EffectuerDonsArg(APIView):
     
     def post(self,request):
         data=self.request.data
-        serializer = EffectuerArgSerializer(data=data)
+        serializer = EffectuerArgSerializer(data=data, many=True)
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            return Response({'message':message,'data':serializer.data})            
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({'message':message,'data':serializer.data})
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 class EffectuerDonsObj(APIView):
     def get(self,request):
@@ -352,11 +342,13 @@ class EffectuerDonsObj(APIView):
 
     def post(self,request):
         data=self.request.data
-        serializer = EffectuerNatSerializer(data=data)
+        serializer = EffectuerNatSerializer(data=data, many=True)
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            return Response({'message':message,'data':serializer.data})        
+            return Response({'message':message,'data':serializer.data})  
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 #Liste des dons détailler ou non par utilisateur
 class Argend(generics.RetrieveUpdateDestroyAPIView):
