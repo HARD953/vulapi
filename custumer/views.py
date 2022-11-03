@@ -464,6 +464,15 @@ class CrudQuartier(APIView):
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class InfoAffecter(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request):
+        chef=AffectaSerializer(Affectation.objects.filter(agent=self.request.user.user_name),context={'request': request},many=True).data
+        zone=[i["quartier"] for i in chef]
+        quartier={}
+        for q in zone:
+            quartier["{}".format(q)]=[dict(i) for i in ZoneSerializer(Zone.objects.filter(nomz=q),context={'request': request},many=True).data]
+        return JsonResponse({'data':quartier})
 
 
 

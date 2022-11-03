@@ -32,6 +32,7 @@ urlpatterns=format_suffix_patterns([
     path('zonec/<int:pk>/', CrudZone.as_view()),
     path('localite/', Quartierl.as_view()),
     path('localite/<int:pk>/', CrudQuartier.as_view()),
+    path('infoaffecte/', InfoAffecter.as_view()),
 
 
     # path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
