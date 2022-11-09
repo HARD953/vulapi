@@ -66,7 +66,7 @@ class Personne(NewUser):
         return '{}_{}'.format(self.nom,self.first_name)
 
 class Chef_menage(Personne):
-    owner1 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_chef_menage', on_delete=models.CASCADE,null=True)
+    owner1 = models.CharField(max_length=100,blank=False)
     type_m=(('Mnf','Menage_non_familial'),('Mbn','Menage_biparental_nucléaire'),('Mbe','Ménage_Biparental_élargi'),('Mi','Ménage_isolé'),('Mm','Ménage_monoparental'),('Mme','Ménage_monoparental_elargi'))
     type_menage=models.CharField(max_length=100,blank=False,choices=type_m)
     nombre_enfant=models.IntegerField(default=0)
@@ -91,8 +91,8 @@ class Chef_menage(Personne):
         return '{}_{}'.format(self.nom,self.first_name)
 
 class Recenser(models.Model):
-    parent=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
-    owner3 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_recenser', on_delete=models.CASCADE,null=True)
+    parent=models.CharField(max_length=100,blank=False)
+    owner3 = models.CharField(max_length=100,blank=False)
     list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
     handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
     maladie=models.CharField(max_length=100,blank=False)
@@ -113,21 +113,21 @@ class Conjoint(models.Model):
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     occupation=models.CharField(max_length=100,blank=True,default='Informaticien')
     annee_naissance=models.DateField(blank=False)
-    idc=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
+    idc=models.CharField(max_length=100,blank=False)
     sexe=(('M','Maxculin'),('F','Feminin'))
     sexes=models.CharField(max_length=1,choices=sexe)
     list_handicap=(('S','Sans_Handicap'),('Nv','Non_voyant'),('So','Sourd'),('Mu','Muet'),('Be','Begue'),('Al','Albinos'),('Hms','Handicap_membre_superieurs'),('Hmi','Handicap_membre_inferieurs'),('Hp','Handicap_physiques'),('Au','Autre_handicap'))
     handicap=models.CharField(max_length=100,blank=False,choices=list_handicap)
-    owner2 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_conjoint', on_delete=models.CASCADE,null=True)
+    owner2 = models.CharField(max_length=100,blank=False)
     maladie=models.CharField(max_length=100,blank=False)
 
     def __str__(self):
-        return '{}_{}'.format(self.idc)
+        return '{}'.format(self.idc)
 
 class Enfant(models.Model):
-    parentf=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
+    parentf=models.CharField(max_length=100,blank=False)
     annee_naissance=models.DateField(blank=False)
-    owner4 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_enfant', on_delete=models.CASCADE,null=True)
+    owner4 = models.CharField(max_length=100,blank=False)
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     sexe=(('M','Maxculin'),('F','Feminin'))
     sexes=models.CharField(max_length=1,choices=sexe)
@@ -139,8 +139,8 @@ class Enfant(models.Model):
         return '{}'.format(self.parentf)
   
 class Commodite(models.Model):
-    parentc=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
-    owner5 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_commodite', on_delete=models.CASCADE,null=True)
+    parentc=models.CharField(max_length=100,blank=False)
+    owner5 = models.CharField(max_length=100,blank=False)
     nombre_piece=models.IntegerField(default=1)
     nombre_piece_dormir=models.IntegerField(default=1)
     typelogement=models.CharField(max_length=100,blank=False)
@@ -156,32 +156,32 @@ class Commodite(models.Model):
         ordering=['parentc']
 
 class Equipement(models.Model):
-    parente=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
-    owner6 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_equipement', on_delete=models.CASCADE,null=True)
-    moyen_deplacement=models.CharField(max_length=100,blank=False)
+    parente=models.CharField(max_length=100,blank=False)
+    owner6 = models.CharField(max_length=100,blank=False)
     equipement_electr=models.CharField(max_length=100,blank=False)
     equipement_audio=models.CharField(max_length=100,blank=False)
+    moyen_deplacement=models.CharField(max_length=100,blank=False)
     proprietaire=models.BooleanField(default=True)
     class Meta:
         ordering=['parente']
 
 class Deces(models.Model):
-    parentd=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
-    owner7 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_deces', on_delete=models.CASCADE,null=True)
+    parentd=models.CharField(max_length=100,blank=False)
+    owner7 = models.CharField(max_length=100,blank=False)
     sexed=(('M','Maxculin'),('F','Feminin'))
     sexesd=models.CharField(max_length=1,choices=sexed)
     annee_deces=models.DateField(blank=False)
     class Meta:
         ordering=['parentd']
     def __str__(self):
-        return '{}_{}'.format(self.parentd)
+        return '{}'.format(self.parentd)
 
 class Charge(models.Model):
-    parentg=models.ForeignKey(Chef_menage,on_delete=models.CASCADE)
+    parentg=models.CharField(max_length=100,blank=False)
     sexed=(('M','Maxculin'),('F','Feminin'))
     sexesd=models.CharField(max_length=1,choices=sexed)
     annee_naissance=models.DateField(blank=False)
-    owner8 = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='list_charge', on_delete=models.CASCADE,null=True)
+    owner8 = models.CharField(max_length=100,blank=False)
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     occupation=models.CharField(max_length=100,blank=True,default='Informaticien')
     immigre=models.BooleanField(default=False)
@@ -191,7 +191,7 @@ class Charge(models.Model):
     maladie=models.CharField(max_length=100,blank=False)
 
     def __str__(self):
-        return '{}_{}'.format(self.parentg)
+        return '{}'.format(self.parentg)
 
 class Enfant_R(NewUser):
     nom=models.CharField(max_length=100,blank=False)
