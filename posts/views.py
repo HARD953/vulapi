@@ -197,7 +197,7 @@ class EnfantRList(generics.ListCreateAPIView):
     model=Enfant_R
     serializer_class=PostEnfantRSerializer
     def get_queryset(self):
-        user = self.request.user
+        user = self.request.user.user_name
         return Enfant_R.objects.filter(owner9=user)
     def perform_create(self, serializer):
         serializer.save(owner9=self.request.user)

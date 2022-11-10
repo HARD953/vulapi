@@ -38,6 +38,8 @@ urlpatterns=[
     path('dcharge/<int:pk>/', ChargeDetail.as_view(),name='charge-detail'),
     path('enfantr/', EnfantRList.as_view(),name='lenfant'),
     path('denfantr/<int:pk>/', EnfantRDetail.as_view(),name='enfant-rue'),
+    path('enfantcir/', StatcircleEn.as_view(),name='enfant-ruec'),
+    path('enfantbar/', StatbarEn.as_view(),name='enfant-rueb'),
     
     #Information traiter
     path('analyses2/',Information),
@@ -63,12 +65,15 @@ urlpatterns=[
     path('statistiquegm/',StatcircleMGeneral.as_view()),
     path('statistiquegi/',StatcircleIGeneral.as_view()),
     path('statgeneral/',StatGeneral.as_view()),
+
     path('homme/',Homme.as_view()),
     path('femme/',Femme.as_view()),
     path('individug/',Individug.as_view()),
+
     path('enfantf/',Enfant_F.as_view()),
     path('enfanth/',Enfant_H.as_view()),
     path('enfantg/',Enfantg.as_view()),
+
     path('test1/',Test1View.as_view()),
     path('test2/',Test2View.as_view()),
 
