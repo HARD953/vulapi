@@ -470,9 +470,14 @@ class InfoAffecter(APIView):
         chef=AffectaSerializer(Affectation.objects.filter(agent=self.request.user.user_name),context={'request': request},many=True).data
         zone=[i["quartier"] for i in chef]
         quartier={}
+        quartiers={}
+        x=[]
         for q in zone:
             quartier["{}".format(q)]=[dict(i) for i in ZoneSerializer(Zone.objects.filter(nomz=q),context={'request': request},many=True).data]
-        return JsonResponse(quartier)
+        for s in quartier.values():
+            x=list(s[0].values())
+        quartiers["{}".format(x[0])]=x[1:]
+        return JsonResponse(quartiers)
 
 
 
