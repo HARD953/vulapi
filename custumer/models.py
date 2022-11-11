@@ -49,6 +49,7 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
         return '/'.join(['images', str(instance.user_name), filename])
     user_name=models.CharField(max_length=30,unique=True)
     first_name=models.CharField(max_length=30)
+    last_name=models.CharField(max_length=30,default="issa")
     start_date=models.DateTimeField(default=timezone.now)
     email=models.EmailField(max_length=255,unique=True)
     adresse=models.CharField(max_length=300, blank=True, null=True)

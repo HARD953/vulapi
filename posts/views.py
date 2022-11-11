@@ -392,8 +392,6 @@ class Natured(generics.RetrieveUpdateDestroyAPIView):
         if self.request.user.is_authenticated:
             return DonsNature.objects.filter(beneficiaire=self.request.user.user_name,status=False)
 
-            
-
 
     # def get(self,request,pk):
     #     try:

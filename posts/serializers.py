@@ -5,7 +5,7 @@ from .models import *
 class PostChefMSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chef_menage
-        fields=['id','create','password','profile_image','email','user_name','owner1','id','url','nom','first_name','annee_naissance','lieu_de_naissance','nationalite','numero_cni','sexes','ethnie','numero','type_menage','nombre_enfant','nombre_enfant_v','nom_personne_charge','conjoints','immigre','district','region','departement','sous_prefecture','commune','milieu_r','quartier','date_depart','motif','age_depart','migrant','lieu_residence_a','annee_deplace','intention_ret']
+        fields=['id','create','password','profile_image','email','user_name','owner1','id','url','nom','first_name','last_name','annee_naissance','lieu_de_naissance','nationalite','numero_cni','sexes','ethnie','numero','type_menage','nombre_enfant','nombre_enfant_v','nom_personne_charge','conjoints','immigre','district','region','departement','sous_prefecture','commune','milieu_r','quartier','date_depart','motif','age_depart','migrant','lieu_residence_a','annee_deplace','intention_ret']
         extra_kwargs ={
             'password':{'write_only':True}
         }
@@ -57,7 +57,7 @@ class PostEnfantRSerializer(serializers.ModelSerializer):
     owner9 = serializers.ReadOnlyField(source='owner9.user_name')
     class Meta:
         model = Enfant_R
-        fields=['create','password','profile_image','email','user_name','nom','first_name','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']
+        fields=['create','password','profile_image','email','user_name','nom','first_name','last_name','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']
         extra_kwargs ={
             'password':{'write_only':True}
         }
