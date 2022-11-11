@@ -347,15 +347,22 @@ class EffectuerDonsArg(APIView):
     
     def post(self,request):
         data=self.request.data
-        print(data)
-        # serializer = EffectuerArgSerializer(data=data, many=True)
-        # message='Insertion Done'
-        # if serializer.is_valid():
-        #     serializer.save()
-        #     return Response({'message':message,'data':serializer.data})
-        # else:
-        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        return Response(data)  
+        liste=[]
+        for i in data["beneficiare"]:
+            dico={}
+            dico["beneficiare"]=i
+            dico["montant"]=data["montant"]
+            dico["typeDons"]=data["typeDons"]
+            print(dico)
+            liste.append(dico)
+        print(liste)
+        serializer = EffectuerArgSerializer(data=liste, many=True)
+        message='Insertion Done'
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':message,'data':serializer.data})
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class EffectuerDonsObj(APIView):
     def get(self,request):

@@ -194,13 +194,12 @@ class Charge(models.Model):
         return '{}'.format(self.parentg)
 
 class Enfant_R(NewUser):
-    nom=models.CharField(max_length=100,blank=False)
     annee_nais=models.DateField(blank=False)
     maladie=models.CharField(max_length=100,blank=False)
     lieu_nais=models.CharField(max_length=100,blank=False)
     owner9  = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enfant_rue', on_delete=models.CASCADE,null=True)
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
-    sexes=models.CharField(max_length=30)
+    sexe=models.CharField(max_length=30)
     handicap=models.CharField(max_length=100,blank=False)
     battu=models.BooleanField(default=False)
     tuteur=models.BooleanField(default=False)
