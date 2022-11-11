@@ -57,7 +57,7 @@ class PostEnfantRSerializer(serializers.ModelSerializer):
     owner9 = serializers.ReadOnlyField(source='owner9.user_name')
     class Meta:
         model = Enfant_R
-        fields=['create','password','profile_image','email','user_name','nom','first_name','last_name','annee_naissance','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue','commune','quartier']
+        fields=['create','password','profile_image','email','user_name','nom','first_name','last_name','annee_nais','lieu_nais','tutrice','owner9','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battu','commune','quartier']
         extra_kwargs ={
             'password':{'write_only':True}
         }
