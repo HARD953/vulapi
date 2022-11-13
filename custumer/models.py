@@ -83,10 +83,10 @@ class NewUser(AbstractBaseUser,PermissionsMixin):
         return self.email
 
 class Quartier(models.Model):
-    district=models.CharField(max_length=100,blank=False)
-    region=models.CharField(max_length=100,blank=False)
-    departement=models.CharField(max_length=100,blank=False)
-    sous_prefecture=models.CharField(max_length=100,blank=False)
+    district=models.CharField(max_length=100,blank=False,default='Abidjan')
+    region=models.CharField(max_length=100,blank=False,default='Abidjan')
+    departement=models.CharField(max_length=100,blank=False,default='Abidjan')
+    sous_prefecture=models.CharField(max_length=100,blank=False,default='Abidjan')
     commune=models.CharField(max_length=100,blank=False)
     quartier=models.CharField(max_length=100,blank=False,default='Rue_12_Avenue_11')
     def __str__(self):

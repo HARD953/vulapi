@@ -414,31 +414,44 @@ class Quartierl(APIView):
     permission_classes=[AllowAny]
     def get(self,request):
         if self.request.user.is_authenticated:
-            if self.request.user.is_superuser:
+            if self.request.user.is_superuser or self.request.user.is_agent:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['commune'] for i in dataf]
                 data={}
+                data2={}
                 for quartier in quartierT:
                     data["{}".format(quartier)]=[dict(s) for s in QuartierSerializer(Quartier.objects.filter(commune=quartier),context={'request': request},many=True).data]
-                return JsonResponse({'data':data,'status':status.HTTP_200_OK})
+                for s in data.keys():
+                    data2["{}".format(s)]=[q["quartier"] for q in data[s]]
+                return Response(data2,status=status.HTTP_200_OK)
             else:
                 data={}
+                data2={}
                 data["quartier"]=[dict(s) for s in QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True).data]
-                return JsonResponse({'data':data,'status':status.HTTP_200_OK})
+                for s in data.keys():
+                    data2["{}".format(s)]=[q["quartier"] for q in data[s]]
+                return Response(data2,status=status.HTTP_200_OK)
         else:
-            return JsonResponse({'status':status.HTTP_400_BAD_REQUEST})
+            return JsonResponse(status=status.HTTP_400_BAD_REQUEST)
 
     def post(self,request):
-        message='Merci pour votre contribution'
-        data=request.data
-        serializer = QuartierSerializer(data=data)
-        message='Merci pour votre contribution'
+        data=self.request.data
+        liste=[]
+        for i in data["quartier"]:
+            dico={}
+            dico["commune"]=data["commune"]
+            dico["quartier"]=i
+            print(dico)
+            liste.append(dico)
+        serializer = QuartierSerializer(data=liste, many=True)
+        message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            return Response({'message':message,'data':serializer.data})            
-        return Response({'message':serializer.errors})
-
+            return Response({'message':message,'data':serializer.data})
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
 class CrudQuartier(APIView):
     def get_object(self, pk):
         try:
