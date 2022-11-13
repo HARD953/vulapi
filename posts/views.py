@@ -374,7 +374,7 @@ class EffectuerDonsArg(APIView):
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            r=requests.post("http://127.0.0.1:8000/etatsargent/",data=payload)
+            r=requests.post("http://apidons.herokuapp.com/etatsargent/",data=payload)
             return Response({'message':message,'data':serializer.data})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -395,7 +395,7 @@ class EffectuerDonsObj(APIView):
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            r=requests.post("http://127.0.0.1:8000/etatsnature/",data=payload)
+            r=requests.post("http://apidons.herokuapp.com/etatsnature/",data=payload)
             return Response({'message':message,'data':serializer.data})  
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
