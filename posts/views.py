@@ -360,11 +360,11 @@ class EffectuerDonsArg(APIView):
         data=self.request.data
         payload={"id":data["iddons"]}
         liste=[]
-        for i in data["beneficiare"]:
+        for i in data["beneficiaire"]:
             dico={}
-            dico["iddons"]=data["idons"]
+            dico["iddons"]=data["iddons"]
             dico["donateur"]=data["donateur"]
-            dico["beneficiare"]=i
+            dico["beneficiaire"]=i
             dico["montant"]=data["montant"]
             dico["typeDons"]=data["typeDons"]
             print(dico)
