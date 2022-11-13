@@ -87,8 +87,8 @@ class Tes2Serializer(serializers.ModelSerializer):
 class EffectuerArgSerializer(serializers.ModelSerializer):
     class Meta:
         model = DonsArgent
-        fields = ["id","idTransaction","status","beneficiaire","donateur","typeDons","montant","create","typePersonne"]
+        fields = ["id","iddons","idTransaction","status","beneficiaire","donateur","typeDons","montant","create","typePersonne"]
 class EffectuerNatSerializer(serializers.ModelSerializer):
     class Meta:
         model = DonsNature
-        fields = ["id","idTransaction","status","beneficiaire","donateur","typeDons","categorieObjet","typeObjet","lieu_reception","Etat","photo","create","typePersonne"]
+        fields = ["id",'iddons',"beneficiaire","donateur","lieu_reception","status"]

@@ -14,6 +14,8 @@ from rest_framework.filters import SearchFilter
 # Create your views here.
 from rest_framework import status
 
+import requests
+
 
 class WritePermission(BasePermission):
     def has_object_permission(self,request,view,obj):
@@ -197,7 +199,7 @@ class EnfantRList(generics.ListCreateAPIView):
     model=Enfant_R
     serializer_class=PostEnfantRSerializer
     def get_queryset(self):
-        user = self.request.user.user_name
+        user = self.request.user
         return Enfant_R.objects.filter(owner9=user)
     def perform_create(self, serializer):
         serializer.save(owner9=self.request.user)
@@ -210,6 +212,16 @@ class EnfantRDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
         return Enfant_R.objects.filter(owner9=user)
     def perform_create(self, serializer):
         serializer.save(owner9=self.request.user)
+
+# class DetailConecter(APIView):
+#     permission_classes=[AllowAny]
+#     def get(self,request):
+#         if self.request.user.is_authenticated:
+#             dons=NewUser.objects.filter(user_name=self.request.user.user_name)
+#             serializer=GeneraleSerialiser(dons, many=True)
+#             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
+#         else:
+#             return Response({'status':status.HTTP_400_BAD_REQUEST})
   
 class ChargeDetail(generics.RetrieveUpdateDestroyAPIView,WritePermission):
     model=Charge
@@ -344,12 +356,14 @@ class EffectuerDonsArg(APIView):
             return Response({'data':serializer.data,'status':status.HTTP_200_OK})
         else:
             return Response({'status':status.HTTP_400_BAD_REQUEST})
-    
     def post(self,request):
         data=self.request.data
+        payload={"id":data["iddons"]}
         liste=[]
         for i in data["beneficiare"]:
             dico={}
+            dico["iddons"]=data["idons"]
+            dico["donateur"]=data["donateur"]
             dico["beneficiare"]=i
             dico["montant"]=data["montant"]
             dico["typeDons"]=data["typeDons"]
@@ -360,6 +374,7 @@ class EffectuerDonsArg(APIView):
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
+            r=requests.post("http://127.0.0.1:8000/etatsargent/",data=payload)
             return Response({'message':message,'data':serializer.data})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -374,11 +389,13 @@ class EffectuerDonsObj(APIView):
             return Response({'status':status.HTTP_400_BAD_REQUEST})
 
     def post(self,request):
-        data=self.request.data
-        serializer = EffectuerNatSerializer(data=data, many=True)
+        datas=self.request.data
+        payload={"id":datas["iddons"]}
+        serializer = EffectuerNatSerializer(data=datas)
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
+            r=requests.post("http://127.0.0.1:8000/etatsnature/",data=payload)
             return Response({'message':message,'data':serializer.data})  
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    

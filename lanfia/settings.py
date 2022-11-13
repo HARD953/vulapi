@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com","https://apivulnerable.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
-ALLOWED_HOSTS = ['0.0.0.0',"http://lanfiadon.herokuapp.com/","https://lanfiadon.herokuapp.com/","https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","http://127.0.0.1:8000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com","https://apivulnerable.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+#ALLOWED_HOSTS = ['0.0.0.0',"http://lanfiadon.herokuapp.com/","https://lanfiadon.herokuapp.com/","https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
 
 
     
@@ -94,10 +94,10 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'danp3q51ol890j', 
-        'USER': 'inwqvtcnwdclka', 
-        'PASSWORD': '74856eaaff5a55c81fc2cda7258f4f644ba0328cd79f4cca1f75dc15162ae83d',
-        'HOST': 'ec2-3-209-39-2.compute-1.amazonaws.com', 
+        'NAME': 'd74ohnatm258vj', 
+        'USER': 'ocsphzncrnjhcf', 
+        'PASSWORD': '842d51d0d734a3cde1d98f3f69406a41044827c2884407122c335f7de790a634',
+        'HOST': 'ec2-54-147-36-107.compute-1.amazonaws.com', 
         'PORT': '5432',
     }
 }
@@ -132,12 +132,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
 ],
-     'DEFAULT_FILTER_BACKENDS':[
-         'django_filters.rest_framework.DjangoFilterBackend',  
-],
- 'DEFAULT_AUTHENTICATION_CLASSES': [
-     'rest_framework_simplejwt.authentication.JWTAuthentication'
-    ],
+#      'DEFAULT_FILTER_BACKENDS':[
+#          'django_filters.rest_framework.DjangoFilterBackend',  
+# ],
+#  'DEFAULT_AUTHENTICATION_CLASSES': [
+#      'rest_framework_simplejwt.authentication.JWTAuthentication'
+#     ],
 }
 
 # REST_FRAMEWORK = {
@@ -194,16 +194,6 @@ django_heroku.settings(locals())
 AUTH_USER_MODEL = 'custumer.NewUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:3000",
-#     "http://127.0.0.1:3000",
-#     "http://127.0.0.1:8000",
-#     "https://localhost:3000",
-#     "https://127.0.0.1:3000",
-#     "https://127.0.0.1:8000",
-#     "http://127.0.0.1:9000"]
-
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
@@ -211,9 +201,19 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
-    "https://lanfiadon.herokuapp.com/",
-    "http://lanfiadon.herokuapp.com/",
-    "https://dashblanfia.herokuapp.com/"]
+    "http://127.0.0.1:9000"]
+
+
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "http://127.0.0.1:8000",
+#     "https://localhost:3000",
+#     "https://127.0.0.1:3000",
+#     "https://127.0.0.1:8000",
+#     "https://lanfiadon.herokuapp.com/",
+#     "http://lanfiadon.herokuapp.com/",
+#     "https://dashblanfia.herokuapp.com/"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",

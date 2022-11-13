@@ -197,7 +197,7 @@ class Enfant_R(NewUser):
     annee_nais=models.DateField(blank=False)
     maladie=models.CharField(max_length=100,blank=False)
     lieu_nais=models.CharField(max_length=100,blank=False)
-    owner9  = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='enfant_rue', on_delete=models.CASCADE,null=True)
+    owner9  = models.CharField(max_length=100,blank=False)
     niveau_etude=models.CharField(max_length=100,blank=True,default='master')
     sexe=models.CharField(max_length=30)
     handicap=models.CharField(max_length=100,blank=False)
@@ -209,7 +209,7 @@ class Enfant_R(NewUser):
     scolariser=models.BooleanField(default=False)
     quartier=models.CharField(max_length=100,blank=False)
     def __str__(self):
-        return '{}'.format(self.nom)
+        return '{}'.format(self.niveau_etude)
     #x=['nom','prenom','annee_naissance','owner4','niveau_etude','sexes','scolariser','mere','pere','tuteur','handicap','battue']
 
 
@@ -228,6 +228,7 @@ class Test2(models.Model):
         return '{}'.format(self.classe)
         
 class DonsArgent(models.Model):
+    iddons=models.CharField(max_length=30,default=1)
     beneficiaire=models.CharField(max_length=30,default='issa')
     donateur=models.CharField(max_length=30,default='issa')
     typePersonne=models.CharField(max_length=100,default='null')
@@ -239,23 +240,38 @@ class DonsArgent(models.Model):
     def __str__(self):
         return '{}'.format(self.beneficiaire) 
 
+# class DonsNature(models.Model):
+    # def nameFile(instance, filename):
+    #     return '/'.join(['images', str(instance.donateur), filename])
+#     iddons=models.CharField(max_length=30,default=1)
+#     beneficiaire=models.CharField(max_length=30,default='issa')
+#     donateur=models.CharField(max_length=30,default='issa')
+#     typePersonne=models.CharField(max_length=100,default='null')
+#     typeDons=models.CharField(max_length=30,default='null')
+#     categorieObjet=models.CharField(max_length=100,default='null')
+#     typeObjet=models.CharField(max_length=30,default='null')
+#     lieu_reception=models.CharField(max_length=100,default='null')
+#     photo=models.ImageField(upload_to=nameFile,blank=True)
+#     Etat=models.CharField(max_length=100,default='null')
+#     create=models.DateTimeField(auto_now_add=True)
+#     status=models.BooleanField(default=False)
+#     idTransaction=models.CharField(max_length=100,default='null')
+#     def __str__(self):
+#         return '{}'.format(self.beneficiaire)
+
+
 class DonsNature(models.Model):
     def nameFile(instance, filename):
         return '/'.join(['images', str(instance.donateur), filename])
+    iddons=models.CharField(max_length=30,default=1)
     beneficiaire=models.CharField(max_length=30,default='issa')
     donateur=models.CharField(max_length=30,default='issa')
-    typePersonne=models.CharField(max_length=100,default='null')
-    typeDons=models.CharField(max_length=30,default='null')
-    categorieObjet=models.CharField(max_length=100,default='null')
-    typeObjet=models.CharField(max_length=30,default='null')
     lieu_reception=models.CharField(max_length=100,default='null')
     photo=models.ImageField(upload_to=nameFile,blank=True)
-    Etat=models.CharField(max_length=100,default='null')
-    create=models.DateTimeField(auto_now_add=True)
     status=models.BooleanField(default=False)
-    idTransaction=models.CharField(max_length=100,default='null')
     def __str__(self):
         return '{}'.format(self.beneficiaire)
+   
    
     
    
