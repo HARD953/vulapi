@@ -433,7 +433,7 @@ class Quartierl(APIView):
                     data2["{}".format(s)]=[q["quartier"] for q in data[s]]
                 return Response(data2,status=status.HTTP_200_OK)
         else:
-            return JsonResponse(status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def post(self,request):
         data=self.request.data
