@@ -283,7 +283,7 @@ class RecensementView(APIView):
             serializereq = EquipementS(data=datas['Equipement'],context={'request': request})
             if serializereq.is_valid():
                 serializereq.save()
-        r=requests.get("http://apidons.herokuapp.com/analyses/")
+        r=requests.get("http://apivulnerable.herokuapp.com/analyses/")
         return Response({'message':"done",'data':serializerch.data})            
         
         # if data['Charges']:
