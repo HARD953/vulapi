@@ -24,7 +24,7 @@ from datetime import date
 
 def vulnerableoc(request):
     if request.method=="GET":
-        chef=Chef_menage.objects.filter(vulnerableOccup=True,commune=request.user.commune)
+        chef=Chef_menage.objects.filter(vulnerableOccup=True)
         chefs=PostChefMSerializer(chef,context={'request': request},many=True)
         return JsonResponse({'data':chefs.data,'status':status.HTTP_200_OK})
     #     dataf=[dict(i) for i in chefs.data]
