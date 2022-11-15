@@ -53,6 +53,7 @@ urlpatterns=[
     
     path('menage/',vulnerableg),
     path('individus/',vulnerableI),
+    
     #Information détailler
     path('information/<int:pk>/',info),
     path('informationd/<int:pk>/',ana),
