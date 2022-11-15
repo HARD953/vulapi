@@ -243,7 +243,6 @@ class ListRecenser(generics.ListAPIView):
         user = self.request.user
         return Chef_menage.objects.filter(owner=user)
 
-
 class RecensementView(APIView):        
     def post(self,request):
         datas=self.request.data

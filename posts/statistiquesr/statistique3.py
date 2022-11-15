@@ -171,7 +171,7 @@ class StatcircleEn(APIView):
                 data1["descolariser"]=Enfant_R.objects.filter(scolariser=True).count()
                 data1["pered"]=Enfant_R.objects.filter(pere=True).count()
                 data1["mered"]=Enfant_R.objects.filter(mere=True).count()
-                data1["battue"]=Enfant_R.objects.filter(battue=True).count()
+                data1["battue"]=Enfant_R.objects.filter(battu=True).count()
                 data1['Total']=Enfant_R.objects.all().count()
                 data={}
                 data["enfantR"]=data1
@@ -182,8 +182,8 @@ class StatcircleEn(APIView):
                 data1["descolariser"]=Enfant_R.objects.filter(scolariser=True,commune=request.user.commune).count()
                 data1["pered"]=Enfant_R.objects.filter(pere=True,commune=request.user.commune).count()
                 data1["mered"]=Enfant_R.objects.filter(mere=True,commune=request.user.commune).count()
-                data1["battue"]=Enfant_R.objects.filter(battue=True).count()
-                data1['Total']=Enfant_R.objects.filter(commune=request.user.commune).count()
+                data1["battue"]=Enfant_R.objects.filter(battu=True).count()
+                data1['Total']=Enfant_R.objects.filter().count()
                 data={}
                 data["enfantR"]=data1
                 return JsonResponse(data)
@@ -209,7 +209,7 @@ class StatbarEn(APIView):
                     data2["{}".format(quartier)]=Enfant_R.objects.filter(scolariser=True,commune=quartier).count()
                     data3["{}".format(quartier)]=Enfant_R.objects.filter(pere=True,commune=quartier).count()
                     data4["{}".format(quartier)]=Enfant_R.objects.filter(mere=True,commune=quartier).count()
-                    data5["{}".format(quartier)]=Enfant_R.objects.filter(battue=True,commune=quartier).count()
+                    data5["{}".format(quartier)]=Enfant_R.objects.filter(battu=True,commune=quartier).count()
                     data["handicap"]=data1
                     data["descolariser"]=data2
                     data["pered"]=data3
@@ -231,7 +231,7 @@ class StatbarEn(APIView):
                     data2["{}".format(quartier)]=Enfant_R.objects.filter(scolariser=True,commune=request.user.commune,quartier=quartier).count()
                     data3["{}".format(quartier)]=Enfant_R.objects.filter(pere=True,commune=request.user.commune,quartier=quartier).count()
                     data4["{}".format(quartier)]=Enfant_R.objects.filter(mere=True,commune=request.user.commune,quartier=quartier).count()
-                    data5["{}".format(quartier)]=Enfant_R.objects.filter(battue=True,commune=quartier).count()
+                    data5["{}".format(quartier)]=Enfant_R.objects.filter(battu=True,commune=quartier).count()
                     data["handicap"]=data1
                     data["descolariser"]=data2
                     data["pered"]=data3
