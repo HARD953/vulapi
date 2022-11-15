@@ -31,6 +31,7 @@ urlpatterns=format_suffix_patterns([
     path('zone/', Zonez.as_view()),
     path('zonec/<int:pk>/', CrudZone.as_view()),
     path('localite/', Quartierl.as_view()),
+    path('quartier/', QuartierT.as_view()),
     path('localite/<int:pk>/', CrudQuartier.as_view()),
     path('infoaffecte/', InfoAffecter.as_view()),
 

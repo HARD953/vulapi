@@ -494,6 +494,25 @@ class InfoAffecter(APIView):
 
 
 
+class QuartierT(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request):
+        if self.request.user.is_authenticated:
+            if self.request.user.is_superuser or self.request.user.is_agent:
+                quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
+                x=[]
+                for i in quartiers:
+                    x.append(i['quartier'])
+                data={}
+                data["quartier"]=x
+                return Response(data,status=status.HTTP_200_OK)
+            else:
+                return Response(status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+
 
 
 
