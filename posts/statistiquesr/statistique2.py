@@ -35,7 +35,7 @@ class StatcircleMGeneral(APIView):
                     data["{}".format(quartier)]=Chef_menage.objects.filter(menage=True,commune=quartier).count()
                 return JsonResponse(data)
             else:
-                quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
+                quartiers=QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['quartier'] for i in dataf]
                 data={}
@@ -57,7 +57,7 @@ class StatcircleIGeneral(APIView):
                     data["{}".format(quartier)]=Chef_menage.objects.filter(individu=True,commune=quartier).count()
                 return JsonResponse(data)
             else:
-                quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
+                quartiers=QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['quartier'] for i in dataf]
                 data={}

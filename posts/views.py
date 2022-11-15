@@ -200,7 +200,7 @@ class EnfantRList(generics.ListCreateAPIView):
     serializer_class=PostEnfantRSerializer
     def get_queryset(self):
         user = self.request.user
-        return Enfant_R.objects.filter(owner9=user)
+        return Enfant_R.objects.filter(owner9=user.user_name)
     def perform_create(self, serializer):
         serializer.save(owner9=self.request.user)
 
@@ -329,6 +329,11 @@ class RecensementEnfent(APIView):
             serializer.save()
             return Response({'message':message,'data':serializer.data})            
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self,request):
+        chef=Enfant_R.objects.all()
+        chefs=PostEnfantRSerializer(chef,context={'request': request},many=True)
+        return Response(chefs.data,status=status.HTTP_200_OK)
 
 class Test1View(APIView):
     def post(self,request):

@@ -98,9 +98,10 @@ class StatbarM(APIView):
                     data["emploi"]=data4
                 return JsonResponse({"menage":data})
             else:
-                quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
+                quartiers=QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['quartier'] for i in dataf]
+                print(quartiers)
                 data={}
                 data1={}
                 data2={}
@@ -142,7 +143,7 @@ class StatbarI(APIView):
                     data["emploi"]=data4
                 return JsonResponse({"individu":data})
             else:
-                quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
+                quartiers=QuartierSerializer(Quartier.objects.filter(commune=self.request.user.commune),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['quartier'] for i in dataf]
                 data={}
