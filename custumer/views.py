@@ -490,7 +490,7 @@ class InfoAffecter(APIView):
         print(quartier)
         for s in quartier.values():
             x=list(s[0].values())
-        quartiers["{}".format(x[0])]=x[2:]
+        quartiers["{}".format(x[0])]=x
         return JsonResponse(quartiers)
 
 
