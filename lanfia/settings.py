@@ -210,10 +210,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
-    # "https://lanfiadon.herokuapp.com/",
-    # "http://lanfiadon.herokuapp.com/",
-    # "https://dashblanfia.herokuapp.com/",
-    # "http://apidons.herokuapp.com/"
+    "https://lanfiadon.herokuapp.com/",
+    "http://lanfiadon.herokuapp.com/",
+    "https://dashblanfia.herokuapp.com/",
+    "http://apidons.herokuapp.com/"
     ]
 
 CORS_ALLOW_METHODS = [
@@ -226,7 +226,7 @@ CORS_ALLOW_METHODS = [
 ]
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=3),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
