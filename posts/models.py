@@ -259,7 +259,6 @@ class DonsArgent(models.Model):
 #     def __str__(self):
 #         return '{}'.format(self.beneficiaire)
 
-
 class DonsNature(models.Model):
     def nameFile(instance, filename):
         return '/'.join(['images', str(instance.donateur), filename])

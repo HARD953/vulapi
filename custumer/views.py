@@ -375,15 +375,15 @@ class Zonez(APIView):
         return Response({'status':status.HTTP_400_BAD_REQUEST})
 
     def post(self,request):
-        message='Merci pour votre contribution'
         data=self.request.data
-        data['commune']=self.request.user.commune
+        data["commune"]=self.request.user.commune
         serializer = ZoneSerializer(data=data)
-        message='Merci pour votre contribution'
+        message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            return Response({'message':message,'data':serializer.data})            
-        return Response({'message':serializer.errors})
+            return Response({'message':message,'data':serializer.data})
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class CrudZone(APIView):
     def get_object(self, pk):
@@ -414,7 +414,7 @@ class Quartierl(APIView):
     permission_classes=[AllowAny]
     def get(self,request):
         if self.request.user.is_authenticated:
-            if self.request.user.is_superuser or self.request.user.is_agent:
+            if  self.request.user.is_agent:
                 quartiers=QuartierSerializer(Quartier.objects.all(),context={'request': request},many=True).data
                 dataf=[dict(i) for i in quartiers]
                 quartierT=[i['commune'] for i in dataf]

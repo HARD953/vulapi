@@ -95,12 +95,7 @@ class Quartier(models.Model):
 class Zone(models.Model):
     nomz=models.CharField(max_length=100,blank=False,primary_key=True)
     commune=models.CharField(max_length=100,blank=False,default='issa')
-    q1=models.CharField(max_length=100,blank=False)
-    q2=models.CharField(max_length=100,blank=False)
-    q3=models.CharField(max_length=100,blank=False)
-    q4=models.CharField(max_length=100,blank=False)
-    q5=models.CharField(max_length=100,blank=False)
-    q6=models.CharField(max_length=100,blank=False)
+    q1=ArrayField(models.CharField(max_length=100))
     status=models.BooleanField(default=False)
     def __str__(self):
         return self.nomz
