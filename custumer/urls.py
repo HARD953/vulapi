@@ -35,7 +35,6 @@ urlpatterns=format_suffix_patterns([
     path('localite/<int:pk>/', CrudQuartier.as_view()),
     path('infoaffecte/', InfoAffecter.as_view()),
 
-
     # path('admins/<int:pk>', DetailAdmin.as_view(),name='registers-sadmin-detail'),
     # path('agent/<int:pk>', DetailAgent.as_view(),name='registers-admin-detail'),
 

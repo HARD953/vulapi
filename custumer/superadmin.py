@@ -19,6 +19,8 @@ class WritePermission(BasePermission):
             return True
         return obj.id==request.user
 
+
+
 class ChefMenageList(generics.ListAPIView):
     permission_classes=[AllowAny]
     model=Chef_menage

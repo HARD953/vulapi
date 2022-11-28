@@ -487,10 +487,13 @@ class InfoAffecter(APIView):
         x=[]
         for q in zone:
             quartier["{}".format(q)]=[dict(i) for i in ZoneSerializer(Zone.objects.filter(nomz=q),context={'request': request},many=True).data]
-        print(quartier)
         for s in quartier.values():
             x=list(s[0].values())
-        quartiers["{}".format(x[0])]=x
+        z=x.copy()
+        z.pop(2)
+        for a in x[2]:
+            z.append(a)
+        quartiers["{}".format(z[0])]=z
         return JsonResponse(quartiers)
 
 
