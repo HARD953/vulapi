@@ -493,7 +493,7 @@ class InfoAffecter(APIView):
         z.pop(2)
         for a in x[2]:
             z.append(a)
-        z.pop(1)
+        z.pop(2)
         quartiers["{}".format(z[0])]=z
         return JsonResponse(quartiers)
 
