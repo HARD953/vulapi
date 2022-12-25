@@ -219,6 +219,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
+    "https://apidons.up.railway.app/"
+    "http://apidons.up.railway.app/"
+    "https://lanfiasave.com/"
+    "http://lanfiasave.com/"
     # "https://lanfiadon.herokuapp.com/",
     # "http://lanfiadon.herokuapp.com/",
     # "https://dashblanfia.herokuapp.com/",
