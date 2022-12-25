@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-plupg3j)r0$q+khc=$8rjfc$q%*(byslhpka^ywe#+2csa$-c-
 DEBUG = True
 
 #ALLOWED_HOSTS = ['0.0.0.0','localhost', '127.0.0.1',"https://127.0.0.1:3000","http://127.0.0.1:8000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com","https://apivulnerable.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
-ALLOWED_HOSTS = ['0.0.0.0',"http://apidons.herokuapp.com/","http://lanfiadon.herokuapp.com/","https://lanfiadon.herokuapp.com/","https://dashblanfia.herokuapp.com/","https://dashlanfia.herokuapp.com/", 'localhost', '127.0.0.1',"https://127.0.0.1:3000","https://lanfiamyapi.herokuapp.com","https://apidons.herokuapp.com",'https://localhost:3000',"http://127.0.0.1:3000",'http://localhost:3000']
+ALLOWED_HOSTS = ['*']
 
 
     
@@ -94,11 +94,11 @@ WSGI_APPLICATION = 'lanfia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd18blps0km3bbl', 
-        'USER': 'vrjcijehchzwaj', 
-        'PASSWORD': '88dba966f71c344674284fd485ad034e1c01248dfec9896669e7defcb2ca2e78',
-        'HOST': 'ec2-35-170-21-76.compute-1.amazonaws.com', 
-        'PORT': '5432',
+        'NAME': 'railway', 
+        'USER': 'postgres', 
+        'PASSWORD': 'NU9O75Ca2IMJ0p8DsiWx',
+        'HOST': 'containers-us-west-107.railway.app', 
+        'PORT': '5941',
     }
 }
 
@@ -219,10 +219,10 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
-    "https://lanfiadon.herokuapp.com/",
-    "http://lanfiadon.herokuapp.com/",
-    "https://dashblanfia.herokuapp.com/",
-    "http://apidons.herokuapp.com/"
+    # "https://lanfiadon.herokuapp.com/",
+    # "http://lanfiadon.herokuapp.com/",
+    # "https://dashblanfia.herokuapp.com/",
+    # "http://apidons.herokuapp.com/"
     ]
 
 CORS_ALLOW_METHODS = [
