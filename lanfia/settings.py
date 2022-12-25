@@ -219,6 +219,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
+    "https://apivulnerable.up.railway.app"
+    "http://apivulnerable.up.railway.app"
     # "https://lanfiadon.herokuapp.com/",
     # "http://lanfiadon.herokuapp.com/",
     # "https://dashblanfia.herokuapp.com/",
