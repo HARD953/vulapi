@@ -141,12 +141,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
 ],
-#      'DEFAULT_FILTER_BACKENDS':[
-#          'django_filters.rest_framework.DjangoFilterBackend',  
-# ],
-#  'DEFAULT_AUTHENTICATION_CLASSES': [
-#      'rest_framework_simplejwt.authentication.JWTAuthentication'
-#     ],
+     'DEFAULT_FILTER_BACKENDS':[
+         'django_filters.rest_framework.DjangoFilterBackend',  
+],
+ 'DEFAULT_AUTHENTICATION_CLASSES': [
+     'rest_framework_simplejwt.authentication.JWTAuthentication'
+    ],
 }
 
 # REST_FRAMEWORK = {
@@ -219,8 +219,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
-    "https://apivulnerable.up.railway.app"
-    "http://apivulnerable.up.railway.app"
     # "https://lanfiadon.herokuapp.com/",
     # "http://lanfiadon.herokuapp.com/",
     # "https://dashblanfia.herokuapp.com/",
