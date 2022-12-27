@@ -282,7 +282,7 @@ class RecensementView(APIView):
             serializereq = EquipementS(data=datas['Equipement'],context={'request': request})
             if serializereq.is_valid():
                 serializereq.save()
-        r=requests.get("http://apivulnerable.herokuapp.com/analyses/")
+        r=requests.get("http://apivulnerable.up.railway.app/analyses/")
         return Response({'message':"done",'data':serializerch.data})            
         
         # if data['Charges']:
@@ -379,7 +379,7 @@ class EffectuerDonsArg(APIView):
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            r=requests.post("http://apidons.herokuapp.com/etatsargent/",data=payload)
+            r=requests.post("http://apidons.up.railway.app/etatsargent/",data=payload)
             return Response({'message':message,'data':serializer.data})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -400,7 +400,7 @@ class EffectuerDonsObj(APIView):
         message='Insertion Done'
         if serializer.is_valid():
             serializer.save()
-            r=requests.post("http://apidons.herokuapp.com/etatsnature/",data=payload)
+            r=requests.post("http://apidons.up.railway.app/etatsnature/",data=payload)
             return Response({'message':message,'data':serializer.data})  
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    

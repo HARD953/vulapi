@@ -223,6 +223,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://apidons.up.railway.app/"
     "https://lanfiasave.com/"
     "http://lanfiasave.com/"
+    "https://dashboard.lanfiasave.com/"
+    "http://dashboard.lanfiasave.com/"
     # "https://lanfiadon.herokuapp.com/",
     # "http://lanfiadon.herokuapp.com/",
     # "https://dashblanfia.herokuapp.com/",

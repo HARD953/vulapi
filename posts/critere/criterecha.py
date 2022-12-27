@@ -5,6 +5,7 @@ from custumer.serializersc import*
 from django.http import HttpResponseGone,JsonResponse
 from rest_framework.response import Response
 
+
 def criterecha(request,data):
     if request.method=="GET":
         critere=[]
@@ -61,7 +62,7 @@ def criterecha(request,data):
                 return critere[3][1]
             else:
                 return critere[3][1]
-
+                
         elif data[0]=="occupation":
             if data[1]=="Informaticien":
                 return critere[4][2]
