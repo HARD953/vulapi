@@ -139,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
 ],
      'DEFAULT_FILTER_BACKENDS':[
          'django_filters.rest_framework.DjangoFilterBackend',  
@@ -219,17 +219,16 @@ CORS_ALLOWED_ORIGINS = [
     "https://localhost:3000",
     "https://127.0.0.1:3000",
     "https://127.0.0.1:8000",
-    "https://apidons.up.railway.app/"
-    "http://apidons.up.railway.app/"
-    "https://apivulnerable.up.railway.app/"
-    "http://apivulnerable.up.railway.app/"
-    "https://dashboard.lanfiasave.com"
-    "http://dashboard.lanfiasave.com"
-    "https://lanfiasave.com"
-    "http://lanfiasave.com"
+    "https://apidons.up.railway.app/",
+    "http://apidons.up.railway.app/",
+    "https://lanfiasave.com/",
+    "http://lanfiasave.com/",
+    "https://dashboard.lanfiasave.com/",
+    "http://dashboard.lanfiasave.com/",
     ]
 
 
+CORS_ALLOWED_ORIGINS_ALL=True
 
 CORS_ALLOW_METHODS = [
     "DELETE",
