@@ -43,20 +43,20 @@ class CreateAgent(APIView):
     def post(self,request):
         message='Enregistrement reussi'
         data=self.request.data
-        # if data['is_staff']=="is_staff":
-        #     data['is_staff']=True
-        # else:
-        #     data['is_staff']=False
+        if data['is_staff']=="is_staff":
+            data['is_staff']=True
+        else:
+            data['is_staff']=True
 
-        # if data['is_active']=="is_active":
-        #     data['is_active']=True
-        # else:
-        #     data['is_active']=False
+        if data['is_active']=="is_active":
+            data['is_active']=True
+        else:
+            data['is_active']=True
     
         if data['is_agent']=="is_agent":
             data['is_agent']=True
         else:
-            data['is_agent']=False
+            data['is_agent']=True
 
         data['responsable']=self.request.user.user_name
         
