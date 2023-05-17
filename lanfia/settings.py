@@ -203,15 +203,6 @@ django_heroku.settings(locals())
 AUTH_USER_MODEL = 'custumer.NewUser'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8000",
-    "https://localhost:3000",
-    "https://127.0.0.1:3000",
-    "https://127.0.0.1:8000",
-    "http://127.0.0.1:9000"]
-
 # CORS_ALLOWED_ORIGINS = [
 #     "http://localhost:3000",
 #     "http://127.0.0.1:3000",
@@ -219,13 +210,22 @@ CORS_ALLOWED_ORIGINS = [
 #     "https://localhost:3000",
 #     "https://127.0.0.1:3000",
 #     "https://127.0.0.1:8000",
-#     "https://apidons.up.railway.app/",
-#     "http://apidons.up.railway.app/",
-#     "https://lanfiasave.com/",
-#     "http://lanfiasave.com/",
-#     "https://dashboard.lanfiasave.com/",
-#     "http://dashboard.lanfiasave.com/",
-#     ]
+#     "http://127.0.0.1:9000"]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:8000",
+    "https://localhost:3000",
+    "https://127.0.0.1:3000",
+    "https://127.0.0.1:8000",
+    "https://apidons.up.railway.app/",
+    "http://apidons.up.railway.app/",
+    "https://lanfiasave.com/",
+    "http://lanfiasave.com/",
+    "https://dashboard.lanfiasave.com/",
+    "http://dashboard.lanfiasave.com/",
+    ]
 
 
 CORS_ALLOWED_ORIGINS_ALL=True
