@@ -80,46 +80,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'lanfia.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'railway', 
         'USER': 'postgres', 
-        'PASSWORD': 'ZzrvUFagzfROvItrzdSptpuWahfdOBLn',
-        'HOST': 'roundhouse.proxy.rlwy.net', 
-        'PORT': '25904',
+        'PASSWORD': 'GuZfekdAbmNgfDlpZeXHwoCDRfqyLTVa',
+        'HOST': 'viaduct.proxy.rlwy.net', 
+        'PORT': '26399',
     } 
 }
 
-# DATABASES = {
-#     'default': {
-#        'ENGINE': 'django.db.backends.oracle',
-#        'NAME': 'host.db.com:1540/oracle_service.db.com',
-#        'USER': 'user',
-#        'PASSWORD': 'password',
-#    }
-# }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'lanfiaapi', 
-#         'USER': 'postgres', 
-#         'PASSWORD': 'issa01',
-#         'HOST': '127.0.0.1', 
-#         'PORT': '5432',
-#     }
-# }   
+
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
